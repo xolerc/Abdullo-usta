@@ -146,8 +146,65 @@ body{
 @keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.2;transform:scale(1.8)}}
 
 /* ─── HERO ─── */
+/* ─── HERO IMAGE ─── */
+.hero-image-wrap{
+  position:relative;
+  width:100%;
+  margin-bottom:16px;
+}
+.hero-image-frame{
+  position:relative;
+  border-radius:var(--radius);
+  overflow:hidden;
+  aspect-ratio:1/1;
+  max-height:340px;
+  width:100%;
+}
+.hero-image-frame img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius:var(--radius);
+}
+.hero-image-frame::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(10,10,10,.6) 0%,transparent 40%,rgba(200,169,110,.08) 100%);
+  border-radius:var(--radius);
+  pointer-events:none;
+}
+.hero-image-frame .border-glow{
+  position:absolute;inset:-1px;
+  border-radius:calc(var(--radius) + 1px);
+  background:linear-gradient(135deg,var(--gold),transparent 40%,transparent 60%,var(--gold));
+  z-index:-1;
+  opacity:.4;
+}
+.hero-image-glow{
+  position:absolute;
+  inset:-20px;
+  background:radial-gradient(ellipse at 50% 50%,rgba(200,169,110,.12) 0%,transparent 70%);
+  pointer-events:none;
+  z-index:-1;
+}
+.hero-image-badge{
+  position:absolute;
+  top:12px;left:12px;
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(10,10,10,.75);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  border:1px solid var(--border2);
+  padding:6px 14px;
+  border-radius:100px;
+  font-size:11px;font-weight:600;
+  color:var(--gold);
+  z-index:2;
+}
+.hero-image-badge span{font-size:14px}
+
 .hero-compact{
-  padding:12px 0 16px;
+  padding:0 0 16px;
 }
 .hero-compact .tag{
   display:inline-flex;align-items:center;gap:6px;
@@ -799,10 +856,21 @@ body{
   <div class="app-body" id="appBody">
     <!-- ASOSIY -->
     <div class="tab-content active" id="tab-home">
+      <!-- Zamonaviy rasm -->
+      <div class="hero-image-wrap">
+        <div class="hero-image-frame">
+          <img src="https://i.ibb.co/PZVxdkXx/1783356087239.png" alt="Abdullo Usta - Professional qurilish" loading="lazy">
+          <div class="hero-image-glow"></div>
+        </div>
+        <div class="hero-image-badge">
+          <span>⭐</span> Namangan №1
+        </div>
+      </div>
+
       <div class="hero-compact">
-        <div class="tag">⚡ Namangan №1 qurilish ustasi</div>
+        <div class="tag">⚡ 8 yillik tajriba, 340+ loyiha</div>
         <h1>Ishonchli <em>usta</em> — <br>sifatli <em>natija</em></h1>
-        <p>8 yillik tajriba, 340+ bajarilgan loyiha, rasmiy shartnoma va kafolat. Uyingizni noldan quring yoki ta'mirlang.</p>
+        <p>Rasmiy shartnoma, kafolat va bepul ko'rik. Uyingizni noldan quring yoki ta'mirlang.</p>
         <div class="hero-actions">
           <a href="#" class="btn btn-primary" onclick="switchTab('tab-services');return false">📋 Xizmatlar</a>
           <a href="#" class="btn btn-ghost" onclick="switchTab('tab-contact');return false">📞 Bepul maslahat</a>
