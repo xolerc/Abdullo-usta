@@ -2,1481 +2,1228 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ABDULLO USTA | Professional Qurilish Xizmatlari</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Abdullo Usta — Professional Qurilish | Namangan</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#0a0a0a;
-  --bg2:#0e0e0e;
-  --bg3:#141414;
-  --surface:#1a1a1a;
-  --surface2:#222;
-  --border:rgba(255,255,255,0.06);
-  --border-light:rgba(200,169,110,0.2);
+  --surface:#111;
+  --surface2:#1a1a1a;
+  --card:#181818;
   --gold:#c8a96e;
   --gold2:#e8c98e;
-  --gold-dim:rgba(200,169,110,0.08);
+  --gold-dim:rgba(200,169,110,.08);
+  --gold-dim2:rgba(200,169,110,.15);
   --text:#f0ede8;
   --text2:#a8a39c;
   --text3:#6b6560;
+  --border:rgba(255,255,255,.06);
+  --border2:rgba(200,169,110,.15);
   --green:#27ae60;
-  --radius:12px;
-  --radius-sm:8px;
-  --ease:cubic-bezier(0.34,1.56,0.64,1);
+  --red:#e74c3c;
+  --radius:10px;
+  --radius-sm:6px;
+  --ease:cubic-bezier(.34,1.56,.64,1);
 }
-html{scroll-behavior:smooth}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;height:100%}
 body{
   background:var(--bg);
   color:var(--text);
-  font-family:'DM Sans',sans-serif;
-  overflow-x:hidden;
-  cursor:none;
+  font-family:'Inter',sans-serif;
+  overflow:hidden;height:100%;
   -webkit-font-smoothing:antialiased;
+  user-select:none;
 }
-
 ::selection{background:var(--gold);color:var(--bg)}
-::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px}
 
-/* ─── LOADING SCREEN ─── */
-#loader{
-  position:fixed;inset:0;z-index:9999;
-  background:var(--bg);
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:24px;
-  transition:opacity .6s,visibility .6s;
+/* ─── LAYOUT ─── */
+.app{
+  display:flex;flex-direction:column;
+  height:100vh;height:100dvh;
+  overflow:hidden;
 }
-#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.loader-bar{
-  width:200px;height:2px;
-  background:var(--surface2);
-  border-radius:2px;overflow:hidden;
-}
-.loader-bar span{
-  display:block;height:100%;width:0;
-  background:var(--gold);
-  border-radius:2px;
-  animation:loadBar 1.2s var(--ease) forwards;
-}
-@keyframes loadBar{to{width:100%}}
-.loader-label{
-  font-size:11px;letter-spacing:4px;text-transform:uppercase;
-  color:var(--text3);font-weight:600;
-}
-
-/* ─── CUSTOM CURSOR ─── */
-.cursor-dot{
-  position:fixed;width:8px;height:8px;
-  background:var(--gold);
-  border-radius:50%;
-  pointer-events:none;z-index:9999;
-  transition:transform .15s,opacity .2s;
-  transform:translate(-50%,-50%);
-  mix-blend-mode:difference;
-}
-.cursor-ring{
-  position:fixed;width:40px;height:40px;
-  border:1.5px solid var(--gold);
-  border-radius:50%;
-  pointer-events:none;z-index:9998;
-  transition:transform .25s var(--ease),width .3s,height .3s,opacity .3s;
-  transform:translate(-50%,-50%);
-  opacity:.4;
-}
-.cursor-dot.hovered{transform:translate(-50%,-50%) scale(2.5);opacity:.6}
-.cursor-ring.hovered{width:60px;height:60px;opacity:.8}
-
-/* ─── SCROLL PROGRESS ─── */
-#scrollProgress{
-  position:fixed;top:0;left:0;width:0;height:2px;
-  background:linear-gradient(90deg,var(--gold),var(--gold2));
-  z-index:9997;
-  transition:width .1s linear;
-}
-
-/* ─── NAVBAR ─── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:20px 48px;
+.app-header{
+  flex-shrink:0;
+  padding:12px 20px;
   display:flex;align-items:center;justify-content:space-between;
-  background:rgba(10,10,10,.6);
-  backdrop-filter:blur(20px) saturate(1.4);
-  -webkit-backdrop-filter:blur(20px) saturate(1.4);
+  background:rgba(10,10,10,.8);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
-  transition:padding .4s,background .4s;
+  z-index:10;
 }
-nav.scrolled{
-  padding:14px 48px;
-  background:rgba(10,10,10,.92);
+.app-body{
+  flex:1;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  padding:16px 20px 80px;
 }
-.nav-logo{
+.app-tabs{
+  flex-shrink:0;
+  display:flex;
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  z-index:10;
+}
+.tab-btn{
+  flex:1;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:8px 4px;
+  background:none;border:none;
+  color:var(--text3);
+  font-size:10px;font-weight:600;
+  letter-spacing:.3px;
+  cursor:pointer;
+  transition:color .25s,background .25s;
+  position:relative;
+  font-family:'Inter',sans-serif;
+  -webkit-tap-highlight-color:transparent;
+}
+.tab-btn .tab-icon{font-size:20px;line-height:1}
+.tab-btn.active{color:var(--gold)}
+.tab-btn.active::after{
+  content:'';position:absolute;top:-1px;left:20%;right:20%;
+  height:2px;background:var(--gold);
+  border-radius:0 0 2px 2px;
+}
+.tab-btn:hover{color:var(--text2)}
+.tab-content{display:none;animation:tabIn .35s var(--ease)}
+.tab-content.active{display:block}
+@keyframes tabIn{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ─── LOGO ─── */
+.logo{
   font-family:'Playfair Display',serif;
-  font-size:26px;
-  font-weight:700;
+  font-size:20px;
   color:var(--text);
   text-decoration:none;
-  letter-spacing:-.5px;
+  letter-spacing:-.3px;
+  line-height:1;
 }
-.nav-logo em{font-style:italic;color:var(--gold)}
-.nav-links{display:flex;gap:40px;list-style:none}
-.nav-links a{
-  color:var(--text2);
-  text-decoration:none;
-  font-size:13px;
+.logo em{font-style:italic;color:var(--gold)}
+.logo small{
+  display:block;
+  font-size:9px;
+  font-family:'Inter',sans-serif;
+  color:var(--text3);
+  letter-spacing:2px;
   font-weight:500;
-  transition:color .3s;
-  position:relative;
-  padding:4px 0;
+  font-style:normal;
+  text-transform:uppercase;
+  margin-top:-2px;
 }
-.nav-links a::after{
-  content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;
-  background:var(--gold);
-  transition:width .4s var(--ease);
-}
-.nav-links a:hover{color:var(--text)}
-.nav-links a:hover::after{width:100%}
-.nav-call-btn{
-  display:flex;align-items:center;gap:10px;
+.header-call{
+  display:flex;align-items:center;gap:6px;
   background:var(--gold);
   color:var(--bg);
   border:none;
-  padding:10px 24px;
-  border-radius:100px;
-  font-family:'DM Sans',sans-serif;
-  font-size:12px;
-  font-weight:700;
-  letter-spacing:.5px;
-  cursor:none;
-  transition:transform .3s,box-shadow .3s;
-  text-decoration:none;
-}
-.nav-call-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 32px rgba(200,169,110,.35);
-}
-.pulse-dot{
-  width:8px;height:8px;
-  background:var(--bg);
-  border-radius:50%;
-  animation:pulse 2s infinite;
-  opacity:.6;
-}
-@keyframes pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:.3;transform:scale(1.6)}}
-
-/* Hamburgur */
-.hamburger{
-  display:none;flex-direction:column;gap:5px;
-  background:none;border:none;cursor:none;padding:4px;
-}
-.hamburger span{
-  display:block;width:24px;height:2px;
-  background:var(--text);
-  border-radius:2px;
-  transition:transform .3s,opacity .3s;
-}
-.hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.hamburger.active span:nth-child(2){opacity:0}
-.hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
-/* ─── HERO ─── */
-.hero{
-  min-height:100vh;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  position:relative;
-  overflow:hidden;
-}
-#particles-canvas{
-  position:absolute;inset:0;z-index:1;
-  pointer-events:none;
-}
-.hero-grid-bg{
-  position:absolute;inset:0;z-index:0;
-  background-image:
-    linear-gradient(rgba(200,169,110,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(200,169,110,.04) 1px,transparent 1px);
-  background-size:64px 64px;
-  mask-image:radial-gradient(ellipse at 50% 50%,black 25%,transparent 75%);
-  -webkit-mask-image:radial-gradient(ellipse at 50% 50%,black 25%,transparent 75%);
-}
-.hero-glow{
-  position:absolute;inset:0;z-index:0;
-  background:
-    radial-gradient(ellipse 600px 400px at 70% 40%,rgba(200,169,110,.08) 0%,transparent 70%),
-    radial-gradient(ellipse 400px 400px at 20% 70%,rgba(200,169,110,.05) 0%,transparent 70%),
-    radial-gradient(ellipse 300px 300px at 50% 100%,rgba(200,169,110,.03) 0%,transparent 70%);
-}
-.hero-left{
-  display:flex;flex-direction:column;justify-content:center;
-  padding:160px 64px 80px;
-  position:relative;z-index:2;
-}
-.hero-tag{
-  display:inline-flex;align-items:center;gap:10px;
-  background:var(--gold-dim);
-  border:1px solid var(--border-light);
   padding:8px 18px;
   border-radius:100px;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:var(--gold);
-  width:fit-content;
-  margin-bottom:36px;
-  opacity:0;transform:translateY(20px);
-  animation:fadeUp .8s var(--ease) forwards;
-}
-.hero-title{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(56px,7vw,96px);
-  line-height:.92;
-  letter-spacing:-2px;
-  color:var(--text);
-  margin-bottom:24px;
-  opacity:0;transform:translateY(30px);
-  animation:fadeUp .8s var(--ease) .15s forwards;
-}
-.hero-title .gold{color:var(--gold);font-style:italic}
-.hero-sub{
-  color:var(--text2);
-  font-size:16px;
-  line-height:1.8;
-  max-width:480px;
-  margin-bottom:48px;
-  opacity:0;transform:translateY(20px);
-  animation:fadeUp .8s var(--ease) .3s forwards;
-}
-.hero-btns{
-  display:flex;gap:14px;flex-wrap:wrap;
-  opacity:0;transform:translateY(20px);
-  animation:fadeUp .8s var(--ease) .45s forwards;
-}
-.btn-primary{
-  display:inline-flex;align-items:center;gap:10px;
-  background:var(--gold);
-  color:var(--bg);
-  padding:16px 36px;
-  border:none;
-  border-radius:100px;
-  font-family:'DM Sans',sans-serif;
-  font-size:13px;
-  font-weight:700;
-  letter-spacing:.5px;
-  cursor:none;
-  text-decoration:none;
-  transition:transform .3s,box-shadow .3s;
-}
-.btn-primary:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 40px rgba(200,169,110,.4);
-}
-.btn-ghost{
-  display:inline-flex;align-items:center;gap:10px;
-  background:transparent;
-  color:var(--text);
-  padding:16px 36px;
-  border:1px solid var(--border);
-  border-radius:100px;
-  font-family:'DM Sans',sans-serif;
-  font-size:13px;
-  font-weight:600;
-  cursor:none;
-  text-decoration:none;
-  transition:border-color .3s,background .3s,transform .3s;
-}
-.btn-ghost:hover{
-  border-color:var(--gold);
-  background:var(--gold-dim);
-  transform:translateY(-3px);
-}
-.hero-stats{
-  display:flex;gap:56px;
-  margin-top:64px;
-  padding-top:40px;
-  border-top:1px solid var(--border);
-  opacity:0;transform:translateY(20px);
-  animation:fadeUp .8s var(--ease) .6s forwards;
-}
-.stat-item{text-align:left}
-.stat-num{
-  font-family:'Playfair Display',serif;
-  font-size:44px;
-  color:var(--gold);
-  line-height:1;
-  font-style:italic;
-}
-.stat-label{
   font-size:12px;
-  color:var(--text3);
-  letter-spacing:1.5px;
-  margin-top:4px;
-  font-weight:500;
+  font-weight:700;
+  font-family:'Inter',sans-serif;
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform .2s,box-shadow .2s;
+  -webkit-tap-highlight-color:transparent;
 }
-.hero-right{
-  position:relative;z-index:2;
-  display:flex;align-items:center;justify-content:center;
-  padding:120px 48px 48px;
-  overflow:hidden;
-  perspective:1200px;
+.header-call:active{transform:scale(.95)}
+.header-call .dot{
+  width:6px;height:6px;
+  background:var(--bg);border-radius:50%;
+  animation:pulse 2s infinite;
+  opacity:.5;
 }
-.hero-img-wrap{
-  position:relative;
-  width:460px;
-  height:580px;
-  border-radius:var(--radius);
-  overflow:hidden;
-  transform:rotateY(-4deg) rotateX(2deg);
-  transition:transform .6s var(--ease);
-  box-shadow:
-    0 40px 80px rgba(0,0,0,.6),
-    0 0 0 1px rgba(200,169,110,.1);
-}
-.hero-img-wrap::before{
-  content:'';
-  position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(200,169,110,.2),transparent 50%,rgba(200,169,110,.1));
-  z-index:1;border-radius:var(--radius);
-}
-.hero-img-wrap img{
-  width:100%;height:100%;
-  object-fit:cover;
-  display:block;
-  filter:grayscale(.3) contrast(1.1);
-}
-.hero-img-wrap:hover{transform:rotateY(-2deg) rotateX(1deg) scale(1.02)}
-.hero-badge{
-  position:absolute;
-  background:rgba(20,20,20,.85);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  border:1px solid var(--border-light);
-  border-radius:var(--radius-sm);
-  padding:16px 22px;
-  z-index:2;
-}
-.hero-badge.b1{
-  bottom:40px;left:-30px;
-  animation:float 5s var(--ease) infinite;
-}
-.hero-badge.b2{
-  top:100px;right:-30px;
-  animation:float 5s var(--ease) 2.5s infinite;
-}
-.badge-label{font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
-.badge-val{font-family:'Playfair Display',serif;font-size:28px;color:var(--gold);font-style:italic;line-height:1.2}
-.badge-sub{font-size:11px;color:var(--text2)}
+@keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.2;transform:scale(1.8)}}
 
-@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-
-/* ─── TICKER ─── */
-.ticker-wrap{
-  overflow:hidden;
-  background:var(--gold);
-  padding:14px 0;
-  position:relative;z-index:2;
+/* ─── HERO ─── */
+.hero-compact{
+  padding:12px 0 16px;
 }
-.ticker-track{
-  display:flex;
-  animation:tick 40s linear infinite;
-  white-space:nowrap;
-  width:max-content;
-}
-.ticker-item{
-  display:inline-flex;align-items:center;gap:28px;
-  padding:0 44px;
-  color:var(--bg);
-  font-size:13px;
-  font-weight:600;
-  letter-spacing:1px;
-  text-transform:uppercase;
-}
-.ticker-item .sep{opacity:.4;font-weight:300}
-@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* ─── SECTIONS ─── */
-section{padding:120px 0;position:relative}
-.container{max-width:1200px;margin:0 auto;padding:0 48px}
-
-.section-header{
-  margin-bottom:72px;
-  display:flex;align-items:flex-end;justify-content:space-between;
-  gap:40px;
-}
-.section-tag{
-  display:inline-flex;align-items:center;gap:10px;
-  font-size:11px;font-weight:600;
-  letter-spacing:3px;text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:14px;
-}
-.section-tag::before{
-  content:'';width:24px;height:1.5px;
-  background:var(--gold);display:inline-block;
-}
-.section-title{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(36px,4.5vw,60px);
-  letter-spacing:-1.5px;
-  line-height:1;
-  color:var(--text);
-}
-.section-title em{color:var(--gold);font-style:italic;font-weight:700}
-.section-desc{
-  color:var(--text2);
-  font-size:15px;
-  line-height:1.8;
-  max-width:380px;
-}
-.section-divider{
-  position:absolute;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--border),transparent);
-}
-
-/* ─── SERVICES ─── */
-.services{background:var(--bg2)}
-.services-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:2px;
-  background:var(--bg);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  overflow:hidden;
-}
-.service-card{
-  background:var(--bg3);
-  padding:48px 40px;
-  position:relative;
-  overflow:hidden;
-  cursor:none;
-  transition:background .4s;
-  perspective:800px;
-}
-.service-card::after{
-  content:'';
-  position:absolute;inset:0;
-  background:linear-gradient(135deg,transparent 40%,rgba(200,169,110,.03));
-  pointer-events:none;
-}
-.service-card:hover{background:var(--surface)}
-.service-card.featured{
-  background:linear-gradient(135deg,#1a1610,#14120e);
-  border-left:1px solid var(--border-light);
-  border-right:1px solid var(--border-light);
-}
-.featured-badge{
-  position:absolute;top:16px;right:16px;
-  background:var(--gold);color:var(--bg);
-  font-size:9px;font-weight:700;
-  letter-spacing:1.5px;text-transform:uppercase;
-  padding:5px 12px;border-radius:100px;
-  z-index:2;
-}
-.service-icon{
-  width:52px;height:52px;
-  border-radius:var(--radius-sm);
-  background:var(--surface2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:22px;
-  margin-bottom:28px;
-  transition:background .3s,transform .3s;
-  border:1px solid var(--border);
-}
-.service-card:hover .service-icon{
+.hero-compact .tag{
+  display:inline-flex;align-items:center;gap:6px;
   background:var(--gold-dim);
-  transform:scale(1.05);
-  border-color:var(--border-light);
-}
-.service-name{
-  font-weight:600;font-size:18px;
-  color:var(--text);margin-bottom:12px;
-  letter-spacing:-.3px;
-}
-.service-desc{
-  color:var(--text3);font-size:14px;
-  line-height:1.7;margin-bottom:28px;
-}
-.service-price{
-  display:flex;align-items:baseline;gap:8px;
-  padding-top:24px;
-  border-top:1px solid var(--border);
-}
-.price-num{
-  font-family:'JetBrains Mono',monospace;
-  font-size:24px;font-weight:700;
-  color:var(--gold);
-}
-.price-unit{
-  font-size:12px;color:var(--text3);
-  letter-spacing:.5px;
-}
-
-/* ─── PROCESS ─── */
-.process{background:var(--bg)}
-.process-steps{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:32px;
-  position:relative;
-}
-.process-step{
-  padding:40px 24px;
-  text-align:center;
-  position:relative;
-  background:var(--bg3);
-  border-radius:var(--radius);
-  border:1px solid var(--border);
-  transition:transform .4s,box-shadow .4s;
-}
-.process-step:hover{
-  transform:translateY(-8px);
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
-}
-.process-step::before{
-  content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);
-  width:60%;height:2px;
-  background:var(--gold);
-  border-radius:2px;
-  opacity:0;transition:opacity .4s;
-}
-.process-step:hover::before{opacity:1}
-.step-num{
-  width:72px;height:72px;
-  border-radius:50%;
-  background:var(--surface);
-  border:2px solid var(--surface2);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 24px;
-  font-family:'Playfair Display',serif;
-  font-size:26px;font-style:italic;
-  color:var(--text2);
-  transition:all .4s;
-}
-.process-step:hover .step-num{
-  border-color:var(--gold);
-  color:var(--gold);
-  background:var(--gold-dim);
-}
-.step-title{font-weight:600;font-size:16px;color:var(--text);margin-bottom:10px}
-.step-desc{color:var(--text3);font-size:13px;line-height:1.7}
-
-/* ─── MASTERS ─── */
-.masters{background:var(--bg2)}
-.masters-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:32px;
-}
-.master-card{
-  background:var(--bg3);
-  border-radius:var(--radius);
-  overflow:hidden;
-  border:1px solid var(--border);
-  transition:transform .5s var(--ease),box-shadow .5s;
-  cursor:none;
-  perspective:800px;
-}
-.master-card:hover{
-  transform:translateY(-8px) rotateX(2deg);
-  box-shadow:0 30px 80px rgba(0,0,0,.5);
-  border-color:var(--border-light);
-}
-.master-img-wrap{
-  position:relative;height:300px;overflow:hidden;
-}
-.master-img-wrap img{
-  width:100%;height:100%;
-  object-fit:cover;
-  transition:transform .7s var(--ease);
-  filter:grayscale(.4) contrast(1.05);
-}
-.master-card:hover .master-img-wrap img{transform:scale(1.08)}
-.master-img-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(0deg,rgba(10,10,10,.9) 0%,transparent 50%);
-}
-.master-exp{
-  position:absolute;top:16px;right:16px;
-  background:var(--gold);color:var(--bg);
-  font-size:10px;font-weight:700;
-  letter-spacing:1.5px;text-transform:uppercase;
-  padding:5px 14px;border-radius:100px;
-}
-.master-info{padding:24px}
-.master-name{font-weight:600;font-size:18px;color:var(--text);margin-bottom:2px}
-.master-spec{font-size:12px;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:14px}
-.master-skills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
-.skill-tag{
-  background:var(--surface);
-  color:var(--text2);
+  border:1px solid var(--border2);
+  padding:4px 12px;
+  border-radius:100px;
   font-size:10px;font-weight:600;
   letter-spacing:1px;text-transform:uppercase;
-  padding:4px 12px;border-radius:100px;
+  color:var(--gold);
+  margin-bottom:12px;
+}
+.hero-compact h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(32px,6vw,52px);
+  line-height:1;
+  letter-spacing:-1.5px;
+  margin-bottom:8px;
+}
+.hero-compact h1 em{color:var(--gold);font-style:italic}
+.hero-compact p{
+  color:var(--text2);
+  font-size:14px;
+  line-height:1.6;
+  max-width:500px;
+  margin-bottom:16px;
+}
+.hero-actions{
+  display:flex;gap:10px;flex-wrap:wrap;
+}
+.hero-actions .btn{
+  padding:12px 24px;
+  border-radius:100px;
+  font-size:13px;font-weight:700;
+  font-family:'Inter',sans-serif;
+  border:none;
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform .2s,box-shadow .2s;
+  display:inline-flex;align-items:center;gap:8px;
+  -webkit-tap-highlight-color:transparent;
+}
+.hero-actions .btn:active{transform:scale(.96)}
+.hero-actions .btn-primary{
+  background:var(--gold);
+  color:var(--bg);
+}
+.hero-actions .btn-primary:hover{
+  box-shadow:0 8px 24px rgba(200,169,110,.3);
+}
+.hero-actions .btn-ghost{
+  background:var(--surface2);
+  color:var(--text);
   border:1px solid var(--border);
 }
-.master-rating{display:flex;align-items:center;gap:8px;color:var(--gold);font-weight:600;font-size:13px}
-.stars{letter-spacing:1px;font-size:14px}
+.hero-actions .btn-ghost:hover{
+  border-color:var(--gold);color:var(--gold);
+}
+.hero-strip{
+  display:flex;gap:24px;
+  margin-top:16px;
+  padding-top:12px;
+  border-top:1px solid var(--border);
+}
+.strip-item{
+  display:flex;align-items:center;gap:8px;
+  font-size:12px;
+  color:var(--text3);
+}
+.strip-item strong{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+  color:var(--gold);
+  font-style:italic;
+  font-weight:700;
+  line-height:1;
+}
 
-/* ─── PRICING ─── */
-.pricing{background:var(--bg)}
-.pricing-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:2px;
-  background:var(--bg);
+/* ─── SECTION HEADERS ─── */
+.section-mini{
+  margin-bottom:16px;
+}
+.section-mini .st{
+  font-size:10px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:4px;
+}
+.section-mini h2{
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+  letter-spacing:-.5px;
+  line-height:1.1;
+}
+.section-mini h2 em{color:var(--gold);font-style:italic}
+.section-mini p{
+  color:var(--text3);
+  font-size:13px;
+  margin-top:4px;
+}
+
+/* ─── ACCORDION ─── */
+.accordion{
+  display:flex;flex-direction:column;gap:6px;
+}
+.acc-item{
+  background:var(--card);
+  border-radius:var(--radius-sm);
   border:1px solid var(--border);
+  overflow:hidden;
+  transition:border-color .3s;
+}
+.acc-item.open{border-color:var(--border2)}
+.acc-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  gap:12px;
+}
+.acc-header .left{
+  display:flex;align-items:center;gap:12px;
+  min-width:0;
+}
+.acc-header .icon{
+  width:36px;height:36px;
+  background:var(--surface2);
+  border-radius:var(--radius-sm);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;
+  flex-shrink:0;
+}
+.acc-header .info h3{
+  font-size:14px;font-weight:600;
+  line-height:1.2;
+}
+.acc-header .info small{
+  display:block;
+  font-size:11px;color:var(--text3);
+  font-weight:500;
+}
+.acc-header .arrow{
+  font-size:12px;color:var(--text3);
+  transition:transform .3s;
+  flex-shrink:0;
+}
+.acc-item.open .acc-header .arrow{transform:rotate(180deg)}
+.acc-body{
+  max-height:0;overflow:hidden;
+  transition:max-height .4s var(--ease);
+}
+.acc-item.open .acc-body{max-height:500px}
+.acc-inner{
+  padding:0 16px 16px;
+  font-size:13px;
+  color:var(--text2);
+  line-height:1.7;
+}
+.acc-inner .price-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--gold-dim);
+  padding:4px 12px;
+  border-radius:100px;
+  font-size:12px;
+  font-weight:600;
+  color:var(--gold);
+  margin-top:8px;
+}
+.acc-inner ul{
+  list-style:none;
+  margin:8px 0;
+}
+.acc-inner ul li{
+  padding:4px 0;
+  display:flex;align-items:center;gap:8px;
+}
+.acc-inner ul li::before{
+  content:'✓';
+  color:var(--gold);
+  font-weight:700;
+  font-size:12px;
+}
+
+/* ─── MASTER MINI ─── */
+.master-scroll{
+  display:flex;gap:12px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:4px;
+  margin:0 -20px;
+  padding:0 20px 4px;
+}
+.master-scroll::-webkit-scrollbar{height:2px}
+.master-scroll::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px}
+.master-mini{
+  min-width:200px;
+  scroll-snap-align:start;
+  background:var(--card);
   border-radius:var(--radius);
+  border:1px solid var(--border);
+  overflow:hidden;
+  flex-shrink:0;
+}
+.master-mini .img{
+  height:140px;
   overflow:hidden;
 }
-.pricing-card{
-  background:var(--bg3);
-  padding:48px 40px;
-  position:relative;
-  transition:background .4s,transform .4s;
+.master-mini .img img{
+  width:100%;height:100%;
+  object-fit:cover;
+  filter:grayscale(.3) contrast(1.05);
+}
+.master-mini .body{
+  padding:12px 14px;
+}
+.master-mini .body h4{
+  font-size:14px;font-weight:600;
+}
+.master-mini .body .spec{
+  font-size:11px;color:var(--gold);
+  letter-spacing:1px;font-weight:600;
+  text-transform:uppercase;
+  margin:2px 0 8px;
+}
+.master-mini .body .tags{
+  display:flex;flex-wrap:wrap;gap:4px;
+}
+.master-mini .body .tags span{
+  background:var(--surface2);
+  padding:2px 8px;
+  border-radius:100px;
+  font-size:9px;
+  color:var(--text2);
+  font-weight:600;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+
+/* ─── PRICING MINI ─── */
+.pricing-strip{
+  display:flex;gap:8px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  margin:0 -20px;
+  padding:0 20px 4px;
+}
+.pricing-strip::-webkit-scrollbar{height:2px}
+.pricing-strip::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px}
+.pricing-mini{
+  min-width:220px;
+  scroll-snap-align:start;
+  background:var(--card);
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  padding:20px;
+  flex-shrink:0;
   display:flex;flex-direction:column;
 }
-.pricing-card:hover{background:var(--surface);transform:translateY(-4px)}
-.pricing-card.popular{
+.pricing-mini.popular{
   background:linear-gradient(135deg,#1a1610,#14120e);
-  border-left:1px solid var(--border-light);
-  border-right:1px solid var(--border-light);
+  border-color:var(--border2);
 }
-.popular-badge{
-  position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+.pricing-mini .badge{
   background:var(--gold);color:var(--bg);
-  font-size:9px;font-weight:700;
+  font-size:8px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:3px 10px;
+  border-radius:100px;
+  width:fit-content;
+  margin-bottom:8px;
+}
+.pricing-mini .name{
+  font-size:11px;font-weight:700;
   letter-spacing:2px;text-transform:uppercase;
-  padding:5px 18px;border-radius:0 0 100px 100px;
+  color:var(--text3);
 }
-.pricing-name{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
-.pricing-price{font-family:'Playfair Display',serif;font-size:48px;color:var(--text);line-height:1;font-style:italic;margin-bottom:4px}
-.pricing-price .currency{font-size:22px;color:var(--gold);vertical-align:super;font-style:normal}
-.pricing-period{font-size:13px;color:var(--text3);margin-bottom:36px}
-.pricing-features{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:40px;flex:1}
-.pricing-features li{font-size:14px;color:var(--text2);display:flex;align-items:center;gap:12px}
-.pricing-features li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0}
-.btn-full{
+.pricing-mini .price{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  font-style:italic;
+  color:var(--text);
+  line-height:1;
+  margin:6px 0;
+}
+.pricing-mini .price .cur{
+  font-size:16px;color:var(--gold);
+  font-style:normal;
+  vertical-align:super;
+}
+.pricing-mini .period{
+  font-size:11px;color:var(--text3);
+  margin-bottom:16px;
+}
+.pricing-mini ul{
+  list-style:none;
+  flex:1;
+  font-size:12px;
+  color:var(--text2);
+  display:flex;flex-direction:column;gap:8px;
+  margin-bottom:16px;
+}
+.pricing-mini ul li{
+  display:flex;align-items:center;gap:8px;
+}
+.pricing-mini ul li::before{
+  content:'✓';color:var(--gold);
+  font-weight:700;font-size:10px;
+}
+.pricing-mini .btn{
   width:100%;display:block;text-align:center;
-  padding:14px;border-radius:100px;
-  font-family:'DM Sans',sans-serif;
-  font-size:12px;font-weight:700;
+  padding:10px;
+  border-radius:100px;
+  font-size:11px;font-weight:700;
   letter-spacing:1px;text-transform:uppercase;
-  cursor:none;
-  transition:all .3s;
+  font-family:'Inter',sans-serif;
+  border:none;
+  cursor:pointer;
   text-decoration:none;
+  transition:transform .2s;
+  -webkit-tap-highlight-color:transparent;
 }
-.btn-outline{
+.pricing-mini .btn:active{transform:scale(.97)}
+.pricing-mini .btn-outline{
   background:transparent;
   border:1px solid var(--border);
   color:var(--text2);
 }
-.btn-outline:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
-.btn-gold{
-  background:var(--gold);border:none;
-  color:var(--bg);
+.pricing-mini .btn-gold{
+  background:var(--gold);color:var(--bg);
 }
-.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,169,110,.3)}
 
 /* ─── CALCULATOR ─── */
-.calculator{background:var(--bg2)}
-.calc-wrap{
+.calc-box{
+  background:var(--card);
+  border-radius:var(--radius);
+  border:1px solid var(--border2);
+  padding:20px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:60px;
-  align-items:start;
+  gap:20px;
+  align-items:center;
 }
-.calc-form{display:flex;flex-direction:column;gap:20px}
-.form-group{display:flex;flex-direction:column;gap:8px}
-.form-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text3)}
-.form-input,.form-select{
-  background:var(--bg3);
+.calc-form{display:flex;flex-direction:column;gap:12px}
+.calc-form .fg{display:flex;flex-direction:column;gap:4px}
+.calc-form .fg label{
+  font-size:10px;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--text3);
+}
+.calc-form select,
+.calc-form input[type="range"]{
+  width:100%;
+}
+.calc-form select{
+  background:var(--surface2);
   border:1px solid var(--border);
   border-radius:var(--radius-sm);
-  padding:14px 18px;
+  padding:10px 14px;
   color:var(--text);
-  font-family:'DM Sans',sans-serif;
-  font-size:14px;
-  transition:border-color .3s,box-shadow .3s;
+  font-family:'Inter',sans-serif;
+  font-size:13px;
   appearance:none;
-  cursor:none;
+  cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23a8a39c' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
 }
-.form-input:focus,.form-select:focus{
+.calc-form select:focus{
   outline:none;
   border-color:var(--gold);
-  box-shadow:0 0 0 3px rgba(200,169,110,.1);
 }
-select.form-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a8a39c' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:44px}
-select.form-select option{background:var(--bg3);color:var(--text)}
-.range-wrap{display:flex;align-items:center;gap:16px}
-.form-range{
+.range-group{display:flex;align-items:center;gap:12px}
+.range-group input[type="range"]{
   flex:1;
   -webkit-appearance:none;
   height:4px;
   background:var(--surface2);
   border-radius:4px;
   outline:none;
-  cursor:none;
 }
-.form-range::-webkit-slider-thumb{
+.range-group input[type="range"]::-webkit-slider-thumb{
   -webkit-appearance:none;
-  width:20px;height:20px;
+  width:18px;height:18px;
   border-radius:50%;
   background:var(--gold);
-  cursor:none;
-  box-shadow:0 0 0 4px rgba(200,169,110,.15);
-  transition:box-shadow .2s;
+  cursor:pointer;
+  box-shadow:0 0 0 3px rgba(200,169,110,.12);
 }
-.form-range::-webkit-slider-thumb:hover{box-shadow:0 0 0 8px rgba(200,169,110,.12)}
-.range-val{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--gold);min-width:80px;text-align:right}
+.range-group .rval{
+  font-family:'Inter',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  color:var(--gold);
+  min-width:50px;
+  text-align:right;
+}
 .calc-result{
-  background:var(--bg3);
-  border:1px solid var(--border-light);
-  border-radius:var(--radius);
-  padding:48px;
   text-align:center;
-  position:relative;overflow:hidden;
 }
-.calc-result::before{
-  content:'';
-  position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% 0%,rgba(200,169,110,.06) 0%,transparent 70%);
+.calc-result .label{
+  font-size:10px;font-weight:600;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--text3);
 }
-.result-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:16px;position:relative}
-.result-price{font-family:'Playfair Display',serif;font-size:72px;color:var(--gold);line-height:1;font-style:italic;margin-bottom:8px;position:relative}
-.result-curr{font-size:13px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:36px;position:relative}
-.result-breakdown{text-align:left;display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--border);padding-top:24px;position:relative}
-.bd-row{display:flex;justify-content:space-between;font-size:13px}
-.bd-name{color:var(--text3)}
-.bd-val{color:var(--text2);font-weight:600;font-family:'JetBrains Mono',monospace}
+.calc-result .total{
+  font-family:'Playfair Display',serif;
+  font-size:42px;
+  font-style:italic;
+  color:var(--gold);
+  line-height:1;
+  margin:4px 0;
+}
+.calc-result .curr{
+  font-size:11px;color:var(--text3);
+  margin-bottom:8px;
+}
+.calc-result .breakdown{
+  font-size:12px;color:var(--text3);
+  display:flex;flex-direction:column;gap:4px;
+}
+.calc-result .breakdown .row{
+  display:flex;justify-content:space-between;
+}
+.calc-result .breakdown .val{
+  color:var(--text2);
+  font-weight:600;
+}
 
 /* ─── CONTACT ─── */
-.contact{background:var(--bg)}
 .contact-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:80px;
-  align-items:start;
+  gap:16px;
 }
-.contact-info{display:flex;flex-direction:column;gap:36px}
-.contact-item{display:flex;gap:20px;align-items:flex-start}
-.contact-icon{
-  width:48px;height:48px;
-  background:var(--bg3);
+.contact-card{
+  background:var(--card);
   border-radius:var(--radius-sm);
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px;flex-shrink:0;
   border:1px solid var(--border);
+  padding:16px;
 }
-.c-label{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
-.c-val{font-size:16px;font-weight:600;color:var(--text)}
-.call-cta{
-  background:linear-gradient(135deg,#1a1610,#14120e);
-  border:1px solid var(--border-light);
-  border-radius:var(--radius);
-  padding:40px;
-  text-align:center;
-  margin-top:8px;
+.contact-card .meta{
+  font-size:10px;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--text3);
+  margin-bottom:2px;
 }
-.call-cta-title{font-family:'Playfair Display',serif;font-size:30px;color:var(--text);font-style:italic;margin-bottom:8px;letter-spacing:-.5px}
-.call-cta-sub{color:var(--text3);font-size:13px;margin-bottom:28px}
-.contact-form{display:flex;flex-direction:column;gap:16px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-
-/* ─── FOOTER ─── */
-footer{
-  background:var(--bg2);
-  border-top:1px solid var(--border);
-  padding:80px 0 32px;
+.contact-card .val{
+  font-size:14px;font-weight:600;
 }
-.footer-grid{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr 1fr;
-  gap:48px;
-  margin-bottom:56px;
+.form-compact{
+  display:flex;flex-direction:column;gap:10px;
 }
-.footer-logo{
-  font-family:'Playfair Display',serif;
-  font-size:32px;
-  font-weight:700;
+.form-compact input,
+.form-compact select,
+.form-compact textarea{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:10px 14px;
   color:var(--text);
-  display:block;margin-bottom:14px;
+  font-family:'Inter',sans-serif;
+  font-size:13px;
+  width:100%;
+  transition:border-color .2s;
+}
+.form-compact input:focus,
+.form-compact select:focus,
+.form-compact textarea:focus{
+  outline:none;
+  border-color:var(--gold);
+}
+.form-compact textarea{resize:none;height:70px}
+.form-compact button{
+  background:var(--gold);
+  color:var(--bg);
+  border:none;
+  padding:12px;
+  border-radius:100px;
+  font-size:13px;
+  font-weight:700;
+  font-family:'Inter',sans-serif;
+  cursor:pointer;
+  transition:transform .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.form-compact button:active{transform:scale(.97)}
+.form-row-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.cta-block{
+  grid-column:1/-1;
+  background:linear-gradient(135deg,#1a1610,#14120e);
+  border:1px solid var(--border2);
+  border-radius:var(--radius-sm);
+  padding:16px;
+  text-align:center;
+  margin-top:4px;
+}
+.cta-block h3{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+  font-style:italic;
   letter-spacing:-.5px;
 }
-.footer-logo em{font-style:italic;color:var(--gold)}
-.footer-desc{color:var(--text3);font-size:14px;line-height:1.7;max-width:280px}
-.footer-col-title{font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
-.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
-.footer-links a{color:var(--text3);text-decoration:none;font-size:13px;transition:color .3s}
-.footer-links a:hover{color:var(--gold)}
-.footer-bottom{
+.cta-block p{
+  font-size:12px;color:var(--text3);
+  margin:4px 0 12px;
+}
+.cta-block .btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gold);color:var(--bg);
+  padding:10px 28px;
+  border-radius:100px;
+  text-decoration:none;
+  font-size:12px;font-weight:700;
+  font-family:'Inter',sans-serif;
+  transition:transform .2s;
+}
+.cta-block .btn:active{transform:scale(.97)}
+
+/* ─── FOOTER ─── */
+.footer-compact{
+  margin-top:20px;
+  padding-top:12px;
   border-top:1px solid var(--border);
-  padding-top:28px;
-  display:flex;justify-content:space-between;align-items:center;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:11px;
+  color:var(--text3);
 }
-.footer-copy{color:var(--text3);font-size:13px}
-.footer-credit{color:var(--text3);font-size:13px}
-.footer-credit em{color:var(--gold);font-style:italic}
+.footer-compact em{font-style:italic;color:var(--gold)}
 
-/* ─── FLOATING CALL ─── */
-.fab{
-  position:fixed;bottom:32px;right:32px;z-index:200;
-  width:60px;height:60px;
-  background:var(--gold);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:24px;
-  cursor:none;
-  text-decoration:none;
-  box-shadow:0 8px 32px rgba(200,169,110,.4);
-  transition:transform .3s,box-shadow .3s;
+/* ─── NOTIFICATION ─── */
+.notif{
+  position:fixed;
+  bottom:80px;left:20px;right:20px;z-index:100;
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:var(--radius);
+  padding:14px 18px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:0 8px 32px rgba(0,0,0,.6);
+  transform:translateY(120%);
+  transition:transform .5s var(--ease);
+  max-width:400px;
+  margin:0 auto;
 }
-.fab:hover{transform:scale(1.1);box-shadow:0 12px 48px rgba(200,169,110,.5)}
-.fab-ring{
-  position:absolute;inset:-8px;
-  border:2px solid rgba(200,169,110,.25);
-  border-radius:50%;
-  animation:fabPulse 2.5s infinite;
-}
-@keyframes fabPulse{
-  0%{transform:scale(1);opacity:.6}
-  100%{transform:scale(1.5);opacity:0}
-}
+.notif.show{transform:translateY(0)}
+.notif .icon{font-size:24px}
+.notif .text{font-size:13px;color:var(--text2);line-height:1.4}
+.notif .text strong{color:var(--text);display:block;font-size:14px}
 
-/* ─── BACK TO TOP ─── */
-#backTop{
-  position:fixed;bottom:104px;right:32px;z-index:199;
-  width:44px;height:44px;
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--text2);
-  cursor:none;
-  text-decoration:none;
-  font-size:18px;
-  opacity:0;visibility:hidden;
-  transform:translateY(20px);
-  transition:all .4s;
-}
-#backTop.visible{opacity:1;visibility:visible;transform:translateY(0)}
-#backTop:hover{background:var(--gold);color:var(--bg);border-color:var(--gold)}
-
-/* ─── MODALS ─── */
+/* ─── MODAL ─── */
 .modal-overlay{
-  position:fixed;inset:0;z-index:1000;
+  position:fixed;inset:0;z-index:200;
   background:rgba(0,0,0,.8);
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
   display:flex;align-items:center;justify-content:center;
   opacity:0;pointer-events:none;
-  transition:opacity .4s;
+  transition:opacity .3s;
+  padding:20px;
 }
 .modal-overlay.active{opacity:1;pointer-events:all}
-.modal{
-  background:var(--bg3);
-  border:1px solid var(--border-light);
+.modal-box{
+  background:var(--card);
+  border:1px solid var(--border2);
   border-radius:var(--radius);
-  padding:48px;
-  width:90%;max-width:460px;
-  transform:translateY(30px) scale(.96);
-  transition:transform .4s var(--ease);
-  position:relative;
+  padding:32px;
+  max-width:400px;
+  width:100%;
+  text-align:center;
+  transform:translateY(20px) scale(.96);
+  transition:transform .35s var(--ease);
 }
-.modal-overlay.active .modal{transform:translateY(0) scale(1)}
-.modal-title{font-family:'Playfair Display',serif;font-size:34px;color:var(--text);font-style:italic;margin-bottom:8px}
-.modal-sub{color:var(--text3);font-size:14px;margin-bottom:28px}
+.modal-overlay.active .modal-box{transform:translateY(0) scale(1)}
+.modal-box .icon{font-size:52px;margin-bottom:12px}
+.modal-box h3{font-family:'Playfair Display',serif;font-size:26px;font-style:italic;letter-spacing:-.5px}
+.modal-box p{font-size:13px;color:var(--text2);margin:6px 0 24px;line-height:1.6}
+.modal-box .btn{
+  display:block;width:100%;text-align:center;
+  padding:12px;
+  background:var(--gold);color:var(--bg);
+  border:none;border-radius:100px;
+  font-size:12px;font-weight:700;
+  font-family:'Inter',sans-serif;
+  cursor:pointer;
+  text-decoration:none;
+}
 .modal-close{
-  position:absolute;top:16px;right:16px;
-  background:var(--surface);
+  position:absolute;top:12px;right:12px;
+  background:var(--surface2);
   border:none;color:var(--text2);
-  width:36px;height:36px;border-radius:50%;
-  font-size:16px;cursor:none;
-  transition:background .2s;
+  width:32px;height:32px;border-radius:50%;
+  font-size:14px;
+  cursor:pointer;
   display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
 }
-.modal-close:hover{background:var(--surface2)}
-
-/* ─── NOTIFICATION ─── */
-.notif{
-  position:fixed;bottom:32px;right:32px;z-index:500;
-  background:var(--bg3);
-  border:1px solid var(--border-light);
-  border-radius:var(--radius-sm);
-  padding:16px 24px;
-  max-width:340px;
-  transform:translateX(120%);
-  transition:transform .5s var(--ease);
-  display:flex;align-items:center;gap:14px;
-  box-shadow:0 8px 32px rgba(0,0,0,.5);
-}
-.notif.show{transform:translateX(0)}
-.notif-icon{font-size:22px}
-.notif-text{font-size:13px;color:var(--text2);line-height:1.5}
-.notif-text strong{color:var(--text);display:block;font-size:14px;margin-bottom:2px}
+.modal-close:hover{background:var(--surface)}
+.modal-box{position:relative}
 
 /* ─── RESPONSIVE ─── */
-@media(max-width:1024px){
-  .hero{grid-template-columns:1fr}
-  .hero-right{display:none}
-  .hero-left{padding:140px 40px 80px}
-  .services-grid{grid-template-columns:1fr 1fr}
-  .masters-grid{grid-template-columns:1fr 1fr}
-  .pricing-grid{grid-template-columns:1fr;gap:2px}
-  .calc-wrap{grid-template-columns:1fr}
-  .contact-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr 1fr}
-  .process-steps{grid-template-columns:1fr 1fr;gap:16px}
-}
-@media(max-width:768px){
-  nav{padding:16px 24px}
-  nav.scrolled{padding:12px 24px}
-  .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:-1}
-  .nav-links.open{
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    background:rgba(10,10,10,.98);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    z-index:98;gap:32px;
+@media(min-width:768px){
+  .app-body{padding:24px 40px 24px;max-width:900px;margin:0 auto;width:100%}
+  .app-tabs{display:none}
+  .desktop-tabs{
+    display:flex;gap:4px;
+    background:var(--surface);
+    padding:4px;
+    border-radius:var(--radius);
+    margin-bottom:20px;
   }
-  .nav-links a{font-size:18px}
-  .hamburger{display:flex;z-index:99}
-  .container{padding:0 24px}
-  .section-header{flex-direction:column;align-items:flex-start;gap:16px}
-  .services-grid,.masters-grid{grid-template-columns:1fr}
-  .pricing-grid{gap:2px}
-  .form-row{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr}
-  .process-steps{grid-template-columns:1fr}
-  .hero-stats{gap:24px;flex-wrap:wrap}
-  .hero-btns{flex-wrap:wrap}
+  .desktop-tabs .tab-btn{
+    flex-direction:row;gap:6px;
+    padding:8px 18px;
+    border-radius:var(--radius-sm);
+    font-size:12px;
+    font-weight:600;
+    background:transparent;
+    border:none;
+    color:var(--text3);
+    cursor:pointer;
+    transition:all .25s;
+    font-family:'Inter',sans-serif;
+  }
+  .desktop-tabs .tab-btn .tab-icon{font-size:16px}
+  .desktop-tabs .tab-btn.active{
+    background:var(--surface2);
+    color:var(--gold);
+  }
+  .desktop-tabs .tab-btn.active::after{display:none}
+  .master-scroll,.pricing-strip{
+    margin:0;
+    padding:0 0 4px;
+  }
 }
-
-/* ─── REVEAL ─── */
-.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
-/* ─── NOISE TEXTURE ─── */
-.noise{
-  position:fixed;inset:0;z-index:9998;
-  pointer-events:none;opacity:.015;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat:repeat;
-  background-size:256px 256px;
+@media(max-width:767px){
+  .desktop-tabs{display:none}
+  .app-body{padding:12px 16px 80px}
+  .calc-box{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .form-row-2{grid-template-columns:1fr}
+  .hero-strip{flex-wrap:wrap;gap:12px}
+  .pricing-mini{min-width:200px}
+  .master-mini{min-width:170px}
 }
 </style>
 </head>
 <body>
+<div class="app">
+  <header class="app-header">
+    <a href="#" class="logo">
+      Abdullo <em>Usta</em>
+      <small>Professional qurilish</small>
+    </a>
+    <a href="tel:+998913631012" class="header-call" onclick="notif()">
+      <span class="dot"></span>
+      Qo'ng'iroq
+    </a>
+  </header>
 
-<!-- Noise overlay -->
-<div class="noise"></div>
-
-<!-- Loader -->
-<div id="loader">
-  <div class="loader-bar"><span></span></div>
-  <div class="loader-label">Yuklanmoqda...</div>
-</div>
-
-<!-- Cursor -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<!-- Scroll progress -->
-<div id="scrollProgress"></div>
-
-<!-- Notification -->
-<div class="notif" id="notif">
-  <span class="notif-icon">📞</span>
-  <div class="notif-text">
-    <strong>Qo'ng'iroq amalga oshirilmoqda...</strong>
-    Usta siz bilan bog'lanadi
-  </div>
-</div>
-
-<!-- Fab call -->
-<a href="tel:+998913631012" class="fab" onclick="showNotif()">
-  <div class="fab-ring"></div>
-  📞
-</a>
-
-<!-- Back to top -->
-<a href="#" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">↑</a>
-
-<!-- Navbar -->
-<nav id="navbar">
-  <a href="#" class="nav-logo">Abdullo <em>Usta</em></a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#services">Xizmatlar</a></li>
-    <li><a href="#masters">Ustalar</a></li>
-    <li><a href="#pricing">Narxlar</a></li>
-    <li><a href="#calculator">Kalkulyator</a></li>
-    <li><a href="#contact">Aloqa</a></li>
-  </ul>
-  <a href="tel:+998913631012" class="nav-call-btn" onclick="showNotif()">
-    <div class="pulse-dot"></div>
-    Qo'ng'iroq
-  </a>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<!-- Hero -->
-<section class="hero" id="home">
-  <div class="hero-grid-bg"></div>
-  <div class="hero-glow"></div>
-  <canvas id="particles-canvas"></canvas>
-  <div class="hero-left">
-    <div class="hero-tag">⚙️ Professional qurilish xizmatlari</div>
-    <h1 class="hero-title">
-      Qurilish<br>
-      <span class="gold">Ustasi</span><br>
-      Siz uchun
-    </h1>
-    <p class="hero-sub">
-      Uyingizni noldan quring yoki ta'mirlang — tajribali ustalar bilan. Arzon narx, yuqori sifat, o'z vaqtida yetkazish kafolati.
-    </p>
-    <div class="hero-btns">
-      <a href="#calculator" class="btn-primary">💰 Narx hisoblash</a>
-      <a href="#contact" class="btn-ghost">Bepul maslahat</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num" data-count="8">0</div>
-        <div class="stat-label">Yillik tajriba</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-count="340">0</div>
-        <div class="stat-label">Bajarilgan loyiha</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-count="24">0</div>
-        <div class="stat-label">/7 Qo'llab-quvvatlash</div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-img-wrap">
-      <img src="https://i.ibb.co/SwW104Xd/IMG-20260531-132158-026.jpg" alt="Professional Usta" loading="lazy">
-      <div class="hero-badge b1">
-        <div class="badge-label">Narxlar</div>
-        <div class="badge-val">260K</div>
-        <div class="badge-sub">so'm/kub</div>
-      </div>
-      <div class="hero-badge b2">
-        <div class="badge-label">Kafolat</div>
-        <div class="badge-val">2 YIL</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Ticker -->
-<div class="ticker-wrap">
-  <div class="ticker-track" id="tickerTrack">
-    <span class="ticker-item">🏗️ Beton quyish — 260 000 so'm/kub <span class="sep">|</span></span>
-    <span class="ticker-item">🧱 G'isht urish — 7 500 so'm/dona <span class="sep">|</span></span>
-    <span class="ticker-item">🏠 Sesma pol — 70 000 so'm/m² <span class="sep">|</span></span>
-    <span class="ticker-item">🔨 Uy qurish — 0 dan tomgacha <span class="sep">|</span></span>
-    <span class="ticker-item">⚡ Elektr ishlari — arzon narxlarda <span class="sep">|</span></span>
-    <span class="ticker-item">🚿 Santexnika — kafolat bilan <span class="sep">|</span></span>
-    <span class="ticker-item">🏗️ Beton quyish — 260 000 so'm/kub <span class="sep">|</span></span>
-    <span class="ticker-item">🧱 G'isht urish — 7 500 so'm/dona <span class="sep">|</span></span>
-    <span class="ticker-item">🏠 Sesma pol — 70 000 so'm/m² <span class="sep">|</span></span>
-    <span class="ticker-item">🔨 Uy qurish — 0 dan tomgacha <span class="sep">|</span></span>
-    <span class="ticker-item">⚡ Elektr ishlari — arzon narxlarda <span class="sep">|</span></span>
-    <span class="ticker-item">🚿 Santexnika — kafolat bilan <span class="sep">|</span></span>
-  </div>
-</div>
-
-<!-- Services -->
-<section class="services" id="services">
-  <div class="container">
-    <div class="section-header reveal">
-      <div>
-        <div class="section-tag">Xizmatlar</div>
-        <h2 class="section-title">Bizning <em>ishlarimiz</em></h2>
-      </div>
-      <p class="section-desc">Uyni noldan qurish yoki ta'mirlashning barcha bosqichlarini bajaramiz — har bir ish kafolat bilan.</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card featured" data-tilt>
-        <span class="featured-badge">Mashhur</span>
-        <div class="service-icon">🏗️</div>
-        <div class="service-name">Beton quyish</div>
-        <div class="service-desc">Poydevor, shift, ustun va boshqa beton konstruksiyalarni professional quyish. Sifatli material, tajribali jamoa.</div>
-        <div class="service-price">
-          <div class="price-num">260 000</div>
-          <div class="price-unit">so'm / kub m</div>
+  <div class="app-body" id="appBody">
+    <!-- ASOSIY -->
+    <div class="tab-content active" id="tab-home">
+      <div class="hero-compact">
+        <div class="tag">⚡ Namangan №1 qurilish ustasi</div>
+        <h1>Ishonchli <em>usta</em> — <br>sifatli <em>natija</em></h1>
+        <p>8 yillik tajriba, 340+ bajarilgan loyiha, rasmiy shartnoma va kafolat. Uyingizni noldan quring yoki ta'mirlang.</p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-primary" onclick="switchTab('tab-services');return false">📋 Xizmatlar</a>
+          <a href="#" class="btn btn-ghost" onclick="switchTab('tab-contact');return false">📞 Bepul maslahat</a>
+        </div>
+        <div class="hero-strip">
+          <div class="strip-item"><strong>8+</strong> yil tajriba</div>
+          <div class="strip-item"><strong>340+</strong> loyiha</div>
+          <div class="strip-item"><strong>2 yil</strong> kafolat</div>
         </div>
       </div>
-      <div class="service-card" data-tilt>
-        <div class="service-icon">🧱</div>
-        <div class="service-name">G'isht urish</div>
-        <div class="service-desc">Uy devorlarini g'ishtdan ko'tarish. Har xil o'lchamdagi g'ishtlar bilan ishlash. Tekis va mustahkam devorlar.</div>
-        <div class="service-price">
-          <div class="price-num">7 500</div>
-          <div class="price-unit">so'm / dona</div>
-        </div>
-      </div>
-      <div class="service-card" data-tilt>
-        <div class="service-icon">🏠</div>
-        <div class="service-name">Sesma (styaжka) pol</div>
-        <div class="service-desc">Sifatli sesma ishlari. Tekis va mustahkam pol uchun. Turli qalinlikda qilish imkoniyati.</div>
-        <div class="service-price">
-          <div class="price-num">70 000</div>
-          <div class="price-unit">so'm / m²</div>
-        </div>
-      </div>
-      <div class="service-card" data-tilt>
-        <div class="service-icon">🔨</div>
-        <div class="service-name">Tom yopish</div>
-        <div class="service-desc">Uyingiz uchun mustahkam tom — shinglas, profnastil, metall cherepitsa. To'liq montaj va izolyatsiya.</div>
-        <div class="service-price">
-          <div class="price-num">80 000</div>
-          <div class="price-unit">so'm / m² dan</div>
-        </div>
-      </div>
-      <div class="service-card" data-tilt>
-        <div class="service-icon">⚡</div>
-        <div class="service-name">Elektr montaj</div>
-        <div class="service-desc">Uy ichidagi elektr tarmoqlarini o'rnatish, rozetka va yoritish tizimlari. Xavfsiz va sifatli.</div>
-        <div class="service-price">
-          <div class="price-num">35 000</div>
-          <div class="price-unit">so'm / m² dan</div>
-        </div>
-      </div>
-      <div class="service-card" data-tilt>
-        <div class="service-icon">🚿</div>
-        <div class="service-name">Santexnika ishlari</div>
-        <div class="service-desc">Suv quvurlari, kanalizatsiya, vannaxona jihozlash. Tez va kafolat bilan bajariladi.</div>
-        <div class="service-price">
-          <div class="price-num">Loyiha</div>
-          <div class="price-unit">asosida narx</div>
-        </div>
-      </div>
-      <div class="service-card" data-tilt>
-        <div class="service-icon">🪟</div>
-        <div class="service-name">Eshik va derazalar</div>
-        <div class="service-desc">Plastik, alyuminiy yoki yog'och eshik-derazalar o'rnatish. Professional montaj kafolati bilan.</div>
-        <div class="service-price">
-          <div class="price-num">Loyiha</div>
-          <div class="price-unit">asosida narx</div>
-        </div>
-      </div>
-      <div class="service-card" data-tilt>
-        <div class="service-icon">🎨</div>
-        <div class="service-name">Suvoq va bo'yash</div>
-        <div class="service-desc">Sifatli suvoq ishlari, gips kartonga ishlov, devorlarni bo'yash va muqova ishlari.</div>
-        <div class="service-price">
-          <div class="price-num">25 000</div>
-          <div class="price-unit">so'm / m² dan</div>
-        </div>
-      </div>
-      <div class="service-card" data-tilt>
-        <div class="service-icon">🏛️</div>
-        <div class="service-name">Uyni 0 dan qurish</div>
-        <div class="service-desc">Poydevor qazishdan to tom yopishgacha — to'liq kalit topshiriq asosida uy qurilishi.</div>
-        <div class="service-price">
-          <div class="price-num">Loyiha</div>
-          <div class="price-unit">asosida narx</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Process -->
-<section class="process" id="process">
-  <div class="container">
-    <div class="section-header reveal">
-      <div>
-        <div class="section-tag">Jarayon</div>
-        <h2 class="section-title">Qanday <em>ishlaymiz</em></h2>
-      </div>
-    </div>
-    <div class="process-steps">
-      <div class="process-step reveal">
-        <div class="step-num">01</div>
-        <div class="step-title">Murojaat qiling</div>
-        <div class="step-desc">Telefon yoki forma orqali bog'laning. Biz siz bilan 30 daqiqa ichida bog'lanamiz.</div>
-      </div>
-      <div class="process-step reveal">
-        <div class="step-num">02</div>
-        <div class="step-title">Bepul ko'rik</div>
-        <div class="step-desc">Ustamiz obyektga kelib, bepul ko'rik o'tkazadi va aniq narx taklif qiladi.</div>
-      </div>
-      <div class="process-step reveal">
-        <div class="step-num">03</div>
-        <div class="step-title">Shartnoma tuziladi</div>
-        <div class="step-desc">Narx, muddat va ish hajmi bo'yicha rasmiy shartnoma imzolanadi.</div>
-      </div>
-      <div class="process-step reveal">
-        <div class="step-num">04</div>
-        <div class="step-title">Ish topshiriladi</div>
-        <div class="step-desc">Belgilangan muddatda ish bajariladi, siz qabul qilasiz va to'lov amalga oshiriladi.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Masters -->
-<section class="masters" id="masters">
-  <div class="container">
-    <div class="section-header reveal">
-      <div>
-        <div class="section-tag">Jamoamiz</div>
-        <h2 class="section-title">Bizning <em>ustalar</em></h2>
-      </div>
-      <p class="section-desc">Har bir ustamiz o'z sohasida 5+ yillik tajribaga ega professional.</p>
-    </div>
-    <div class="masters-grid">
-      <div class="master-card reveal" data-tilt>
-        <div class="master-img-wrap">
-          <img src="https://i.ibb.co/r2WJ5MWr/file-0000000047ec71f4984c8e4a7e572d0a.png" alt="Abdullo Usta" loading="lazy">
-          <div class="master-img-overlay"></div>
-          <div class="master-exp">8 yil tajriba</div>
+      <!-- Nega biz -->
+      <div style="margin-top:20px">
+        <div class="section-mini">
+          <div class="st">Nega aynan biz</div>
         </div>
-        <div class="master-info">
-          <div class="master-name">Abdullo Usta</div>
-          <div class="master-spec">Bosh qurilish ustasi</div>
-          <div class="master-skills">
-            <span class="skill-tag">Beton</span>
-            <span class="skill-tag">G'isht</span>
-            <span class="skill-tag">Tom</span>
-            <span class="skill-tag">Loyiha</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);padding:14px">
+            <div style="color:var(--gold);font-size:18px;margin-bottom:4px">📋</div>
+            <div style="font-size:13px;font-weight:600">Rasmiy shartnoma</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px">Narx va muddat qat'iy belgilanadi</div>
           </div>
-          <div class="master-rating">
-            <span class="stars">★★★★★</span>
-            <span>5.0 (82 sharh)</span>
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);padding:14px">
+            <div style="color:var(--gold);font-size:18px;margin-bottom:4px">🔄</div>
+            <div style="font-size:13px;font-weight:600">Bepul ko'rik</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px">Usta kelib, aniq narx taklif qiladi</div>
+          </div>
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);padding:14px">
+            <div style="color:var(--gold);font-size:18px;margin-bottom:4px">🔒</div>
+            <div style="font-size:13px;font-weight:600">2 yil kafolat</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px">Barcha ishlarga to'liq kafolat</div>
+          </div>
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);padding:14px">
+            <div style="color:var(--gold);font-size:18px;margin-bottom:4px">⏱</div>
+            <div style="font-size:13px;font-weight:600">O'z vaqtida yetkazish</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px">Muddatni kechiktirmaymiz, kafolat beramiz</div>
           </div>
         </div>
       </div>
-      <div class="master-card reveal" data-tilt>
-        <div class="master-img-wrap">
-          <img src="https://i.ibb.co/SwW104Xd/IMG-20260531-132158-026.jpg" alt="Beton ustasi" loading="lazy">
-          <div class="master-img-overlay"></div>
-          <div class="master-exp">6 yil tajriba</div>
-        </div>
-        <div class="master-info">
-          <div class="master-name">Jamoa Sardori</div>
-          <div class="master-spec">Beton va sesma mutaxassisi</div>
-          <div class="master-skills">
-            <span class="skill-tag">Sesma</span>
-            <span class="skill-tag">Poydevor</span>
-            <span class="skill-tag">Beton</span>
-          </div>
-          <div class="master-rating">
-            <span class="stars">★★★★★</span>
-            <span>4.9 (64 sharh)</span>
-          </div>
-        </div>
-      </div>
-      <div class="master-card reveal" data-tilt>
-        <div class="master-img-wrap">
-          <img src="https://i.ibb.co/r2WJ5MWr/file-0000000047ec71f4984c8e4a7e572d0a.png" alt="Tom ustasi" loading="lazy">
-          <div class="master-img-overlay"></div>
-          <div class="master-exp">5 yil tajriba</div>
-        </div>
-        <div class="master-info">
-          <div class="master-name">Alijon Usta</div>
-          <div class="master-spec">Tom va elektr mutaxassisi</div>
-          <div class="master-skills">
-            <span class="skill-tag">Tom yopish</span>
-            <span class="skill-tag">Elektr</span>
-            <span class="skill-tag">G'isht</span>
-          </div>
-          <div class="master-rating">
-            <span class="stars">★★★★★</span>
-            <span>4.8 (51 sharh)</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Pricing -->
-<section class="pricing" id="pricing">
-  <div class="container">
-    <div class="section-header reveal">
-      <div>
-        <div class="section-tag">Narxlar</div>
-        <h2 class="section-title">Aniq <em>narxlar</em></h2>
+      <!-- Desktop tabs -->
+      <div class="desktop-tabs">
+        <button class="tab-btn active" data-tab="tab-home" onclick="switchTab('tab-home')"><span class="tab-icon">🏠</span> Asosiy</button>
+        <button class="tab-btn" data-tab="tab-services" onclick="switchTab('tab-services')"><span class="tab-icon">📋</span> Xizmatlar</button>
+        <button class="tab-btn" data-tab="tab-masters" onclick="switchTab('tab-masters')"><span class="tab-icon">👨‍🔧</span> Ustalar</button>
+        <button class="tab-btn" data-tab="tab-pricing" onclick="switchTab('tab-pricing')"><span class="tab-icon">💰</span> Narxlar</button>
+        <button class="tab-btn" data-tab="tab-contact" onclick="switchTab('tab-contact')"><span class="tab-icon">📞</span> Aloqa</button>
       </div>
-      <p class="section-desc">Yashirin to'lovlar yo'q. Shartnomada yozilgan narxdan ortiq to'lamaysiz.</p>
-    </div>
-    <div class="pricing-grid">
-      <div class="pricing-card reveal">
-        <div class="pricing-name">Ta'mirlash</div>
-        <div class="pricing-price"><span class="currency">₩</span>Asosiy</div>
-        <div class="pricing-period">Xona ta'mirlash va kichik ishlar</div>
-        <ul class="pricing-features">
-          <li>Devor suvoq va bo'yash</li>
-          <li>Sesma pol — 70 000 so'm/m²</li>
-          <li>Eshik o'rnatish</li>
-          <li>Elektr tarmog'i</li>
-          <li>1 yil kafolat</li>
-        </ul>
-        <a href="tel:+998913631012" class="btn-full btn-outline" onclick="showNotif()">Qo'ng'iroq qilish</a>
-      </div>
-      <div class="pricing-card popular reveal">
-        <div class="popular-badge">Mashhur</div>
-        <div class="pricing-name">Kalit topshiriq</div>
-        <div class="pricing-price"><span class="currency">₩</span>To'liq</div>
-        <div class="pricing-period">Uyni 0 dan topshirishgacha</div>
-        <ul class="pricing-features">
-          <li>Poydevor — beton 260 000 so'm/kub</li>
-          <li>G'isht urish — 7 500 so'm/dona</li>
-          <li>Sesma pol — 70 000 so'm/m²</li>
-          <li>Tom yopish — shinglas/profnastil</li>
-          <li>Elektr va santexnika</li>
-          <li>Devor suvoq va bo'yash</li>
-          <li>2 yil kafolat</li>
-        </ul>
-        <a href="tel:+998913631012" class="btn-full btn-gold" onclick="showNotif()">Bepul maslahat olish</a>
-      </div>
-      <div class="pricing-card reveal">
-        <div class="pricing-name">Premium</div>
-        <div class="pricing-price"><span class="currency">₩</span>Premium</div>
-        <div class="pricing-period">Dizayn va qurilish birlikda</div>
-        <ul class="pricing-features">
-          <li>Arxitektor loyihasi</li>
-          <li>Barcha asosiy ishlar</li>
-          <li>Ichki bezak va dizayn</li>
-          <li>Mebel o'rnatish</li>
-          <li>Bog' va hovli</li>
-          <li>3 yil kafolat</li>
-        </ul>
-        <a href="tel:+998913631012" class="btn-full btn-outline" onclick="showNotif()">Qo'ng'iroq qilish</a>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- Calculator -->
-<section class="calculator" id="calculator">
-  <div class="container">
-    <div class="section-header reveal">
-      <div>
-        <div class="section-tag">Hisoblash</div>
-        <h2 class="section-title">Narx <em>kalkulyator</em></h2>
+      <div class="footer-compact">
+        <span>© 2025 Abdullo Usta</span>
+        <span>Sifatli qurilish — <em>sharafimiz</em></span>
       </div>
-      <p class="section-desc">Taxminiy narxni o'zingiz hisoblang. Aniq narx uchun qo'ng'iroq qiling.</p>
     </div>
-    <div class="calc-wrap">
-      <div class="calc-form reveal">
-        <div class="form-group">
-          <label class="form-label">Xizmat turi</label>
-          <select class="form-select" id="calcService" onchange="calcPrice()">
-            <option value="beton">Beton quyish (260 000 so'm/kub)</option>
-            <option value="gisht">G'isht urish (7 500 so'm/dona)</option>
-            <option value="sesma">Sesma pol (70 000 so'm/m²)</option>
-            <option value="tom">Tom yopish (so'm/m²)</option>
-            <option value="elektr">Elektr montaj (so'm/m²)</option>
-            <option value="suvoq">Devor suvoq (so'm/m²)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label" id="amountLabel">Hajm (kub metr)</label>
-          <div class="range-wrap">
-            <input type="range" class="form-range" id="calcAmount" min="1" max="100" value="10" oninput="calcPrice()">
-            <span class="range-val" id="amountVal">10</span>
+
+    <!-- XIZMATLAR -->
+    <div class="tab-content" id="tab-services">
+      <div class="section-mini">
+        <div class="st">Xizmatlar</div>
+        <h2>Nimani <em>taklif qilamiz</em></h2>
+        <p>Barcha ishlar rasmiy shartnoma va kafolat bilan. Narxlar aniq, yashirin to'lovlarsiz.</p>
+      </div>
+      <div class="accordion">
+        <div class="acc-item open">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            <div class="left">
+              <div class="icon">🏗️</div>
+              <div class="info">
+                <h3>Beton quyish</h3>
+                <small>Poydevor, shift, ustunlar</small>
+              </div>
+            </div>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="acc-inner">
+              Poydevor, shift va ustunlarni professional quyish. Sifatli beton (M200-M400), tajribali jamoa.
+              <ul>
+                <li>Poydevor (lenta, plita, qoziq)</li>
+                <li>Shift (monolit, yig'ma)</li>
+                <li>Ustun va armatura ishlari</li>
+              </ul>
+              <div class="price-tag">💰 260 000 so'm/kub m</div>
+            </div>
           </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Sifat darajasi</label>
-          <select class="form-select" id="calcQuality" onchange="calcPrice()">
-            <option value="1">Standart</option>
-            <option value="1.3">Premium (+30%)</option>
-            <option value="1.6">Lyuks (+60%)</option>
-          </select>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            <div class="left">
+              <div class="icon">🧱</div>
+              <div class="info">
+                <h3>G'isht urish</h3>
+                <small>Devor va qismalar</small>
+              </div>
+            </div>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="acc-inner">
+              Har xil turdagi g'isht bilan ishlaymiz: keramik, silikat, qoplama. Tekis va mustahkam devor.
+              <ul>
+                <li>Yuk ko'taruvchi devorlar</li>
+                <li>Ichki qismalar</li>
+                <li>Fasad qoplama</li>
+              </ul>
+              <div class="price-tag">💰 7 500 so'm/dona</div>
+            </div>
+          </div>
         </div>
-        <a href="tel:+998913631012" class="btn-primary" style="justify-content:center" onclick="showNotif()">
-          📞 Aniq narx uchun qo'ng'iroq
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            <div class="left">
+              <div class="icon">🏠</div>
+              <div class="info">
+                <h3>Sesma (styaжka) pol</h3>
+                <small>Tekis va mustahkam pol</small>
+              </div>
+            </div>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="acc-inner">
+              Sifatli sesma ishlari. Turli qalinlikda va turdagi pol qoplamalari uchun tayyorlash.
+              <div class="price-tag">💰 70 000 so'm/m²</div>
+            </div>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            <div class="left">
+              <div class="icon">🔨</div>
+              <div class="info">
+                <h3>Tom yopish</h3>
+                <small>Shinglas, profnastil, metall</small>
+              </div>
+            </div>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="acc-inner">
+              Uyingiz uchun mustahkam tom. Barcha turdagi materiallar bilan ishlaymiz. Izolyatsiya bilan to'liq montaj.
+              <div class="price-tag">💰 80 000 so'm/m² dan</div>
+            </div>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            <div class="left">
+              <div class="icon">⚡</div>
+              <div class="info">
+                <h3>Elektr montaj</h3>
+                <small>Rozetka, yoritish, tarmoq</small>
+              </div>
+            </div>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="acc-inner">
+              Uy ichidagi elektr tarmoqlarini o'rnatish. Xavfsizlik standartlariga to'liq rioya qilgan holda.
+              <div class="price-tag">💰 35 000 so'm/m² dan</div>
+            </div>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            <div class="left">
+              <div class="icon">🚿</div>
+              <div class="info">
+                <h3>Santexnika</h3>
+                <small>Quvurlar, kanalizatsiya, jihoz</small>
+              </div>
+            </div>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="acc-inner">
+              Suv ta'minoti, kanalizatsiya tizimlari, vannaxona jihozlash. Tez va kafolat bilan.
+            </div>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            <div class="left">
+              <div class="icon">🎨</div>
+              <div class="info">
+                <h3>Suvoq va bo'yash</h3>
+                <small>Devorlarni tayyorlash</small>
+              </div>
+            </div>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="acc-inner">
+              Sifatli suvoq, gips karton ishlov, devorlarni bo'yash va muqova ishlari.
+              <div class="price-tag">💰 25 000 so'm/m² dan</div>
+            </div>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-header" onclick="toggleAcc(this)">
+            <div class="left">
+              <div class="icon">🏛️</div>
+              <div class="info">
+                <h3>Uyni 0 dan qurish</h3>
+                <small>Kalit topshiriq</small>
+              </div>
+            </div>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="acc-body">
+            <div class="acc-inner">
+              Poydevor qazishdan to tom yopishgacha — to'liq kalit topshiriq asosida uy qurilishi. Siz faqat yashaydigan kunni kuting.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:12px;text-align:center">
+        <a href="#" class="btn btn-primary" style="display:inline-flex;padding:12px 32px;border-radius:100px;background:var(--gold);color:var(--bg);font-size:13px;font-weight:700;font-family:'Inter',sans-serif;text-decoration:none;border:none;cursor:pointer" onclick="switchTab('tab-contact');return false">
+          📞 Bepul maslahat olish
         </a>
       </div>
-      <div class="calc-result reveal">
-        <div class="result-label">Taxminiy narx</div>
-        <div class="result-price" id="resultPrice">2 600 000</div>
-        <div class="result-curr">O'zbek so'mi</div>
-        <div class="result-breakdown">
-          <div class="bd-row">
-            <span class="bd-name">Ish narxi:</span>
-            <span class="bd-val" id="breakWorkPrice">2 600 000 so'm</span>
-          </div>
-          <div class="bd-row">
-            <span class="bd-name">Material:</span>
-            <span class="bd-val">Alohida hisob</span>
-          </div>
-          <div class="bd-row">
-            <span class="bd-name">Ko'rik:</span>
-            <span class="bd-val" style="color:var(--green)">Bepul</span>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-</section>
 
-<!-- Contact -->
-<section class="contact" id="contact">
-  <div class="container">
-    <div class="section-header reveal">
-      <div>
-        <div class="section-tag">Aloqa</div>
-        <h2 class="section-title">Bog'lanish <em>usullari</em></h2>
+    <!-- USTALAR -->
+    <div class="tab-content" id="tab-masters">
+      <div class="section-mini">
+        <div class="st">Jamoamiz</div>
+        <h2>Tajribali <em>ustalar</em></h2>
+        <p>Har bir usta o'z sohasida kamida 5 yillik tajribaga ega. Natija uchun ishlaymiz.</p>
+      </div>
+      <div class="master-scroll">
+        <div class="master-mini">
+          <div class="img">
+            <img src="https://i.ibb.co/r2WJ5MWr/file-0000000047ec71f4984c8e4a7e572d0a.png" alt="Abdullo Usta" loading="lazy">
+          </div>
+          <div class="body">
+            <h4>Abdullo Usta</h4>
+            <div class="spec">Bosh qurilish ustasi</div>
+            <div class="tags">
+              <span>Beton</span>
+              <span>G'isht</span>
+              <span>Tom</span>
+            </div>
+          </div>
+        </div>
+        <div class="master-mini">
+          <div class="img">
+            <img src="https://i.ibb.co/SwW104Xd/IMG-20260531-132158-026.jpg" alt="Jamoa Sardori" loading="lazy">
+          </div>
+          <div class="body">
+            <h4>Jamoa Sardori</h4>
+            <div class="spec">Beton va sesma ustasi</div>
+            <div class="tags">
+              <span>Sesma</span>
+              <span>Poydevor</span>
+              <span>Beton</span>
+            </div>
+          </div>
+        </div>
+        <div class="master-mini">
+          <div class="img">
+            <img src="https://i.ibb.co/r2WJ5MWr/file-0000000047ec71f4984c8e4a7e572d0a.png" alt="Alijon Usta" loading="lazy">
+          </div>
+          <div class="body">
+            <h4>Alijon Usta</h4>
+            <div class="spec">Tom va elektr mutaxassisi</div>
+            <div class="tags">
+              <span>Tom</span>
+              <span>Elektr</span>
+              <span>G'isht</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <div style="background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:20px;text-align:center">
+          <div style="font-size:32px;color:var(--gold);font-family:'Playfair Display',serif;font-style:italic">4.9</div>
+          <div style="color:var(--gold);font-size:16px;letter-spacing:3px;margin:4px 0">★★★★★</div>
+          <div style="font-size:13px;color:var(--text2)">200+ mijoz mamnun</div>
+        </div>
       </div>
     </div>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <div class="contact-item reveal">
-          <div class="contact-icon">📍</div>
-          <div>
-            <div class="c-label">Manzil</div>
-            <div class="c-val">Namangan shahar, Ziyokor mfy</div>
+
+    <!-- NARXLAR -->
+    <div class="tab-content" id="tab-pricing">
+      <div class="section-mini">
+        <div class="st">Narxlar</div>
+        <h2>Aniq va <em>shaffof</em></h2>
+        <p>Yashirin to'lovlar yo'q. Shartnomada yozilgan narxdan ortiq to'lamaysiz. Kafolat bilan.</p>
+      </div>
+
+      <div class="calc-box">
+        <div class="calc-form">
+          <div class="fg">
+            <label>Xizmat turi</label>
+            <select id="calcService" onchange="calcPrice()">
+              <option value="beton">Beton quyish</option>
+              <option value="gisht">G'isht urish</option>
+              <option value="sesma">Sesma pol</option>
+              <option value="tom">Tom yopish</option>
+              <option value="elektr">Elektr montaj</option>
+              <option value="suvoq">Suvoq ishlari</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label id="amountLabel">Hajm (kub metr)</label>
+            <div class="range-group">
+              <input type="range" id="calcAmount" min="1" max="100" value="10" oninput="calcPrice()">
+              <span class="rval" id="amountVal">10</span>
+            </div>
+          </div>
+          <div class="fg">
+            <label>Sifat darajasi</label>
+            <select id="calcQuality" onchange="calcPrice()">
+              <option value="1">Standart</option>
+              <option value="1.3">Premium (+30%)</option>
+              <option value="1.6">Lyuks (+60%)</option>
+            </select>
           </div>
         </div>
-        <div class="contact-item reveal">
-          <div class="contact-icon">🕐</div>
-          <div>
-            <div class="c-label">Ish vaqti</div>
-            <div class="c-val">Du-Yak: 08:00 – 20:00</div>
+        <div class="calc-result">
+          <div class="label">Taxminiy narx</div>
+          <div class="total" id="resultPrice">2 600 000</div>
+          <div class="curr">O'zbek so'mi</div>
+          <div class="breakdown">
+            <div class="row"><span>Ish narxi</span><span class="val" id="breakWorkPrice">2 600 000 so'm</span></div>
+            <div class="row"><span>Material</span><span class="val">Alohida hisob</span></div>
+            <div class="row"><span>Ko'rik</span><span class="val" style="color:var(--green)">Bepul</span></div>
           </div>
-        </div>
-        <div class="contact-item reveal">
-          <div class="contact-icon">⚡</div>
-          <div>
-            <div class="c-label">Javob vaqti</div>
-            <div class="c-val">30 daqiqa ichida aloqa</div>
-          </div>
-        </div>
-        <div class="call-cta reveal">
-          <div class="call-cta-title">Hoziroq qo'ng'iroq qiling</div>
-          <div class="call-cta-sub">Bepul maslahat va ko'rik uchun</div>
-          <a href="tel:+998913631012" class="btn-primary" onclick="showNotif()" style="justify-content:center;display:inline-flex">
-            📞 Qo'ng'iroq qilish
-          </a>
         </div>
       </div>
-      <div class="contact-form reveal">
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Ismingiz</label>
-            <input type="text" class="form-input" placeholder="Ismingizni kiriting">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Telefon</label>
-            <input type="tel" class="form-input" placeholder="+998 XX XXX XX XX">
-          </div>
+
+      <div class="pricing-strip" style="margin-top:16px">
+        <div class="pricing-mini">
+          <div class="name">Ta'mirlash</div>
+          <div class="price"><span class="cur">₩</span>Asosiy</div>
+          <div class="period">Xona ta'mirlash va kichik ishlar</div>
+          <ul>
+            <li>Suvoq va bo'yash</li>
+            <li>Sesma pol</li>
+            <li>Eshik o'rnatish</li>
+            <li>Elektr tarmog'i</li>
+            <li>1 yil kafolat</li>
+          </ul>
+          <a href="tel:+998913631012" class="btn btn-outline" onclick="notif()">Qo'ng'iroq</a>
         </div>
-        <div class="form-group">
-          <label class="form-label">Xizmat turi</label>
-          <select class="form-select">
+        <div class="pricing-mini popular">
+          <div class="badge">Mashhur</div>
+          <div class="name">Kalit topshiriq</div>
+          <div class="price"><span class="cur">₩</span>To'liq</div>
+          <div class="period">Uyni 0 dan topshirishgacha</div>
+          <ul>
+            <li>Beton 260 000 so'm/kub</li>
+            <li>G'isht 7 500 so'm/dona</li>
+            <li>Sesma pol 70 000 so'm/m²</li>
+            <li>Tom yopish</li>
+            <li>Elektr va santexnika</li>
+            <li>2 yil kafolat</li>
+          </ul>
+          <a href="tel:+998913631012" class="btn btn-gold" onclick="notif()">Bepul maslahat</a>
+        </div>
+        <div class="pricing-mini">
+          <div class="name">Premium</div>
+          <div class="price"><span class="cur">₩</span>Premium</div>
+          <div class="period">Dizayn + qurilish</div>
+          <ul>
+            <li>Arxitektor loyihasi</li>
+            <li>Barcha ishlar</li>
+            <li>Ichki dizayn</li>
+            <li>Mebel o'rnatish</li>
+            <li>3 yil kafolat</li>
+          </ul>
+          <a href="tel:+998913631012" class="btn btn-outline" onclick="notif()">Qo'ng'iroq</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALOQA -->
+    <div class="tab-content" id="tab-contact">
+      <div class="section-mini">
+        <div class="st">Aloqa</div>
+        <h2>Bog'lanish <em>usullari</em></h2>
+        <p>30 daqiqa ichida javob beramiz. Bepul ko'rik va maslahat.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="meta">📍 Manzil</div>
+          <div class="val">Namangan, Ziyokor mfy</div>
+        </div>
+        <div class="contact-card">
+          <div class="meta">🕐 Ish vaqti</div>
+          <div class="val">Du-Yak: 08:00 – 20:00</div>
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <div class="form-compact">
+          <div class="form-row-2">
+            <input type="text" placeholder="Ismingiz" id="formName">
+            <input type="tel" placeholder="Telefon raqam" id="formPhone">
+          </div>
+          <select id="formService">
+            <option value="">Xizmat turini tanlang</option>
             <option>Beton quyish</option>
             <option>G'isht urish</option>
             <option>Sesma pol</option>
@@ -1486,320 +1233,133 @@ footer{
             <option>Uyni 0 dan qurish</option>
             <option>Boshqa</option>
           </select>
+          <textarea placeholder="Qo'shimcha ma'lumot (ixtiyoriy)..."></textarea>
+          <button onclick="submitForm()">✉️ So'rov yuborish</button>
         </div>
-        <div class="form-group">
-          <label class="form-label">Xabar</label>
-          <textarea class="form-input" rows="4" placeholder="Qo'shimcha ma'lumot (ixtiyoriy)..."></textarea>
-        </div>
-        <button class="btn-primary" style="width:100%;justify-content:center" onclick="submitForm(this)">
-          ✉️ So'rov yuborish
-        </button>
+      </div>
+      <div class="cta-block">
+        <h3>Hoziroq qo'ng'iroq qiling</h3>
+        <p>Bepul maslahat va ko'rik uchun</p>
+        <a href="tel:+998913631012" class="btn" onclick="notif()">📞 Qo'ng'iroq qilish</a>
+      </div>
+      <div class="footer-compact">
+        <span>© 2025 Abdullo Usta</span>
+        <span>Sifatli qurilish — <em>sharafimiz</em></span>
       </div>
     </div>
   </div>
-</section>
 
-<!-- Footer -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <span class="footer-logo">Abdullo <em>Usta</em></span>
-        <p class="footer-desc">Professional qurilish xizmatlari. Uyingizni noldan quring yoki ta'mirlang — tajribali ustalar bilan, kafolat bilan.</p>
-      </div>
-      <div>
-        <div class="footer-col-title">Xizmatlar</div>
-        <ul class="footer-links">
-          <li><a href="#services">Beton quyish</a></li>
-          <li><a href="#services">G'isht urish</a></li>
-          <li><a href="#services">Sesma pol</a></li>
-          <li><a href="#services">Tom yopish</a></li>
-          <li><a href="#services">Elektr montaj</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Kompaniya</div>
-        <ul class="footer-links">
-          <li><a href="#masters">Ustalar</a></li>
-          <li><a href="#process">Jarayon</a></li>
-          <li><a href="#pricing">Narxlar</a></li>
-          <li><a href="#calculator">Kalkulyator</a></li>
-          <li><a href="#contact">Aloqa</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Aloqa</div>
-        <ul class="footer-links">
-          <li><a href="tel:+998913631012" onclick="showNotif()">📞 Qo'ng'iroq qilish</a></li>
-          <li><a href="#contact">📍 Namangan, Ziyokor mfy</a></li>
-          <li><a href="#contact">🕐 Du-Yak: 08-20</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p class="footer-copy">© 2025 Abdullo Usta — Barcha huquqlar himoyalangan.</p>
-      <p class="footer-credit">Sifatli qurilish — <em>bizning sharafimiz</em></p>
-    </div>
+  <!-- Bottom Tabs (Mobile) -->
+  <nav class="app-tabs" id="bottomTabs">
+    <button class="tab-btn active" data-tab="tab-home" onclick="switchTab('tab-home')">
+      <span class="tab-icon">🏠</span> Asosiy
+    </button>
+    <button class="tab-btn" data-tab="tab-services" onclick="switchTab('tab-services')">
+      <span class="tab-icon">📋</span> Xizmatlar
+    </button>
+    <button class="tab-btn" data-tab="tab-masters" onclick="switchTab('tab-masters')">
+      <span class="tab-icon">👨‍🔧</span> Ustalar
+    </button>
+    <button class="tab-btn" data-tab="tab-pricing" onclick="switchTab('tab-pricing')">
+      <span class="tab-icon">💰</span> Narxlar
+    </button>
+    <button class="tab-btn" data-tab="tab-contact" onclick="switchTab('tab-contact')">
+      <span class="tab-icon">📞</span> Aloqa
+    </button>
+  </nav>
+</div>
+
+<!-- Notification -->
+<div class="notif" id="notif">
+  <div class="icon">📞</div>
+  <div class="text">
+    <strong>Qo'ng'iroq amalga oshirilmoqda</strong>
+    Usta siz bilan bog'lanadi
   </div>
-</footer>
+</div>
 
-<!-- Order Modal -->
-<div class="modal-overlay" id="orderModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal('orderModal')">✕</button>
-    <div class="modal-title">So'rov yuborildi</div>
-    <div class="modal-sub">Usta 30 daqiqa ichida siz bilan bog'lanadi</div>
-    <div style="text-align:center;font-size:64px;margin:24px 0">✅</div>
-    <p style="color:var(--text2);font-size:14px;text-align:center;line-height:1.8">
-      So'rovingiz qabul qilindi. Ustamiz tez orada siz bilan bog'lanib, bepul ko'rik uchun vaqt belgilaydi.
-    </p>
-    <div style="margin-top:28px">
-      <a href="tel:+998913631012" class="btn-full btn-gold" onclick="showNotif();closeModal('orderModal')" style="text-align:center;display:block">📞 Hoziroq qo'ng'iroq qilish</a>
-    </div>
+<!-- Modal -->
+<div class="modal-overlay" id="orderModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="icon">✅</div>
+    <h3>So'rov yuborildi</h3>
+    <p>Ustamiz 30 daqiqa ichida siz bilan bog'lanadi va bepul ko'rik uchun vaqt belgilaydi.</p>
+    <a href="tel:+998913631012" class="btn" onclick="closeModal();notif()">📞 Hoziroq qo'ng'iroq qilish</a>
   </div>
 </div>
 
 <script>
-// ─── LOADER ───
-window.addEventListener('load', () => {
-  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 400);
-});
-
-// ─── CURSOR ───
-const dot = document.getElementById('cursorDot');
-const ring = document.getElementById('cursorRing');
-document.addEventListener('mousemove', e => {
-  dot.style.left = e.clientX + 'px';
-  dot.style.top = e.clientY + 'px';
-  requestAnimationFrame(() => {
-    ring.style.left = e.clientX + 'px';
-    ring.style.top = e.clientY + 'px';
-  });
-});
-document.querySelectorAll('a, button, input, select, textarea, .service-card, .master-card, .process-step, .hamburger').forEach(el => {
-  el.addEventListener('mouseenter', () => { dot.classList.add('hovered'); ring.classList.add('hovered'); });
-  el.addEventListener('mouseleave', () => { dot.classList.remove('hovered'); ring.classList.remove('hovered'); });
-});
-
-// ─── SCROLL PROGRESS ───
-const progressBar = document.getElementById('scrollProgress');
-window.addEventListener('scroll', () => {
-  const h = document.documentElement.scrollHeight - window.innerHeight;
-  progressBar.style.width = (window.scrollY / h * 100) + '%';
-});
-
-// ─── NAVBAR ───
-const navbar = document.getElementById('navbar');
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 60);
-});
-
-// ─── HAMBURGER ───
-function toggleMenu() {
-  document.getElementById('hamburger').classList.toggle('active');
-  document.getElementById('navLinks').classList.toggle('open');
+// ─── TAB SYSTEM ───
+function switchTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll(`[data-tab="${id}"]`).forEach(b => b.classList.add('active'));
+  document.getElementById('appBody').scrollTop = 0;
 }
-document.querySelectorAll('.nav-links a').forEach(a => {
-  a.addEventListener('click', () => {
-    document.getElementById('hamburger').classList.remove('active');
-    document.getElementById('navLinks').classList.remove('open');
-  });
-});
 
-// ─── PARTICLES ───
-(function initParticles() {
-  const canvas = document.getElementById('particles-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let w, h, particles = [];
-  const COUNT = 50;
-
-  function resize() {
-    w = canvas.width = canvas.parentElement.offsetWidth;
-    h = canvas.height = canvas.parentElement.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  class Particle {
-    constructor() { this.reset(); }
-    reset() {
-      this.x = Math.random() * w;
-      this.y = Math.random() * h;
-      this.size = Math.random() * 2 + .5;
-      this.speedX = (Math.random() - .5) * .3;
-      this.speedY = (Math.random() - .5) * .3;
-      this.opacity = Math.random() * .4 + .1;
-    }
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      if (this.x < 0 || this.x > w) this.speedX *= -1;
-      if (this.y < 0 || this.y > h) this.speedY *= -1;
-    }
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(200,169,110,${this.opacity})`;
-      ctx.fill();
-    }
-  }
-
-  for (let i = 0; i < COUNT; i++) particles.push(new Particle());
-
-  function connect() {
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(200,169,110,${.06 * (1 - dist / 120)})`;
-          ctx.lineWidth = .5;
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, w, h);
-    particles.forEach(p => { p.update(); p.draw(); });
-    connect();
-    requestAnimationFrame(animate);
-  }
-  animate();
-})();
-
-// ─── 3D TILT ───
-document.querySelectorAll('[data-tilt]').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
-    const tiltX = (y - .5) * 8;
-    const tiltY = (x - .5) * -8;
-    card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02,1.02,1.02)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)';
-  });
-});
-
-// ─── SCROLL REVEAL ───
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), (e.target.dataset.delay || 0) * 1000);
-      revealObserver.unobserve(e.target);
-    }
-  });
-}, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.reveal, .process-step, .master-card, .pricing-card').forEach((el, i) => {
-  el.dataset.delay = (i % 3) * .1;
-  revealObserver.observe(el);
-});
-
-// ─── COUNTER ───
-const counterObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const el = entry.target;
-      const target = parseInt(el.dataset.count);
-      const dur = 2000;
-      const start = performance.now();
-      function update(now) {
-        const p = Math.min((now - start) / dur, 1);
-        const val = Math.floor(p * target);
-        el.textContent = val + (target === 24 ? '' : '+');
-        if (p < 1) requestAnimationFrame(update);
-        else el.textContent = target + (target === 24 ? '' : '+');
-      }
-      requestAnimationFrame(update);
-      counterObserver.unobserve(el);
-    }
-  });
-}, { threshold: .5 });
-
-document.querySelectorAll('.stat-num[data-count]').forEach(el => counterObserver.observe(el));
+// ─── ACCORDION ───
+function toggleAcc(header) {
+  const item = header.closest('.acc-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.acc-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
 
 // ─── CALCULATOR ───
-const serviceRates = {
-  beton: { rate: 260000, unit: 'kub metr', label: 'Hajm (kub metr)', max: 100 },
-  gisht: { rate: 7500, unit: 'dona', label: 'Miqdor (dona)', max: 5000 },
-  sesma: { rate: 70000, unit: 'm²', label: 'Maydon (m²)', max: 500 },
-  tom: { rate: 80000, unit: 'm²', label: 'Maydon (m²)', max: 500 },
-  elektr: { rate: 35000, unit: 'm²', label: 'Maydon (m²)', max: 500 },
-  suvoq: { rate: 25000, unit: 'm²', label: 'Maydon (m²)', max: 500 }
+const rates = {
+  beton:{rate:260000,unit:'kub metr',label:'Hajm (kub metr)',max:100},
+  gisht:{rate:7500,unit:'dona',label:'Miqdor (dona)',max:5000},
+  sesma:{rate:70000,unit:'m²',label:'Maydon (m²)',max:500},
+  tom:{rate:80000,unit:'m²',label:'Maydon (m²)',max:500},
+  elektr:{rate:35000,unit:'m²',label:'Maydon (m²)',max:500},
+  suvoq:{rate:25000,unit:'m²',label:'Maydon (m²)',max:500}
 };
-
-function calcPrice() {
-  const service = document.getElementById('calcService').value;
-  const amount = parseInt(document.getElementById('calcAmount').value);
-  const quality = parseFloat(document.getElementById('calcQuality').value);
-  const s = serviceRates[service];
-  document.getElementById('amountLabel').textContent = s.label;
-  document.getElementById('calcAmount').max = s.max;
-  if (amount > s.max) document.getElementById('calcAmount').value = s.max;
-  document.getElementById('amountVal').textContent = Math.min(amount, s.max) + ' ' + s.unit;
-  const total = s.rate * Math.min(amount, s.max) * quality;
-  document.getElementById('resultPrice').textContent = formatNum(Math.round(total));
-  document.getElementById('breakWorkPrice').textContent = formatNum(Math.round(total)) + ' so\'m';
+function calcPrice(){
+  const s=document.getElementById('calcService').value;
+  const a=Math.min(parseInt(document.getElementById('calcAmount').value)||1,rates[s].max);
+  const q=parseFloat(document.getElementById('calcQuality').value);
+  document.getElementById('amountLabel').textContent=rates[s].label;
+  document.getElementById('calcAmount').max=rates[s].max;
+  document.getElementById('amountVal').textContent=a+' '+rates[s].unit;
+  const t=rates[s].rate*a*q;
+  document.getElementById('resultPrice').textContent=f(Math.round(t));
+  document.getElementById('breakWorkPrice').textContent=f(Math.round(t))+' so\'m';
 }
-function formatNum(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
-document.getElementById('calcAmount').addEventListener('input', function() {
-  const s = serviceRates[document.getElementById('calcService').value];
-  if (this.value > s.max) this.value = s.max;
-  document.getElementById('amountVal').textContent = this.value + ' ' + s.unit;
-  calcPrice();
-});
+function f(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
 
 // ─── NOTIFICATION ───
-function showNotif() {
-  const n = document.getElementById('notif');
+function notif(){
+  const n=document.getElementById('notif');
   n.classList.add('show');
-  setTimeout(() => n.classList.remove('show'), 3500);
+  setTimeout(()=>n.classList.remove('show'),3500);
 }
 
 // ─── FORM ───
-function submitForm(btn) {
-  btn.textContent = '✅ Yuborildi!';
-  btn.style.background = 'var(--green)';
+function submitForm(){
+  const name=document.getElementById('formName').value.trim();
+  const phone=document.getElementById('formPhone').value.trim();
+  if(!name||!phone){alert('Ism va telefon raqamni kiriting');return}
   document.getElementById('orderModal').classList.add('active');
 }
-function closeModal(id) {
-  document.getElementById(id).classList.remove('active');
+function closeModal(){
+  document.getElementById('orderModal').classList.remove('active');
 }
-document.querySelectorAll('.modal-overlay').forEach(m => {
-  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); });
-});
 
-// ─── SMOOTH SCROLL ───
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
-  });
-});
-
-// ─── BACK TO TOP BUTTON ───
-const backTop = document.getElementById('backTop');
-window.addEventListener('scroll', () => {
-  backTop.classList.toggle('visible', window.scrollY > 600);
+// ─── KEYBOARD ───
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeModal();
 });
 
 // ─── INIT ───
 calcPrice();
 
-// ─── KEYBOARD ───
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
-});
+// ─── TOUCH SAFE ───
+let touchStartY=0;
+document.getElementById('appBody').addEventListener('touchstart',e=>{
+  touchStartY=e.touches[0].clientY;
+},{passive:true});
 </script>
 </body>
 </html>
