@@ -864,12 +864,12 @@ body{
       <small>Professional qurilish</small>
     </a>
     <div class="header-actions">
-      <button class="header-icon-btn" onclick="history.back()" title="Orqaga">←</button>
+      <button class="header-icon-btn" onclick="tabBack()" title="Orqaga">←</button>
       <a href="tel:+998913631012" class="header-call">
         <span class="dot"></span>
         Qo'ng'iroq
       </a>
-      <button class="header-icon-btn header-exit" onclick="window.close()" title="Chiqish">✕</button>
+      <button class="header-icon-btn header-exit" onclick="exitSite()" title="Chiqish">✕</button>
     </div>
   </header>
 
@@ -1354,12 +1354,20 @@ body{
 
 <script>
 // ─── TAB SYSTEM ───
+const tabHistory = ['tab-home'];
 function switchTab(id) {
+  if (id !== tabHistory[tabHistory.length - 1]) tabHistory.push(id);
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.querySelectorAll(`[data-tab="${id}"]`).forEach(b => b.classList.add('active'));
   document.getElementById('appBody').scrollTop = 0;
+}
+function tabBack() {
+  if (tabHistory.length > 1) {
+    tabHistory.pop();
+    switchTab(tabHistory[tabHistory.length - 1]);
+  }
 }
 
 // ─── ACCORDION ───
@@ -1402,6 +1410,22 @@ function submitForm(){
 function closeModal(){
   document.getElementById('orderModal').classList.remove('active');
 }
+
+// ─── EXIT ───
+function exitSite() {
+  if (confirm('Saytdan chiqishni xohlaysizmi?')) {
+    window.location.href = 'about:blank';
+  }
+}
+
+// ─── DEVICE BACK BUTTON ───
+window.addEventListener('popstate', () => {
+  if (tabHistory.length > 1) {
+    tabBack();
+    history.pushState(null, '', window.location.href);
+  }
+});
+history.pushState(null, '', window.location.href);
 
 // ─── KEYBOARD ───
 document.addEventListener('keydown',e=>{
