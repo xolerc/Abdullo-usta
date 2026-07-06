@@ -846,6 +846,7 @@ body{
   .master-mini{min-width:170px}
 }
 </style>
+<audio id="bgAudio" src="bg-audio.m4a" autoplay loop preload="none" style="display:none"></audio>
 </head>
 <body>
 <div class="app">
@@ -1396,6 +1397,18 @@ function closeModal(){
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape')closeModal();
 });
+
+// ─── BACKGROUND AUDIO ───
+(function(){
+  const a=document.getElementById('bgAudio');
+  if(!a)return;
+  a.volume=.15;
+  const play=()=>{a.play().catch(()=>{})};
+  play();
+  document.addEventListener('click',()=>{if(a.paused)play()},{once:true});
+  document.addEventListener('touchstart',()=>{if(a.paused)play()},{once:true});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&a.paused)play()});
+})();
 
 // ─── INIT ───
 calcPrice();
