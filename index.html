@@ -136,6 +136,25 @@ body{
   transition:transform .2s,box-shadow .2s;
   -webkit-tap-highlight-color:transparent;
 }
+.header-actions{
+  display:flex;align-items:center;gap:8px;
+}
+.header-icon-btn{
+  width:34px;height:34px;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:50%;
+  color:var(--text2);
+  font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:all .2s;
+  font-family:'Inter',sans-serif;
+  -webkit-tap-highlight-color:transparent;
+}
+.header-icon-btn:active{transform:scale(.9)}
+.header-icon-btn:hover{background:var(--gold-dim);border-color:var(--border2);color:var(--gold)}
+.header-exit{color:var(--text3);font-size:14px}
 .header-call:active{transform:scale(.95)}
 .header-call .dot{
   width:6px;height:6px;
@@ -844,10 +863,14 @@ body{
       Abdullo <em>Usta</em>
       <small>Professional qurilish</small>
     </a>
-    <a href="tel:+998913631012" class="header-call">
-      <span class="dot"></span>
-      Qo'ng'iroq
-    </a>
+    <div class="header-actions">
+      <button class="header-icon-btn" onclick="history.back()" title="Orqaga">←</button>
+      <a href="tel:+998913631012" class="header-call">
+        <span class="dot"></span>
+        Qo'ng'iroq
+      </a>
+      <button class="header-icon-btn header-exit" onclick="window.close()" title="Chiqish">✕</button>
+    </div>
   </header>
 
   <div class="app-body" id="appBody">
