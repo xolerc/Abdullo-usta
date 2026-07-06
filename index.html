@@ -686,25 +686,6 @@ body{
 .footer-compact em{font-style:italic;color:var(--gold)}
 
 /* ─── NOTIFICATION ─── */
-.notif{
-  position:fixed;
-  bottom:80px;left:20px;right:20px;z-index:100;
-  background:var(--card);
-  border:1px solid var(--border2);
-  border-radius:var(--radius);
-  padding:14px 18px;
-  display:flex;align-items:center;gap:12px;
-  box-shadow:0 8px 32px rgba(0,0,0,.6);
-  transform:translateY(120%);
-  transition:transform .5s var(--ease);
-  max-width:400px;
-  margin:0 auto;
-}
-.notif.show{transform:translateY(0)}
-.notif .icon{font-size:24px}
-.notif .text{font-size:13px;color:var(--text2);line-height:1.4}
-.notif .text strong{color:var(--text);display:block;font-size:14px}
-
 /* ─── MODAL ─── */
 .modal-overlay{
   position:fixed;inset:0;z-index:200;
@@ -809,7 +790,7 @@ body{
       Abdullo <em>Usta</em>
       <small>Professional qurilish</small>
     </a>
-    <a href="tel:+998913631012" class="header-call" onclick="notif()">
+    <a href="tel:+998913631012" class="header-call">
       <span class="dot"></span>
       Qo'ng'iroq
     </a>
@@ -1166,7 +1147,7 @@ body{
             <li>Elektr tarmog'i</li>
             <li>1 yil kafolat</li>
           </ul>
-          <a href="tel:+998913631012" class="btn btn-outline" onclick="notif()">Qo'ng'iroq</a>
+          <a href="tel:+998913631012" class="btn btn-outline" >Qo'ng'iroq</a>
         </div>
         <div class="pricing-mini popular">
           <div class="badge">Mashhur</div>
@@ -1181,7 +1162,7 @@ body{
             <li>Elektr va santexnika</li>
             <li>2 yil kafolat</li>
           </ul>
-          <a href="tel:+998913631012" class="btn btn-gold" onclick="notif()">Bepul maslahat</a>
+          <a href="tel:+998913631012" class="btn btn-gold" >Bepul maslahat</a>
         </div>
         <div class="pricing-mini">
           <div class="name">Premium</div>
@@ -1194,7 +1175,7 @@ body{
             <li>Mebel o'rnatish</li>
             <li>3 yil kafolat</li>
           </ul>
-          <a href="tel:+998913631012" class="btn btn-outline" onclick="notif()">Qo'ng'iroq</a>
+          <a href="tel:+998913631012" class="btn btn-outline" >Qo'ng'iroq</a>
         </div>
       </div>
     </div>
@@ -1240,7 +1221,7 @@ body{
       <div class="cta-block">
         <h3>Hoziroq qo'ng'iroq qiling</h3>
         <p>Bepul maslahat va ko'rik uchun</p>
-        <a href="tel:+998913631012" class="btn" onclick="notif()">📞 Qo'ng'iroq qilish</a>
+        <a href="tel:+998913631012" class="btn" >📞 Qo'ng'iroq qilish</a>
       </div>
       <div class="footer-compact">
         <span>© 2025 Abdullo Usta</span>
@@ -1269,14 +1250,7 @@ body{
   </nav>
 </div>
 
-<!-- Notification -->
-<div class="notif" id="notif">
-  <div class="icon">📞</div>
-  <div class="text">
-    <strong>Qo'ng'iroq amalga oshirilmoqda</strong>
-    Usta siz bilan bog'lanadi
-  </div>
-</div>
+
 
 <!-- Modal -->
 <div class="modal-overlay" id="orderModal" onclick="if(event.target===this)closeModal()">
@@ -1285,7 +1259,7 @@ body{
     <div class="icon">✅</div>
     <h3>So'rov yuborildi</h3>
     <p>Ustamiz 30 daqiqa ichida siz bilan bog'lanadi va bepul ko'rik uchun vaqt belgilaydi.</p>
-    <a href="tel:+998913631012" class="btn" onclick="closeModal();notif()">📞 Hoziroq qo'ng'iroq qilish</a>
+    <a href="tel:+998913631012" class="btn" onclick="closeModal()">📞 Hoziroq qo'ng'iroq qilish</a>
   </div>
 </div>
 
@@ -1328,13 +1302,6 @@ function calcPrice(){
   document.getElementById('breakWorkPrice').textContent=f(Math.round(t))+' so\'m';
 }
 function f(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
-
-// ─── NOTIFICATION ───
-function notif(){
-  const n=document.getElementById('notif');
-  n.classList.add('show');
-  setTimeout(()=>n.classList.remove('show'),3500);
-}
 
 // ─── FORM ───
 function submitForm(){
