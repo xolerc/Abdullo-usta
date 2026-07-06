@@ -3,1132 +3,990 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ABDULLA MILION USTA</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>ABDULLO USTA | Professional Qurilish Xizmatlari</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0a0a;
-    --bg2: #111111;
-    --bg3: #1a1a1a;
-    --card: #181818;
-    --gray: #2a2a2a;
-    --gray2: #3a3a3a;
-    --gray3: #555;
-    --accent: #c8a96e;
-    --accent2: #e8c98e;
-    --text: #f0ede8;
-    --text2: #a8a39c;
-    --text3: #6b6560;
-    --btn: #2c2c2c;
-    --btn-hover: #383838;
-    --border: rgba(200,169,110,0.15);
-    --border2: rgba(255,255,255,0.06);
-    --red: #c0392b;
-    --green: #27ae60;
-  }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0a;
+  --bg2:#0e0e0e;
+  --bg3:#141414;
+  --surface:#1a1a1a;
+  --surface2:#222;
+  --border:rgba(255,255,255,0.06);
+  --border-light:rgba(200,169,110,0.2);
+  --gold:#c8a96e;
+  --gold2:#e8c98e;
+  --gold-dim:rgba(200,169,110,0.08);
+  --text:#f0ede8;
+  --text2:#a8a39c;
+  --text3:#6b6560;
+  --green:#27ae60;
+  --radius:12px;
+  --radius-sm:8px;
+  --ease:cubic-bezier(0.34,1.56,0.64,1);
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;
+  cursor:none;
+  -webkit-font-smoothing:antialiased;
+}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+::selection{background:var(--gold);color:var(--bg)}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px}
 
-  html { scroll-behavior: smooth; }
+/* ─── LOADING SCREEN ─── */
+#loader{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:24px;
+  transition:opacity .6s,visibility .6s;
+}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-bar{
+  width:200px;height:2px;
+  background:var(--surface2);
+  border-radius:2px;overflow:hidden;
+}
+.loader-bar span{
+  display:block;height:100%;width:0;
+  background:var(--gold);
+  border-radius:2px;
+  animation:loadBar 1.2s var(--ease) forwards;
+}
+@keyframes loadBar{to{width:100%}}
+.loader-label{
+  font-size:11px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--text3);font-weight:600;
+}
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Montserrat', sans-serif;
-    overflow-x: hidden;
-    cursor: none;
-  }
+/* ─── CUSTOM CURSOR ─── */
+.cursor-dot{
+  position:fixed;width:8px;height:8px;
+  background:var(--gold);
+  border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transition:transform .15s,opacity .2s;
+  transform:translate(-50%,-50%);
+  mix-blend-mode:difference;
+}
+.cursor-ring{
+  position:fixed;width:40px;height:40px;
+  border:1.5px solid var(--gold);
+  border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transition:transform .25s var(--ease),width .3s,height .3s,opacity .3s;
+  transform:translate(-50%,-50%);
+  opacity:.4;
+}
+.cursor-dot.hovered{transform:translate(-50%,-50%) scale(2.5);opacity:.6}
+.cursor-ring.hovered{width:60px;height:60px;opacity:.8}
 
-  /* Custom cursor */
-  .cursor {
-    position: fixed;
-    width: 12px; height: 12px;
-    background: var(--accent);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, width 0.2s, height 0.2s, opacity 0.2s;
-    mix-blend-mode: difference;
-  }
-  .cursor-ring {
-    position: fixed;
-    width: 36px; height: 36px;
-    border: 1.5px solid var(--accent);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.18s ease, width 0.2s, height 0.2s, opacity 0.3s;
-    opacity: 0.5;
-  }
-  .cursor.hovered { width: 20px; height: 20px; }
-  .cursor-ring.hovered { width: 52px; height: 52px; opacity: 0.8; }
+/* ─── SCROLL PROGRESS ─── */
+#scrollProgress{
+  position:fixed;top:0;left:0;width:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold2));
+  z-index:9997;
+  transition:width .1s linear;
+}
 
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--gray2); border-radius: 2px; }
+/* ─── NAVBAR ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:20px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(10,10,10,.6);
+  backdrop-filter:blur(20px) saturate(1.4);
+  -webkit-backdrop-filter:blur(20px) saturate(1.4);
+  border-bottom:1px solid var(--border);
+  transition:padding .4s,background .4s;
+}
+nav.scrolled{
+  padding:14px 48px;
+  background:rgba(10,10,10,.92);
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:26px;
+  font-weight:700;
+  color:var(--text);
+  text-decoration:none;
+  letter-spacing:-.5px;
+}
+.nav-logo em{font-style:italic;color:var(--gold)}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{
+  color:var(--text2);
+  text-decoration:none;
+  font-size:13px;
+  font-weight:500;
+  transition:color .3s;
+  position:relative;
+  padding:4px 0;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;
+  background:var(--gold);
+  transition:width .4s var(--ease);
+}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{width:100%}
+.nav-call-btn{
+  display:flex;align-items:center;gap:10px;
+  background:var(--gold);
+  color:var(--bg);
+  border:none;
+  padding:10px 24px;
+  border-radius:100px;
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.5px;
+  cursor:none;
+  transition:transform .3s,box-shadow .3s;
+  text-decoration:none;
+}
+.nav-call-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(200,169,110,.35);
+}
+.pulse-dot{
+  width:8px;height:8px;
+  background:var(--bg);
+  border-radius:50%;
+  animation:pulse 2s infinite;
+  opacity:.6;
+}
+@keyframes pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:.3;transform:scale(1.6)}}
 
-  /* ========== NAVBAR ========== */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 20px 48px;
-    display: flex; align-items: center; justify-content: space-between;
-    background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, transparent 100%);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border2);
-    transition: all 0.3s;
-  }
-  nav.scrolled {
-    padding: 14px 48px;
-    background: rgba(10,10,10,0.98);
-  }
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 3px;
-    color: var(--accent);
-    text-decoration: none;
-  }
-  .nav-logo span { color: var(--text); }
-  .nav-links { display: flex; gap: 36px; list-style: none; }
-  .nav-links a {
-    color: var(--text2);
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    transition: color 0.3s;
-    position: relative;
-  }
-  .nav-links a::after {
-    content: '';
-    position: absolute; bottom: -4px; left: 0; right: 0; height: 1px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transition: transform 0.3s;
-  }
-  .nav-links a:hover { color: var(--accent); }
-  .nav-links a:hover::after { transform: scaleX(1); }
-  .nav-call-btn {
-    background: var(--btn);
-    border: 1px solid var(--border);
-    color: var(--accent);
-    padding: 10px 22px;
-    border-radius: 3px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: none;
-    transition: all 0.3s;
-    display: flex; align-items: center; gap: 8px;
-    text-decoration: none;
-  }
-  .nav-call-btn:hover {
-    background: var(--accent);
-    color: var(--bg);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(200,169,110,0.3);
-  }
-  .pulse-dot {
-    width: 8px; height: 8px;
-    background: var(--green);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.4); }
-  }
+/* Hamburgur */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;cursor:none;padding:4px;
+}
+.hamburger span{
+  display:block;width:24px;height:2px;
+  background:var(--text);
+  border-radius:2px;
+  transition:transform .3s,opacity .3s;
+}
+.hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-  /* ========== HERO ========== */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse at 70% 50%, rgba(200,169,110,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse at 20% 80%, rgba(200,169,110,0.04) 0%, transparent 50%);
-  }
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(200,169,110,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(200,169,110,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
-  }
-  .hero-left {
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 140px 64px 80px;
-    position: relative; z-index: 2;
-  }
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: rgba(200,169,110,0.08);
-    border: 1px solid var(--border);
-    padding: 8px 16px;
-    border-radius: 2px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 32px;
-    width: fit-content;
-    animation: fadeInUp 0.8s ease forwards;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(64px, 8vw, 110px);
-    line-height: 0.92;
-    letter-spacing: 2px;
-    color: var(--text);
-    animation: fadeInUp 0.8s ease 0.15s forwards;
-    opacity: 0;
-    transform: translateY(30px);
-    margin-bottom: 28px;
-  }
-  .hero-title .gold { color: var(--accent); }
-  .hero-subtitle {
-    color: var(--text2);
-    font-size: 15px;
-    line-height: 1.8;
-    max-width: 480px;
-    animation: fadeInUp 0.8s ease 0.3s forwards;
-    opacity: 0;
-    transform: translateY(20px);
-    margin-bottom: 48px;
-  }
-  .hero-btns {
-    display: flex; gap: 16px;
-    animation: fadeInUp 0.8s ease 0.45s forwards;
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  .btn-primary {
-    background: var(--accent);
-    color: var(--bg);
-    padding: 16px 36px;
-    border: none;
-    border-radius: 3px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: none;
-    transition: all 0.3s;
-    text-decoration: none;
-    display: inline-flex; align-items: center; gap: 10px;
-  }
-  .btn-primary:hover {
-    background: var(--accent2);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 36px rgba(200,169,110,0.4);
-  }
-  .btn-secondary {
-    background: var(--btn);
-    color: var(--text);
-    padding: 16px 36px;
-    border: 1px solid var(--border2);
-    border-radius: 3px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: none;
-    transition: all 0.3s;
-    text-decoration: none;
-  }
-  .btn-secondary:hover {
-    background: var(--btn-hover);
-    border-color: var(--border);
-    transform: translateY(-2px);
-  }
-  .hero-stats {
-    display: flex; gap: 48px;
-    margin-top: 64px;
-    animation: fadeInUp 0.8s ease 0.6s forwards;
-    opacity: 0;
-    transform: translateY(20px);
-    padding-top: 40px;
-    border-top: 1px solid var(--border2);
-  }
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
-    color: var(--accent);
-    line-height: 1;
-    letter-spacing: 1px;
-  }
-  .stat-label {
-    font-size: 11px;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 4px;
-  }
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  position:relative;
+  overflow:hidden;
+}
+#particles-canvas{
+  position:absolute;inset:0;z-index:1;
+  pointer-events:none;
+}
+.hero-grid-bg{
+  position:absolute;inset:0;z-index:0;
+  background-image:
+    linear-gradient(rgba(200,169,110,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,169,110,.04) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse at 50% 50%,black 25%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 50%,black 25%,transparent 75%);
+}
+.hero-glow{
+  position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 600px 400px at 70% 40%,rgba(200,169,110,.08) 0%,transparent 70%),
+    radial-gradient(ellipse 400px 400px at 20% 70%,rgba(200,169,110,.05) 0%,transparent 70%),
+    radial-gradient(ellipse 300px 300px at 50% 100%,rgba(200,169,110,.03) 0%,transparent 70%);
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:160px 64px 80px;
+  position:relative;z-index:2;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--gold-dim);
+  border:1px solid var(--border-light);
+  padding:8px 18px;
+  border-radius:100px;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--gold);
+  width:fit-content;
+  margin-bottom:36px;
+  opacity:0;transform:translateY(20px);
+  animation:fadeUp .8s var(--ease) forwards;
+}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(56px,7vw,96px);
+  line-height:.92;
+  letter-spacing:-2px;
+  color:var(--text);
+  margin-bottom:24px;
+  opacity:0;transform:translateY(30px);
+  animation:fadeUp .8s var(--ease) .15s forwards;
+}
+.hero-title .gold{color:var(--gold);font-style:italic}
+.hero-sub{
+  color:var(--text2);
+  font-size:16px;
+  line-height:1.8;
+  max-width:480px;
+  margin-bottom:48px;
+  opacity:0;transform:translateY(20px);
+  animation:fadeUp .8s var(--ease) .3s forwards;
+}
+.hero-btns{
+  display:flex;gap:14px;flex-wrap:wrap;
+  opacity:0;transform:translateY(20px);
+  animation:fadeUp .8s var(--ease) .45s forwards;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--gold);
+  color:var(--bg);
+  padding:16px 36px;
+  border:none;
+  border-radius:100px;
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.5px;
+  cursor:none;
+  text-decoration:none;
+  transition:transform .3s,box-shadow .3s;
+}
+.btn-primary:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 40px rgba(200,169,110,.4);
+}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:10px;
+  background:transparent;
+  color:var(--text);
+  padding:16px 36px;
+  border:1px solid var(--border);
+  border-radius:100px;
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  cursor:none;
+  text-decoration:none;
+  transition:border-color .3s,background .3s,transform .3s;
+}
+.btn-ghost:hover{
+  border-color:var(--gold);
+  background:var(--gold-dim);
+  transform:translateY(-3px);
+}
+.hero-stats{
+  display:flex;gap:56px;
+  margin-top:64px;
+  padding-top:40px;
+  border-top:1px solid var(--border);
+  opacity:0;transform:translateY(20px);
+  animation:fadeUp .8s var(--ease) .6s forwards;
+}
+.stat-item{text-align:left}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:44px;
+  color:var(--gold);
+  line-height:1;
+  font-style:italic;
+}
+.stat-label{
+  font-size:12px;
+  color:var(--text3);
+  letter-spacing:1.5px;
+  margin-top:4px;
+  font-weight:500;
+}
+.hero-right{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;
+  padding:120px 48px 48px;
+  overflow:hidden;
+  perspective:1200px;
+}
+.hero-img-wrap{
+  position:relative;
+  width:460px;
+  height:580px;
+  border-radius:var(--radius);
+  overflow:hidden;
+  transform:rotateY(-4deg) rotateX(2deg);
+  transition:transform .6s var(--ease);
+  box-shadow:
+    0 40px 80px rgba(0,0,0,.6),
+    0 0 0 1px rgba(200,169,110,.1);
+}
+.hero-img-wrap::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(200,169,110,.2),transparent 50%,rgba(200,169,110,.1));
+  z-index:1;border-radius:var(--radius);
+}
+.hero-img-wrap img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  filter:grayscale(.3) contrast(1.1);
+}
+.hero-img-wrap:hover{transform:rotateY(-2deg) rotateX(1deg) scale(1.02)}
+.hero-badge{
+  position:absolute;
+  background:rgba(20,20,20,.85);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius-sm);
+  padding:16px 22px;
+  z-index:2;
+}
+.hero-badge.b1{
+  bottom:40px;left:-30px;
+  animation:float 5s var(--ease) infinite;
+}
+.hero-badge.b2{
+  top:100px;right:-30px;
+  animation:float 5s var(--ease) 2.5s infinite;
+}
+.badge-label{font-size:10px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
+.badge-val{font-family:'Playfair Display',serif;font-size:28px;color:var(--gold);font-style:italic;line-height:1.2}
+.badge-sub{font-size:11px;color:var(--text2)}
 
-  /* Hero Right - Master Image */
-  .hero-right {
-    position: relative; z-index: 2;
-    display: flex; align-items: flex-end; justify-content: center;
-    padding-top: 80px;
-    overflow: hidden;
-  }
-  .hero-img-frame {
-    position: relative;
-    width: 480px;
-    height: 600px;
-    animation: fadeInRight 1s ease 0.3s forwards;
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  .hero-img-frame::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(135deg, var(--accent), transparent 60%, var(--accent) 100%);
-    border-radius: 4px;
-    z-index: -1;
-  }
-  .hero-img-frame img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    border-radius: 3px;
-    filter: grayscale(20%) contrast(1.1);
-    display: block;
-  }
-  .hero-img-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(0deg, rgba(10,10,10,0.6) 0%, transparent 50%);
-    border-radius: 3px;
-  }
-  .hero-float-badge {
-    position: absolute;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 14px 20px;
-    backdrop-filter: blur(10px);
-  }
-  .hero-float-badge.badge1 {
-    bottom: 80px; left: -40px;
-    animation: float 4s ease-in-out infinite;
-  }
-  .hero-float-badge.badge2 {
-    top: 120px; right: -40px;
-    animation: float 4s ease-in-out 2s infinite;
-  }
-  .badge-label { font-size: 10px; color: var(--text3); letter-spacing: 2px; text-transform: uppercase; }
-  .badge-val { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--accent); letter-spacing: 1px; line-height: 1.2; }
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  @keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeInRight {
-    to { opacity: 1; transform: translateX(0); }
-  }
+/* ─── TICKER ─── */
+.ticker-wrap{
+  overflow:hidden;
+  background:var(--gold);
+  padding:14px 0;
+  position:relative;z-index:2;
+}
+.ticker-track{
+  display:flex;
+  animation:tick 40s linear infinite;
+  white-space:nowrap;
+  width:max-content;
+}
+.ticker-item{
+  display:inline-flex;align-items:center;gap:28px;
+  padding:0 44px;
+  color:var(--bg);
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.ticker-item .sep{opacity:.4;font-weight:300}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-  /* ========== SECTION COMMON ========== */
-  section { padding: 100px 0; }
-  .container { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+/* ─── SECTIONS ─── */
+section{padding:120px 0;position:relative}
+.container{max-width:1200px;margin:0 auto;padding:0 48px}
 
-  .section-header {
-    margin-bottom: 64px;
-    display: flex; align-items: flex-end; justify-content: space-between;
-  }
-  .section-tag {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(40px, 5vw, 64px);
-    letter-spacing: 1px;
-    line-height: 1;
-    color: var(--text);
-  }
-  .section-title .accent { color: var(--accent); }
-  .section-desc {
-    color: var(--text2);
-    font-size: 14px;
-    line-height: 1.8;
-    max-width: 360px;
-  }
+.section-header{
+  margin-bottom:72px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:40px;
+}
+.section-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11px;font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:14px;
+}
+.section-tag::before{
+  content:'';width:24px;height:1.5px;
+  background:var(--gold);display:inline-block;
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(36px,4.5vw,60px);
+  letter-spacing:-1.5px;
+  line-height:1;
+  color:var(--text);
+}
+.section-title em{color:var(--gold);font-style:italic;font-weight:700}
+.section-desc{
+  color:var(--text2);
+  font-size:15px;
+  line-height:1.8;
+  max-width:380px;
+}
+.section-divider{
+  position:absolute;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+}
 
-  /* ========== SERVICES ========== */
-  .services { background: var(--bg2); }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-  }
-  .service-card {
-    background: var(--card);
-    padding: 48px 40px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.4s;
-    cursor: none;
-  }
-  .service-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0;
-    width: 100%; height: 2px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transition: transform 0.4s;
-    transform-origin: left;
-  }
-  .service-card::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(circle at 50% 0%, rgba(200,169,110,0.06) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-  .service-card:hover::before { transform: scaleX(1); }
-  .service-card:hover::after { opacity: 1; }
-  .service-card:hover { transform: translateY(-4px); }
-  .service-icon {
-    width: 56px; height: 56px;
-    background: var(--gray);
-    border-radius: 3px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
-    margin-bottom: 24px;
-    transition: background 0.3s;
-  }
-  .service-card:hover .service-icon { background: rgba(200,169,110,0.15); }
-  .service-name {
-    font-weight: 700;
-    font-size: 17px;
-    color: var(--text);
-    margin-bottom: 10px;
-    letter-spacing: 0.5px;
-  }
-  .service-desc {
-    color: var(--text3);
-    font-size: 13px;
-    line-height: 1.8;
-    margin-bottom: 24px;
-  }
-  .service-price {
-    display: flex; align-items: baseline; gap: 6px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border2);
-  }
-  .price-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--accent);
-  }
-  .price-unit {
-    font-size: 11px;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  .service-card.featured {
-    background: linear-gradient(135deg, #1e1a14, #181510);
-    border: 1px solid rgba(200,169,110,0.25);
-  }
-  .featured-badge {
-    position: absolute; top: 20px; right: 20px;
-    background: var(--accent);
-    color: var(--bg);
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 2px;
-  }
+/* ─── SERVICES ─── */
+.services{background:var(--bg2)}
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.service-card{
+  background:var(--bg3);
+  padding:48px 40px;
+  position:relative;
+  overflow:hidden;
+  cursor:none;
+  transition:background .4s;
+  perspective:800px;
+}
+.service-card::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 40%,rgba(200,169,110,.03));
+  pointer-events:none;
+}
+.service-card:hover{background:var(--surface)}
+.service-card.featured{
+  background:linear-gradient(135deg,#1a1610,#14120e);
+  border-left:1px solid var(--border-light);
+  border-right:1px solid var(--border-light);
+}
+.featured-badge{
+  position:absolute;top:16px;right:16px;
+  background:var(--gold);color:var(--bg);
+  font-size:9px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:5px 12px;border-radius:100px;
+  z-index:2;
+}
+.service-icon{
+  width:52px;height:52px;
+  border-radius:var(--radius-sm);
+  background:var(--surface2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;
+  margin-bottom:28px;
+  transition:background .3s,transform .3s;
+  border:1px solid var(--border);
+}
+.service-card:hover .service-icon{
+  background:var(--gold-dim);
+  transform:scale(1.05);
+  border-color:var(--border-light);
+}
+.service-name{
+  font-weight:600;font-size:18px;
+  color:var(--text);margin-bottom:12px;
+  letter-spacing:-.3px;
+}
+.service-desc{
+  color:var(--text3);font-size:14px;
+  line-height:1.7;margin-bottom:28px;
+}
+.service-price{
+  display:flex;align-items:baseline;gap:8px;
+  padding-top:24px;
+  border-top:1px solid var(--border);
+}
+.price-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:24px;font-weight:700;
+  color:var(--gold);
+}
+.price-unit{
+  font-size:12px;color:var(--text3);
+  letter-spacing:.5px;
+}
 
-  /* ========== PROCESS ========== */
-  .process { background: var(--bg); }
-  .process-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    position: relative;
-  }
-  .process-steps::before {
-    content: '';
-    position: absolute;
-    top: 40px; left: 12.5%; right: 12.5%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    z-index: 0;
-  }
-  .process-step {
-    padding: 40px 32px;
-    text-align: center;
-    position: relative; z-index: 1;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s, transform 0.6s;
-  }
-  .process-step.visible { opacity: 1; transform: translateY(0); }
-  .step-num {
-    width: 80px; height: 80px;
-    border-radius: 50%;
-    background: var(--card);
-    border: 2px solid var(--gray2);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 28px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    color: var(--text2);
-    transition: all 0.4s;
-    position: relative;
-  }
-  .process-step:hover .step-num {
-    background: rgba(200,169,110,0.1);
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-  .step-title {
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--text);
-    margin-bottom: 10px;
-  }
-  .step-desc {
-    color: var(--text3);
-    font-size: 12px;
-    line-height: 1.8;
-  }
+/* ─── PROCESS ─── */
+.process{background:var(--bg)}
+.process-steps{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:32px;
+  position:relative;
+}
+.process-step{
+  padding:40px 24px;
+  text-align:center;
+  position:relative;
+  background:var(--bg3);
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  transition:transform .4s,box-shadow .4s;
+}
+.process-step:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+.process-step::before{
+  content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+  width:60%;height:2px;
+  background:var(--gold);
+  border-radius:2px;
+  opacity:0;transition:opacity .4s;
+}
+.process-step:hover::before{opacity:1}
+.step-num{
+  width:72px;height:72px;
+  border-radius:50%;
+  background:var(--surface);
+  border:2px solid var(--surface2);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 24px;
+  font-family:'Playfair Display',serif;
+  font-size:26px;font-style:italic;
+  color:var(--text2);
+  transition:all .4s;
+}
+.process-step:hover .step-num{
+  border-color:var(--gold);
+  color:var(--gold);
+  background:var(--gold-dim);
+}
+.step-title{font-weight:600;font-size:16px;color:var(--text);margin-bottom:10px}
+.step-desc{color:var(--text3);font-size:13px;line-height:1.7}
 
-  /* ========== MASTERS ========== */
-  .masters { background: var(--bg2); }
-  .masters-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .master-card {
-    background: var(--card);
-    border-radius: 4px;
-    overflow: hidden;
-    position: relative;
-    transition: transform 0.4s;
-    cursor: none;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.6s, transform 0.6s;
-  }
-  .master-card.visible { opacity: 1; transform: translateY(0); }
-  .master-card:hover { transform: translateY(-6px) !important; }
-  .master-img-wrap {
-    position: relative; height: 320px; overflow: hidden;
-  }
-  .master-img-wrap img {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center top;
-    transition: transform 0.6s ease;
-    filter: grayscale(30%) contrast(1.05);
-  }
-  .master-card:hover .master-img-wrap img { transform: scale(1.06); }
-  .master-img-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(0deg, rgba(10,10,10,0.85) 0%, transparent 55%);
-  }
-  .master-exp {
-    position: absolute; top: 16px; right: 16px;
-    background: var(--accent);
-    color: var(--bg);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 5px 12px;
-    border-radius: 2px;
-  }
-  .master-info { padding: 24px; }
-  .master-name {
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-  .master-spec {
-    font-size: 12px;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 600;
-    margin-bottom: 14px;
-  }
-  .master-skills {
-    display: flex; flex-wrap: wrap; gap: 6px;
-    margin-bottom: 20px;
-  }
-  .skill-tag {
-    background: var(--gray);
-    color: var(--text2);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 2px;
-  }
-  .master-rating {
-    display: flex; align-items: center; gap: 6px;
-    color: var(--accent);
-    font-size: 13px;
-    font-weight: 700;
-  }
-  .stars { letter-spacing: 2px; }
+/* ─── MASTERS ─── */
+.masters{background:var(--bg2)}
+.masters-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:32px;
+}
+.master-card{
+  background:var(--bg3);
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--border);
+  transition:transform .5s var(--ease),box-shadow .5s;
+  cursor:none;
+  perspective:800px;
+}
+.master-card:hover{
+  transform:translateY(-8px) rotateX(2deg);
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+  border-color:var(--border-light);
+}
+.master-img-wrap{
+  position:relative;height:300px;overflow:hidden;
+}
+.master-img-wrap img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .7s var(--ease);
+  filter:grayscale(.4) contrast(1.05);
+}
+.master-card:hover .master-img-wrap img{transform:scale(1.08)}
+.master-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(10,10,10,.9) 0%,transparent 50%);
+}
+.master-exp{
+  position:absolute;top:16px;right:16px;
+  background:var(--gold);color:var(--bg);
+  font-size:10px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:5px 14px;border-radius:100px;
+}
+.master-info{padding:24px}
+.master-name{font-weight:600;font-size:18px;color:var(--text);margin-bottom:2px}
+.master-spec{font-size:12px;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:14px}
+.master-skills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.skill-tag{
+  background:var(--surface);
+  color:var(--text2);
+  font-size:10px;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;
+  padding:4px 12px;border-radius:100px;
+  border:1px solid var(--border);
+}
+.master-rating{display:flex;align-items:center;gap:8px;color:var(--gold);font-weight:600;font-size:13px}
+.stars{letter-spacing:1px;font-size:14px}
 
-  /* ========== PRICING ========== */
-  .pricing { background: var(--bg); }
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-  }
-  .pricing-card {
-    background: var(--card);
-    padding: 48px 40px;
-    position: relative;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.6s, transform 0.6s;
-  }
-  .pricing-card.visible { opacity: 1; transform: translateY(0); }
-  .pricing-card.popular {
-    background: linear-gradient(135deg, #1c1710, #181410);
-    border-left: 2px solid var(--accent);
-    border-right: 2px solid var(--accent);
-  }
-  .popular-badge {
-    position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
-    background: var(--accent);
-    color: var(--bg);
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 5px 16px;
-    border-radius: 0 0 4px 4px;
-  }
-  .pricing-name {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text3);
-    margin-bottom: 16px;
-  }
-  .pricing-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 52px;
-    color: var(--text);
-    line-height: 1;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-  }
-  .pricing-price .currency { font-size: 24px; color: var(--accent); vertical-align: super; }
-  .pricing-period {
-    font-size: 12px;
-    color: var(--text3);
-    margin-bottom: 36px;
-  }
-  .pricing-features {
-    list-style: none;
-    display: flex; flex-direction: column; gap: 14px;
-    margin-bottom: 40px;
-  }
-  .pricing-features li {
-    font-size: 13px;
-    color: var(--text2);
-    display: flex; align-items: center; gap: 12px;
-  }
-  .pricing-features li::before {
-    content: '✓';
-    color: var(--accent);
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-  .btn-outline {
-    width: 100%;
-    background: transparent;
-    border: 1px solid var(--border2);
-    color: var(--text2);
-    padding: 14px;
-    border-radius: 3px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: none;
-    transition: all 0.3s;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-  }
-  .btn-outline:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(200,169,110,0.05);
-  }
-  .btn-gold {
-    width: 100%;
-    background: var(--accent);
-    border: none;
-    color: var(--bg);
-    padding: 14px;
-    border-radius: 3px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: none;
-    transition: all 0.3s;
-    text-decoration: none;
-    display: block;
-    text-align: center;
-  }
-  .btn-gold:hover {
-    background: var(--accent2);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(200,169,110,0.3);
-  }
+/* ─── PRICING ─── */
+.pricing{background:var(--bg)}
+.pricing-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.pricing-card{
+  background:var(--bg3);
+  padding:48px 40px;
+  position:relative;
+  transition:background .4s,transform .4s;
+  display:flex;flex-direction:column;
+}
+.pricing-card:hover{background:var(--surface);transform:translateY(-4px)}
+.pricing-card.popular{
+  background:linear-gradient(135deg,#1a1610,#14120e);
+  border-left:1px solid var(--border-light);
+  border-right:1px solid var(--border-light);
+}
+.popular-badge{
+  position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+  background:var(--gold);color:var(--bg);
+  font-size:9px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  padding:5px 18px;border-radius:0 0 100px 100px;
+}
+.pricing-name{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
+.pricing-price{font-family:'Playfair Display',serif;font-size:48px;color:var(--text);line-height:1;font-style:italic;margin-bottom:4px}
+.pricing-price .currency{font-size:22px;color:var(--gold);vertical-align:super;font-style:normal}
+.pricing-period{font-size:13px;color:var(--text3);margin-bottom:36px}
+.pricing-features{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:40px;flex:1}
+.pricing-features li{font-size:14px;color:var(--text2);display:flex;align-items:center;gap:12px}
+.pricing-features li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0}
+.btn-full{
+  width:100%;display:block;text-align:center;
+  padding:14px;border-radius:100px;
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;
+  cursor:none;
+  transition:all .3s;
+  text-decoration:none;
+}
+.btn-outline{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--text2);
+}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+.btn-gold{
+  background:var(--gold);border:none;
+  color:var(--bg);
+}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,169,110,.3)}
 
-  /* ========== CALCULATOR ========== */
-  .calculator { background: var(--bg2); }
-  .calc-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-  }
-  .calc-form { display: flex; flex-direction: column; gap: 20px; }
-  .form-group { display: flex; flex-direction: column; gap: 8px; }
-  .form-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text3);
-  }
-  .form-control {
-    background: var(--card);
-    border: 1px solid var(--border2);
-    border-radius: 3px;
-    padding: 14px 18px;
-    color: var(--text);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    appearance: none;
-    cursor: none;
-  }
-  .form-control:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(200,169,110,0.1);
-  }
-  select.form-control option { background: var(--card); }
-  .range-wrap {
-    position: relative;
-    display: flex; align-items: center; gap: 16px;
-  }
-  .form-range {
-    flex: 1;
-    -webkit-appearance: none;
-    height: 3px;
-    background: var(--gray2);
-    border-radius: 2px;
-    outline: none;
-    cursor: none;
-  }
-  .form-range::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 18px; height: 18px;
-    border-radius: 50%;
-    background: var(--accent);
-    cursor: none;
-    box-shadow: 0 0 0 4px rgba(200,169,110,0.15);
-  }
-  .range-val {
-    font-family: 'Space Mono', monospace;
-    font-size: 14px;
-    color: var(--accent);
-    min-width: 64px;
-    text-align: right;
-  }
-  .calc-result {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 48px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .calc-result::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(circle at 50% 0%, rgba(200,169,110,0.08) 0%, transparent 70%);
-  }
-  .result-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text3);
-    margin-bottom: 16px;
-  }
-  .result-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 72px;
-    color: var(--accent);
-    line-height: 1;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-  }
-  .result-currency {
-    font-size: 13px;
-    color: var(--text3);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 32px;
-  }
-  .result-breakdown {
-    text-align: left;
-    display: flex; flex-direction: column; gap: 10px;
-    border-top: 1px solid var(--border2);
-    padding-top: 24px;
-  }
-  .breakdown-row {
-    display: flex; justify-content: space-between;
-    font-size: 12px;
-  }
-  .breakdown-name { color: var(--text3); }
-  .breakdown-val { color: var(--text2); font-weight: 600; font-family: 'Space Mono', monospace; }
+/* ─── CALCULATOR ─── */
+.calculator{background:var(--bg2)}
+.calc-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:start;
+}
+.calc-form{display:flex;flex-direction:column;gap:20px}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text3)}
+.form-input,.form-select{
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:14px 18px;
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;
+  transition:border-color .3s,box-shadow .3s;
+  appearance:none;
+  cursor:none;
+}
+.form-input:focus,.form-select:focus{
+  outline:none;
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(200,169,110,.1);
+}
+select.form-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a8a39c' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:44px}
+select.form-select option{background:var(--bg3);color:var(--text)}
+.range-wrap{display:flex;align-items:center;gap:16px}
+.form-range{
+  flex:1;
+  -webkit-appearance:none;
+  height:4px;
+  background:var(--surface2);
+  border-radius:4px;
+  outline:none;
+  cursor:none;
+}
+.form-range::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:20px;height:20px;
+  border-radius:50%;
+  background:var(--gold);
+  cursor:none;
+  box-shadow:0 0 0 4px rgba(200,169,110,.15);
+  transition:box-shadow .2s;
+}
+.form-range::-webkit-slider-thumb:hover{box-shadow:0 0 0 8px rgba(200,169,110,.12)}
+.range-val{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--gold);min-width:80px;text-align:right}
+.calc-result{
+  background:var(--bg3);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius);
+  padding:48px;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.calc-result::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(200,169,110,.06) 0%,transparent 70%);
+}
+.result-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:16px;position:relative}
+.result-price{font-family:'Playfair Display',serif;font-size:72px;color:var(--gold);line-height:1;font-style:italic;margin-bottom:8px;position:relative}
+.result-curr{font-size:13px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:36px;position:relative}
+.result-breakdown{text-align:left;display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--border);padding-top:24px;position:relative}
+.bd-row{display:flex;justify-content:space-between;font-size:13px}
+.bd-name{color:var(--text3)}
+.bd-val{color:var(--text2);font-weight:600;font-family:'JetBrains Mono',monospace}
 
-  /* ========== CONTACT ========== */
-  .contact { background: var(--bg); }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-  .contact-info { display: flex; flex-direction: column; gap: 40px; }
-  .contact-item {
-    display: flex; gap: 20px; align-items: flex-start;
-  }
-  .contact-icon {
-    width: 48px; height: 48px;
-    background: var(--card);
-    border-radius: 3px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-    border: 1px solid var(--border2);
-  }
-  .contact-detail-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text3);
-    margin-bottom: 4px;
-  }
-  .contact-detail-val {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .contact-form { display: flex; flex-direction: column; gap: 16px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .call-cta {
-    background: linear-gradient(135deg, #1c1710, #181410);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 40px;
-    text-align: center;
-    margin-top: 12px;
-  }
-  .call-cta-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    color: var(--text);
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-  }
-  .call-cta-sub {
-    color: var(--text3);
-    font-size: 12px;
-    margin-bottom: 24px;
-  }
-  .btn-call-big {
-    background: var(--accent);
-    color: var(--bg);
-    border: none;
-    padding: 18px 48px;
-    border-radius: 3px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: none;
-    transition: all 0.3s;
-    display: inline-flex; align-items: center; gap: 12px;
-    text-decoration: none;
-    animation: glow 3s ease-in-out infinite;
-  }
-  @keyframes glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(200,169,110,0.2); }
-    50% { box-shadow: 0 0 40px rgba(200,169,110,0.5); }
-  }
-  .btn-call-big:hover {
-    background: var(--accent2);
-    transform: scale(1.04);
-  }
-  .phone-icon { font-size: 18px; animation: ring 2s ease-in-out infinite; }
-  @keyframes ring {
-    0%, 100% { transform: rotate(0); }
-    10% { transform: rotate(-15deg); }
-    20% { transform: rotate(15deg); }
-    30% { transform: rotate(-10deg); }
-    40% { transform: rotate(10deg); }
-    50% { transform: rotate(0); }
-  }
+/* ─── CONTACT ─── */
+.contact{background:var(--bg)}
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:start;
+}
+.contact-info{display:flex;flex-direction:column;gap:36px}
+.contact-item{display:flex;gap:20px;align-items:flex-start}
+.contact-icon{
+  width:48px;height:48px;
+  background:var(--bg3);
+  border-radius:var(--radius-sm);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+  border:1px solid var(--border);
+}
+.c-label{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.c-val{font-size:16px;font-weight:600;color:var(--text)}
+.call-cta{
+  background:linear-gradient(135deg,#1a1610,#14120e);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius);
+  padding:40px;
+  text-align:center;
+  margin-top:8px;
+}
+.call-cta-title{font-family:'Playfair Display',serif;font-size:30px;color:var(--text);font-style:italic;margin-bottom:8px;letter-spacing:-.5px}
+.call-cta-sub{color:var(--text3);font-size:13px;margin-bottom:28px}
+.contact-form{display:flex;flex-direction:column;gap:16px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 
-  /* ========== FOOTER ========== */
-  footer {
-    background: var(--bg2);
-    border-top: 1px solid var(--border2);
-    padding: 60px 0 32px;
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 48px;
-    margin-bottom: 48px;
-  }
-  .footer-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    letter-spacing: 3px;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 14px;
-  }
-  .footer-logo span { color: var(--text); }
-  .footer-desc {
-    color: var(--text3);
-    font-size: 13px;
-    line-height: 1.8;
-    max-width: 260px;
-  }
-  .footer-col-title {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
-  }
-  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .footer-links a {
-    color: var(--text3);
-    text-decoration: none;
-    font-size: 13px;
-    transition: color 0.3s;
-  }
-  .footer-links a:hover { color: var(--accent); }
-  .footer-bottom {
-    border-top: 1px solid var(--border2);
-    padding-top: 28px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .footer-copy { color: var(--text3); font-size: 12px; }
-  .footer-credit { color: var(--text3); font-size: 12px; }
+/* ─── FOOTER ─── */
+footer{
+  background:var(--bg2);
+  border-top:1px solid var(--border);
+  padding:80px 0 32px;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;
+  margin-bottom:56px;
+}
+.footer-logo{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  font-weight:700;
+  color:var(--text);
+  display:block;margin-bottom:14px;
+  letter-spacing:-.5px;
+}
+.footer-logo em{font-style:italic;color:var(--gold)}
+.footer-desc{color:var(--text3);font-size:14px;line-height:1.7;max-width:280px}
+.footer-col-title{font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{color:var(--text3);text-decoration:none;font-size:13px;transition:color .3s}
+.footer-links a:hover{color:var(--gold)}
+.footer-bottom{
+  border-top:1px solid var(--border);
+  padding-top:28px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-copy{color:var(--text3);font-size:13px}
+.footer-credit{color:var(--text3);font-size:13px}
+.footer-credit em{color:var(--gold);font-style:italic}
 
-  /* ========== MODALS ========== */
-  .modal-overlay {
-    position: fixed; inset: 0; z-index: 1000;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(8px);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.3s;
-  }
-  .modal-overlay.active { opacity: 1; pointer-events: all; }
-  .modal {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 48px;
-    width: 90%;
-    max-width: 480px;
-    transform: translateY(30px) scale(0.96);
-    transition: transform 0.3s;
-  }
-  .modal-overlay.active .modal { transform: translateY(0) scale(1); }
-  .modal-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    color: var(--text);
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-  }
-  .modal-sub {
-    color: var(--text3);
-    font-size: 13px;
-    margin-bottom: 28px;
-  }
-  .modal-close {
-    position: absolute; top: 20px; right: 20px;
-    background: var(--gray);
-    border: none;
-    color: var(--text2);
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    font-size: 16px;
-    cursor: none;
-    transition: background 0.2s;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .modal-close:hover { background: var(--gray2); }
+/* ─── FLOATING CALL ─── */
+.fab{
+  position:fixed;bottom:32px;right:32px;z-index:200;
+  width:60px;height:60px;
+  background:var(--gold);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;
+  cursor:none;
+  text-decoration:none;
+  box-shadow:0 8px 32px rgba(200,169,110,.4);
+  transition:transform .3s,box-shadow .3s;
+}
+.fab:hover{transform:scale(1.1);box-shadow:0 12px 48px rgba(200,169,110,.5)}
+.fab-ring{
+  position:absolute;inset:-8px;
+  border:2px solid rgba(200,169,110,.25);
+  border-radius:50%;
+  animation:fabPulse 2.5s infinite;
+}
+@keyframes fabPulse{
+  0%{transform:scale(1);opacity:.6}
+  100%{transform:scale(1.5);opacity:0}
+}
 
-  /* Notification */
-  .notif {
-    position: fixed; bottom: 32px; right: 32px; z-index: 500;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 16px 24px;
-    max-width: 320px;
-    transform: translateX(120%);
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    display: flex; align-items: center; gap: 14px;
-  }
-  .notif.show { transform: translateX(0); }
-  .notif-icon { font-size: 20px; }
-  .notif-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
-  .notif-text strong { color: var(--text); display: block; font-size: 14px; margin-bottom: 2px; }
+/* ─── BACK TO TOP ─── */
+#backTop{
+  position:fixed;bottom:104px;right:32px;z-index:199;
+  width:44px;height:44px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text2);
+  cursor:none;
+  text-decoration:none;
+  font-size:18px;
+  opacity:0;visibility:hidden;
+  transform:translateY(20px);
+  transition:all .4s;
+}
+#backTop.visible{opacity:1;visibility:visible;transform:translateY(0)}
+#backTop:hover{background:var(--gold);color:var(--bg);border-color:var(--gold)}
 
-  /* ========== SCROLL REVEAL ========== */
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+/* ─── MODALS ─── */
+.modal-overlay{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.8);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity .4s;
+}
+.modal-overlay.active{opacity:1;pointer-events:all}
+.modal{
+  background:var(--bg3);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius);
+  padding:48px;
+  width:90%;max-width:460px;
+  transform:translateY(30px) scale(.96);
+  transition:transform .4s var(--ease);
+  position:relative;
+}
+.modal-overlay.active .modal{transform:translateY(0) scale(1)}
+.modal-title{font-family:'Playfair Display',serif;font-size:34px;color:var(--text);font-style:italic;margin-bottom:8px}
+.modal-sub{color:var(--text3);font-size:14px;margin-bottom:28px}
+.modal-close{
+  position:absolute;top:16px;right:16px;
+  background:var(--surface);
+  border:none;color:var(--text2);
+  width:36px;height:36px;border-radius:50%;
+  font-size:16px;cursor:none;
+  transition:background .2s;
+  display:flex;align-items:center;justify-content:center;
+}
+.modal-close:hover{background:var(--surface2)}
 
-  /* ========== RESPONSIVE ========== */
-  @media (max-width: 1024px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero-right { display: none; }
-    .hero-left { padding: 140px 40px 80px; }
-    .services-grid { grid-template-columns: 1fr 1fr; }
-    .masters-grid { grid-template-columns: 1fr 1fr; }
-    .pricing-grid { grid-template-columns: 1fr; gap: 2px; }
-    .calc-wrapper { grid-template-columns: 1fr; }
-    .contact-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-    .process-steps { grid-template-columns: 1fr 1fr; }
-    .process-steps::before { display: none; }
-  }
-  @media (max-width: 768px) {
-    nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    .container { padding: 0 24px; }
-    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .services-grid { grid-template-columns: 1fr; }
-    .masters-grid { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .process-steps { grid-template-columns: 1fr 1fr; }
-    .hero-stats { flex-wrap: wrap; gap: 24px; }
-    .hero-btns { flex-wrap: wrap; }
-  }
+/* ─── NOTIFICATION ─── */
+.notif{
+  position:fixed;bottom:32px;right:32px;z-index:500;
+  background:var(--bg3);
+  border:1px solid var(--border-light);
+  border-radius:var(--radius-sm);
+  padding:16px 24px;
+  max-width:340px;
+  transform:translateX(120%);
+  transition:transform .5s var(--ease);
+  display:flex;align-items:center;gap:14px;
+  box-shadow:0 8px 32px rgba(0,0,0,.5);
+}
+.notif.show{transform:translateX(0)}
+.notif-icon{font-size:22px}
+.notif-text{font-size:13px;color:var(--text2);line-height:1.5}
+.notif-text strong{color:var(--text);display:block;font-size:14px;margin-bottom:2px}
 
-  /* Ticker */
-  .ticker-wrap {
-    overflow: hidden;
-    background: var(--accent);
-    padding: 12px 0;
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:140px 40px 80px}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .masters-grid{grid-template-columns:1fr 1fr}
+  .pricing-grid{grid-template-columns:1fr;gap:2px}
+  .calc-wrap{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .process-steps{grid-template-columns:1fr 1fr;gap:16px}
+}
+@media(max-width:768px){
+  nav{padding:16px 24px}
+  nav.scrolled{padding:12px 24px}
+  .nav-links{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:-1}
+  .nav-links.open{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:rgba(10,10,10,.98);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    z-index:98;gap:32px;
   }
-  .ticker {
-    display: flex;
-    animation: ticker 30s linear infinite;
-    white-space: nowrap;
-  }
-  .ticker-item {
-    display: inline-flex; align-items: center; gap: 24px;
-    padding: 0 40px;
-    color: var(--bg);
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-  .ticker-sep { opacity: 0.4; }
-  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .nav-links a{font-size:18px}
+  .hamburger{display:flex;z-index:99}
+  .container{padding:0 24px}
+  .section-header{flex-direction:column;align-items:flex-start;gap:16px}
+  .services-grid,.masters-grid{grid-template-columns:1fr}
+  .pricing-grid{gap:2px}
+  .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr}
+  .hero-stats{gap:24px;flex-wrap:wrap}
+  .hero-btns{flex-wrap:wrap}
+}
 
-  /* Floating call button */
-  .fab-call {
-    position: fixed;
-    bottom: 32px; right: 32px; z-index: 200;
-    width: 64px; height: 64px;
-    background: var(--accent);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 26px;
-    cursor: none;
-    box-shadow: 0 8px 32px rgba(200,169,110,0.4);
-    text-decoration: none;
-    animation: glow 3s infinite;
-    transition: transform 0.3s;
-  }
-  .fab-call:hover { transform: scale(1.12); }
-  .fab-ring {
-    position: absolute; inset: -8px;
-    border: 2px solid rgba(200,169,110,0.3);
-    border-radius: 50%;
-    animation: fab-pulse 2s infinite;
-  }
-  @keyframes fab-pulse {
-    0% { transform: scale(1); opacity: 0.8; }
-    100% { transform: scale(1.4); opacity: 0; }
-  }
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ─── NOISE TEXTURE ─── */
+.noise{
+  position:fixed;inset:0;z-index:9998;
+  pointer-events:none;opacity:.015;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat:repeat;
+  background-size:256px 256px;
+}
 </style>
 </head>
 <body>
 
-<!-- Custom cursor -->
-<div class="cursor" id="cursor"></div>
+<!-- Noise overlay -->
+<div class="noise"></div>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-bar"><span></span></div>
+  <div class="loader-label">Yuklanmoqda...</div>
+</div>
+
+<!-- Cursor -->
+<div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Scroll progress -->
+<div id="scrollProgress"></div>
 
 <!-- Notification -->
 <div class="notif" id="notif">
@@ -1139,92 +997,77 @@
   </div>
 </div>
 
-<!-- Floating call button -->
-<a href="tel:+998913631012" class="fab-call" onclick="showNotif()">
+<!-- Fab call -->
+<a href="tel:+998913631012" class="fab" onclick="showNotif()">
   <div class="fab-ring"></div>
   📞
 </a>
 
+<!-- Back to top -->
+<a href="#" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">↑</a>
+
 <!-- Navbar -->
 <nav id="navbar">
-  <a href="#" class="nav-logo">Pro<span>Usta</span></a>
-  <ul class="nav-links">
+  <a href="#" class="nav-logo">Abdullo <em>Usta</em></a>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#services">Xizmatlar</a></li>
     <li><a href="#masters">Ustalar</a></li>
     <li><a href="#pricing">Narxlar</a></li>
-    <li><a href="#calculator">Hisoblash</a></li>
+    <li><a href="#calculator">Kalkulyator</a></li>
     <li><a href="#contact">Aloqa</a></li>
   </ul>
   <a href="tel:+998913631012" class="nav-call-btn" onclick="showNotif()">
     <div class="pulse-dot"></div>
-    Qo'ng'iroq qilish
+    Qo'ng'iroq
   </a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- Ticker -->
-<div class="ticker-wrap" style="margin-top: 0; position: relative; z-index: 50;">
-  <div class="ticker">
-    <span class="ticker-item">🏗️ Beton quyish — 260 000 so'm/kub <span class="ticker-sep">|</span></span>
-    <span class="ticker-item">🧱 G'isht urish — 7 500 so'm/dona <span class="ticker-sep">|</span></span>
-    <span class="ticker-item">🏠 Sesma pol — 70 000 so'm/m² <span class="ticker-sep">|</span></span>
-    <span class="ticker-item">🔨 Uy qurish — 0 dan tomgacha <span class="ticker-sep">|</span></span>
-    <span class="ticker-item">⚡ Elektr ishlari — arzon narxlarda <span class="ticker-sep">|</span></span>
-    <span class="ticker-item">🚿 Santexnika — kafolat bilan <span class="ticker-sep">|</span></span>
-    <!-- duplicate for seamless loop -->
-    <span class="ticker-item">🏗️ Beton quyish — 260 000 so'm/kub <span class="ticker-sep">|</span></span>
-    <span class="ticker-item">🧱 G'isht urish — 7 500 so'm/dona <span class="ticker-sep">|</span></span>
-    <span class="ticker-item">🏠 Sesma pol — 70 000 so'm/m² <span class="ticker-sep">|</span></span>
-    <span class="ticker-item">🔨 Uy qurish — 0 dan tomgacha <span class="ticker-sep">|</span></span>
-    <span class="ticker-item">⚡ Elektr ishlari — arzon narxlarda <span class="ticker-sep">|</span></span>
-    <span class="ticker-item">🚿 Santexnika — kafolat bilan <span class="ticker-sep">|</span></span>
-  </div>
-</div>
-
-<!-- HERO -->
+<!-- Hero -->
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <canvas id="particles-canvas"></canvas>
   <div class="hero-left">
     <div class="hero-tag">⚙️ Professional qurilish xizmatlari</div>
     <h1 class="hero-title">
-      QURILISH<br>
-      <span class="gold">USTASI</span><br>
-      SIZ UCHUN
+      Qurilish<br>
+      <span class="gold">Ustasi</span><br>
+      Siz uchun
     </h1>
-    <p class="hero-subtitle">
+    <p class="hero-sub">
       Uyingizni noldan quring yoki ta'mirlang — tajribali ustalar bilan. Arzon narx, yuqori sifat, o'z vaqtida yetkazish kafolati.
     </p>
     <div class="hero-btns">
-      <a href="#calculator" class="btn-primary">
-        💰 Narx hisoblash
-      </a>
-      <a href="#contact" class="btn-secondary">Bepul maslahat</a>
+      <a href="#calculator" class="btn-primary">💰 Narx hisoblash</a>
+      <a href="#contact" class="btn-ghost">Bepul maslahat</a>
     </div>
     <div class="hero-stats">
-      <div>
-        <div class="stat-num">8+</div>
+      <div class="stat-item">
+        <div class="stat-num" data-count="8">0</div>
         <div class="stat-label">Yillik tajriba</div>
       </div>
-      <div>
-        <div class="stat-num">340+</div>
+      <div class="stat-item">
+        <div class="stat-num" data-count="340">0</div>
         <div class="stat-label">Bajarilgan loyiha</div>
       </div>
-      <div>
-        <div class="stat-num">24/7</div>
-        <div class="stat-label">Qo'llab-quvvatlash</div>
+      <div class="stat-item">
+        <div class="stat-num" data-count="24">0</div>
+        <div class="stat-label">/7 Qo'llab-quvvatlash</div>
       </div>
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-img-frame">
-      <img src="https://i.ibb.co/SwW104Xd/IMG-20260531-132158-026.jpg" alt="Professional Usta">
-      <div class="hero-img-overlay"></div>
-      <div class="hero-float-badge badge1">
+    <div class="hero-img-wrap">
+      <img src="https://i.ibb.co/SwW104Xd/IMG-20260531-132158-026.jpg" alt="Professional Usta" loading="lazy">
+      <div class="hero-badge b1">
         <div class="badge-label">Narxlar</div>
         <div class="badge-val">260K</div>
-        <div class="badge-label">so'm/kub</div>
+        <div class="badge-sub">so'm/kub</div>
       </div>
-      <div class="hero-float-badge badge2">
+      <div class="hero-badge b2">
         <div class="badge-label">Kafolat</div>
         <div class="badge-val">2 YIL</div>
       </div>
@@ -1232,28 +1075,46 @@
   </div>
 </section>
 
-<!-- SERVICES -->
+<!-- Ticker -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="tickerTrack">
+    <span class="ticker-item">🏗️ Beton quyish — 260 000 so'm/kub <span class="sep">|</span></span>
+    <span class="ticker-item">🧱 G'isht urish — 7 500 so'm/dona <span class="sep">|</span></span>
+    <span class="ticker-item">🏠 Sesma pol — 70 000 so'm/m² <span class="sep">|</span></span>
+    <span class="ticker-item">🔨 Uy qurish — 0 dan tomgacha <span class="sep">|</span></span>
+    <span class="ticker-item">⚡ Elektr ishlari — arzon narxlarda <span class="sep">|</span></span>
+    <span class="ticker-item">🚿 Santexnika — kafolat bilan <span class="sep">|</span></span>
+    <span class="ticker-item">🏗️ Beton quyish — 260 000 so'm/kub <span class="sep">|</span></span>
+    <span class="ticker-item">🧱 G'isht urish — 7 500 so'm/dona <span class="sep">|</span></span>
+    <span class="ticker-item">🏠 Sesma pol — 70 000 so'm/m² <span class="sep">|</span></span>
+    <span class="ticker-item">🔨 Uy qurish — 0 dan tomgacha <span class="sep">|</span></span>
+    <span class="ticker-item">⚡ Elektr ishlari — arzon narxlarda <span class="sep">|</span></span>
+    <span class="ticker-item">🚿 Santexnika — kafolat bilan <span class="sep">|</span></span>
+  </div>
+</div>
+
+<!-- Services -->
 <section class="services" id="services">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header reveal">
       <div>
-        <div class="section-tag">// Xizmatlar</div>
-        <h2 class="section-title">BIZNING <span class="accent">ISHLARIMIZ</span></h2>
+        <div class="section-tag">Xizmatlar</div>
+        <h2 class="section-title">Bizning <em>ishlarimiz</em></h2>
       </div>
       <p class="section-desc">Uyni noldan qurish yoki ta'mirlashning barcha bosqichlarini bajaramiz — har bir ish kafolat bilan.</p>
     </div>
     <div class="services-grid">
-      <div class="service-card featured reveal">
-        <span class="featured-badge">Eng mashhur</span>
+      <div class="service-card featured" data-tilt>
+        <span class="featured-badge">Mashhur</span>
         <div class="service-icon">🏗️</div>
-        <div class="service-name">Beton quyish ishlari</div>
+        <div class="service-name">Beton quyish</div>
         <div class="service-desc">Poydevor, shift, ustun va boshqa beton konstruksiyalarni professional quyish. Sifatli material, tajribali jamoa.</div>
         <div class="service-price">
           <div class="price-num">260 000</div>
           <div class="price-unit">so'm / kub m</div>
         </div>
       </div>
-      <div class="service-card reveal">
+      <div class="service-card" data-tilt>
         <div class="service-icon">🧱</div>
         <div class="service-name">G'isht urish</div>
         <div class="service-desc">Uy devorlarini g'ishtdan ko'tarish. Har xil o'lchamdagi g'ishtlar bilan ishlash. Tekis va mustahkam devorlar.</div>
@@ -1262,61 +1123,61 @@
           <div class="price-unit">so'm / dona</div>
         </div>
       </div>
-      <div class="service-card reveal">
+      <div class="service-card" data-tilt>
         <div class="service-icon">🏠</div>
-        <div class="service-name">Sesma pol qilish</div>
-        <div class="service-desc">Sifatli sesma (stяжка) ishlari. Tekis, mustahkam pol uchun. Turli qalinlikda qilish imkoniyati.</div>
+        <div class="service-name">Sesma (styaжka) pol</div>
+        <div class="service-desc">Sifatli sesma ishlari. Tekis va mustahkam pol uchun. Turli qalinlikda qilish imkoniyati.</div>
         <div class="service-price">
           <div class="price-num">70 000</div>
           <div class="price-unit">so'm / m²</div>
         </div>
       </div>
-      <div class="service-card reveal">
+      <div class="service-card" data-tilt>
         <div class="service-icon">🔨</div>
-        <div class="service-name">Tom yopish ishlari</div>
+        <div class="service-name">Tom yopish</div>
         <div class="service-desc">Uyingiz uchun mustahkam tom — shinglas, profnastil, metall cherepitsa. To'liq montaj va izolyatsiya.</div>
         <div class="service-price">
-          <div class="price-num">Narx</div>
-          <div class="price-unit">maslahatlashish</div>
+          <div class="price-num">80 000</div>
+          <div class="price-unit">so'm / m² dan</div>
         </div>
       </div>
-      <div class="service-card reveal">
+      <div class="service-card" data-tilt>
         <div class="service-icon">⚡</div>
         <div class="service-name">Elektr montaj</div>
-        <div class="service-desc">Uy ichidagi elektr tarmoqlarini o'rnatish, rozеtka va yoritish tizimlari. Xavfsiz va sifatli.</div>
+        <div class="service-desc">Uy ichidagi elektr tarmoqlarini o'rnatish, rozetka va yoritish tizimlari. Xavfsiz va sifatli.</div>
         <div class="service-price">
-          <div class="price-num">Narx</div>
-          <div class="price-unit">maslahatlashish</div>
+          <div class="price-num">35 000</div>
+          <div class="price-unit">so'm / m² dan</div>
         </div>
       </div>
-      <div class="service-card reveal">
+      <div class="service-card" data-tilt>
         <div class="service-icon">🚿</div>
         <div class="service-name">Santexnika ishlari</div>
         <div class="service-desc">Suv quvurlari, kanalizatsiya, vannaxona jihozlash. Tez va kafolat bilan bajariladi.</div>
         <div class="service-price">
-          <div class="price-num">Narx</div>
-          <div class="price-unit">maslahatlashish</div>
+          <div class="price-num">Loyiha</div>
+          <div class="price-unit">asosida narx</div>
         </div>
       </div>
-      <div class="service-card reveal">
+      <div class="service-card" data-tilt>
         <div class="service-icon">🪟</div>
         <div class="service-name">Eshik va derazalar</div>
         <div class="service-desc">Plastik, alyuminiy yoki yog'och eshik-derazalar o'rnatish. Professional montaj kafolati bilan.</div>
         <div class="service-price">
-          <div class="price-num">Narx</div>
-          <div class="price-unit">maslahatlashish</div>
+          <div class="price-num">Loyiha</div>
+          <div class="price-unit">asosida narx</div>
         </div>
       </div>
-      <div class="service-card reveal">
+      <div class="service-card" data-tilt>
         <div class="service-icon">🎨</div>
-        <div class="service-name">Devor suvoq va bo'yash</div>
-        <div class="service-desc">Sifatli suvoq ishlari, gips kartonga ishlov, devorlarni bo'yash va muqova ishlar.</div>
+        <div class="service-name">Suvoq va bo'yash</div>
+        <div class="service-desc">Sifatli suvoq ishlari, gips kartonga ishlov, devorlarni bo'yash va muqova ishlari.</div>
         <div class="service-price">
-          <div class="price-num">Narx</div>
-          <div class="price-unit">maslahatlashish</div>
+          <div class="price-num">25 000</div>
+          <div class="price-unit">so'm / m² dan</div>
         </div>
       </div>
-      <div class="service-card reveal">
+      <div class="service-card" data-tilt>
         <div class="service-icon">🏛️</div>
         <div class="service-name">Uyni 0 dan qurish</div>
         <div class="service-desc">Poydevor qazishdan to tom yopishgacha — to'liq kalit topshiriq asosida uy qurilishi.</div>
@@ -1329,32 +1190,32 @@
   </div>
 </section>
 
-<!-- PROCESS -->
+<!-- Process -->
 <section class="process" id="process">
   <div class="container">
     <div class="section-header reveal">
       <div>
-        <div class="section-tag">// Jarayon</div>
-        <h2 class="section-title">QANDAY <span class="accent">ISHLAYMIZ</span></h2>
+        <div class="section-tag">Jarayon</div>
+        <h2 class="section-title">Qanday <em>ishlaymiz</em></h2>
       </div>
     </div>
     <div class="process-steps">
-      <div class="process-step">
+      <div class="process-step reveal">
         <div class="step-num">01</div>
         <div class="step-title">Murojaat qiling</div>
         <div class="step-desc">Telefon yoki forma orqali bog'laning. Biz siz bilan 30 daqiqa ichida bog'lanamiz.</div>
       </div>
-      <div class="process-step">
+      <div class="process-step reveal">
         <div class="step-num">02</div>
         <div class="step-title">Bepul ko'rik</div>
         <div class="step-desc">Ustamiz obyektga kelib, bepul ko'rik o'tkazadi va aniq narx taklif qiladi.</div>
       </div>
-      <div class="process-step">
+      <div class="process-step reveal">
         <div class="step-num">03</div>
         <div class="step-title">Shartnoma tuziladi</div>
-        <div class="step-desc">Narx, muddat va ish hajmi bo'yicha rasmiy shartnoma imzolanadi. Kafolat beriladi.</div>
+        <div class="step-desc">Narx, muddat va ish hajmi bo'yicha rasmiy shartnoma imzolanadi.</div>
       </div>
-      <div class="process-step">
+      <div class="process-step reveal">
         <div class="step-num">04</div>
         <div class="step-title">Ish topshiriladi</div>
         <div class="step-desc">Belgilangan muddatda ish bajariladi, siz qabul qilasiz va to'lov amalga oshiriladi.</div>
@@ -1363,26 +1224,26 @@
   </div>
 </section>
 
-<!-- MASTERS -->
+<!-- Masters -->
 <section class="masters" id="masters">
   <div class="container">
     <div class="section-header reveal">
       <div>
-        <div class="section-tag">// Jamoamiz</div>
-        <h2 class="section-title">BIZNING <span class="accent">USTALAR</span></h2>
+        <div class="section-tag">Jamoamiz</div>
+        <h2 class="section-title">Bizning <em>ustalar</em></h2>
       </div>
       <p class="section-desc">Har bir ustamiz o'z sohasida 5+ yillik tajribaga ega professional.</p>
     </div>
     <div class="masters-grid">
-      <div class="master-card">
+      <div class="master-card reveal" data-tilt>
         <div class="master-img-wrap">
-          <img src="https://i.ibb.co/r2WJ5MWr/file-0000000047ec71f4984c8e4a7e572d0a.png" alt="Bosh Usta">
+          <img src="https://i.ibb.co/r2WJ5MWr/file-0000000047ec71f4984c8e4a7e572d0a.png" alt="Abdullo Usta" loading="lazy">
           <div class="master-img-overlay"></div>
           <div class="master-exp">8 yil tajriba</div>
         </div>
         <div class="master-info">
-          <div class="master-name">Bosh Usta</div>
-          <div class="master-spec">Qurilish loyihachisi</div>
+          <div class="master-name">Abdullo Usta</div>
+          <div class="master-spec">Bosh qurilish ustasi</div>
           <div class="master-skills">
             <span class="skill-tag">Beton</span>
             <span class="skill-tag">G'isht</span>
@@ -1395,15 +1256,15 @@
           </div>
         </div>
       </div>
-      <div class="master-card">
+      <div class="master-card reveal" data-tilt>
         <div class="master-img-wrap">
-          <img src="https://i.ibb.co/SwW104Xd/IMG-20260531-132158-026.jpg" alt="Beton Ustasi">
+          <img src="https://i.ibb.co/SwW104Xd/IMG-20260531-132158-026.jpg" alt="Beton ustasi" loading="lazy">
           <div class="master-img-overlay"></div>
           <div class="master-exp">6 yil tajriba</div>
         </div>
         <div class="master-info">
-          <div class="master-name">ABDULLO USTA JAMOSI</div>
-          <div class="master-spec">Beton va sesma ustasi</div>
+          <div class="master-name">Jamoa Sardori</div>
+          <div class="master-spec">Beton va sesma mutaxassisi</div>
           <div class="master-skills">
             <span class="skill-tag">Sesma</span>
             <span class="skill-tag">Poydevor</span>
@@ -1415,15 +1276,15 @@
           </div>
         </div>
       </div>
-      <div class="master-card">
+      <div class="master-card reveal" data-tilt>
         <div class="master-img-wrap">
-          <img src="https://i.ibb.co/r2WJ5MWr/file-0000000047ec71f4984c8e4a7e572d0a.png" alt="Tom Ustasi">
+          <img src="https://i.ibb.co/r2WJ5MWr/file-0000000047ec71f4984c8e4a7e572d0a.png" alt="Tom ustasi" loading="lazy">
           <div class="master-img-overlay"></div>
           <div class="master-exp">5 yil tajriba</div>
         </div>
         <div class="master-info">
-          <div class="master-name">1 TA FANTA BOLSA BOLDI</div>
-          <div class="master-spec">Tom va elektr ustasi</div>
+          <div class="master-name">Alijon Usta</div>
+          <div class="master-spec">Tom va elektr mutaxassisi</div>
           <div class="master-skills">
             <span class="skill-tag">Tom yopish</span>
             <span class="skill-tag">Elektr</span>
@@ -1439,22 +1300,20 @@
   </div>
 </section>
 
-<!-- PRICING -->
+<!-- Pricing -->
 <section class="pricing" id="pricing">
   <div class="container">
     <div class="section-header reveal">
       <div>
-        <div class="section-tag">// Narxlar</div>
-        <h2 class="section-title">ANIQ <span class="accent">NARXLAR</span></h2>
+        <div class="section-tag">Narxlar</div>
+        <h2 class="section-title">Aniq <em>narxlar</em></h2>
       </div>
       <p class="section-desc">Yashirin to'lovlar yo'q. Shartnomada yozilgan narxdan ortiq to'lamaysiz.</p>
     </div>
     <div class="pricing-grid">
       <div class="pricing-card reveal">
-        <div class="pricing-name">Asosiy Paket</div>
-        <div class="pricing-price">
-          <span class="currency">₩</span>Ta'mirlash
-        </div>
+        <div class="pricing-name">Ta'mirlash</div>
+        <div class="pricing-price"><span class="currency">₩</span>Asosiy</div>
         <div class="pricing-period">Xona ta'mirlash va kichik ishlar</div>
         <ul class="pricing-features">
           <li>Devor suvoq va bo'yash</li>
@@ -1463,14 +1322,12 @@
           <li>Elektr tarmog'i</li>
           <li>1 yil kafolat</li>
         </ul>
-        <a href="tel:+998913631012" class="btn-outline" onclick="showNotif()">Qo'ng'iroq qilish</a>
+        <a href="tel:+998913631012" class="btn-full btn-outline" onclick="showNotif()">Qo'ng'iroq qilish</a>
       </div>
       <div class="pricing-card popular reveal">
-        <div class="popular-badge">Eng mashhur</div>
-        <div class="pricing-name">To'liq Paket</div>
-        <div class="pricing-price">
-          <span class="currency">₩</span>Kalit topshiriq
-        </div>
+        <div class="popular-badge">Mashhur</div>
+        <div class="pricing-name">Kalit topshiriq</div>
+        <div class="pricing-price"><span class="currency">₩</span>To'liq</div>
         <div class="pricing-period">Uyni 0 dan topshirishgacha</div>
         <ul class="pricing-features">
           <li>Poydevor — beton 260 000 so'm/kub</li>
@@ -1481,13 +1338,11 @@
           <li>Devor suvoq va bo'yash</li>
           <li>2 yil kafolat</li>
         </ul>
-        <a href="tel:+998913631012" class="btn-gold" onclick="showNotif()">Bepul maslahat olish</a>
+        <a href="tel:+998913631012" class="btn-full btn-gold" onclick="showNotif()">Bepul maslahat olish</a>
       </div>
       <div class="pricing-card reveal">
-        <div class="pricing-name">Premium Paket</div>
-        <div class="pricing-price">
-          <span class="currency">₩</span>Premium
-        </div>
+        <div class="pricing-name">Premium</div>
+        <div class="pricing-price"><span class="currency">₩</span>Premium</div>
         <div class="pricing-period">Dizayn va qurilish birlikda</div>
         <ul class="pricing-features">
           <li>Arxitektor loyihasi</li>
@@ -1497,27 +1352,27 @@
           <li>Bog' va hovli</li>
           <li>3 yil kafolat</li>
         </ul>
-        <a href="tel:+998913631012" class="btn-outline" onclick="showNotif()">Qo'ng'iroq qilish</a>
+        <a href="tel:+998913631012" class="btn-full btn-outline" onclick="showNotif()">Qo'ng'iroq qilish</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CALCULATOR -->
+<!-- Calculator -->
 <section class="calculator" id="calculator">
   <div class="container">
     <div class="section-header reveal">
       <div>
-        <div class="section-tag">// Hisoblash</div>
-        <h2 class="section-title">NARX <span class="accent">KALKULYATOR</span></h2>
+        <div class="section-tag">Hisoblash</div>
+        <h2 class="section-title">Narx <em>kalkulyator</em></h2>
       </div>
       <p class="section-desc">Taxminiy narxni o'zingiz hisoblang. Aniq narx uchun qo'ng'iroq qiling.</p>
     </div>
-    <div class="calc-wrapper">
+    <div class="calc-wrap">
       <div class="calc-form reveal">
         <div class="form-group">
           <label class="form-label">Xizmat turi</label>
-          <select class="form-control" id="calcService" onchange="calcPrice()">
+          <select class="form-select" id="calcService" onchange="calcPrice()">
             <option value="beton">Beton quyish (260 000 so'm/kub)</option>
             <option value="gisht">G'isht urish (7 500 so'm/dona)</option>
             <option value="sesma">Sesma pol (70 000 so'm/m²)</option>
@@ -1534,41 +1389,33 @@
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">Ish muddati</label>
-          <select class="form-control" id="calcTime">
-            <option value="1">Oddiy (1-2 hafta)</option>
-            <option value="1.2">Tezkor (+20%)</option>
-            <option value="1.5">Juda tezkor (+50%)</option>
-          </select>
-        </div>
-        <div class="form-group">
           <label class="form-label">Sifat darajasi</label>
-          <select class="form-control" id="calcQuality" onchange="calcPrice()">
+          <select class="form-select" id="calcQuality" onchange="calcPrice()">
             <option value="1">Standart</option>
             <option value="1.3">Premium (+30%)</option>
             <option value="1.6">Lyuks (+60%)</option>
           </select>
         </div>
-        <a href="tel:+998913631012" class="btn-primary" style="justify-content:center;" onclick="showNotif()">
+        <a href="tel:+998913631012" class="btn-primary" style="justify-content:center" onclick="showNotif()">
           📞 Aniq narx uchun qo'ng'iroq
         </a>
       </div>
       <div class="calc-result reveal">
         <div class="result-label">Taxminiy narx</div>
         <div class="result-price" id="resultPrice">2 600 000</div>
-        <div class="result-currency">O'zbek so'mi</div>
+        <div class="result-curr">O'zbek so'mi</div>
         <div class="result-breakdown">
-          <div class="breakdown-row">
-            <span class="breakdown-name">Ish narxi:</span>
-            <span class="breakdown-val" id="breakWorkPrice">2 600 000 so'm</span>
+          <div class="bd-row">
+            <span class="bd-name">Ish narxi:</span>
+            <span class="bd-val" id="breakWorkPrice">2 600 000 so'm</span>
           </div>
-          <div class="breakdown-row">
-            <span class="breakdown-name">Material:</span>
-            <span class="breakdown-val">Alohida hisob</span>
+          <div class="bd-row">
+            <span class="bd-name">Material:</span>
+            <span class="bd-val">Alohida hisob</span>
           </div>
-          <div class="breakdown-row">
-            <span class="breakdown-name">Ko'rik:</span>
-            <span class="breakdown-val" style="color: var(--green)">Bepul</span>
+          <div class="bd-row">
+            <span class="bd-name">Ko'rik:</span>
+            <span class="bd-val" style="color:var(--green)">Bepul</span>
           </div>
         </div>
       </div>
@@ -1576,13 +1423,13 @@
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- Contact -->
 <section class="contact" id="contact">
   <div class="container">
     <div class="section-header reveal">
       <div>
-        <div class="section-tag">// Aloqa</div>
-        <h2 class="section-title">BOG'LANISH <span class="accent">USULLARI</span></h2>
+        <div class="section-tag">Aloqa</div>
+        <h2 class="section-title">Bog'lanish <em>usullari</em></h2>
       </div>
     </div>
     <div class="contact-grid">
@@ -1590,30 +1437,29 @@
         <div class="contact-item reveal">
           <div class="contact-icon">📍</div>
           <div>
-            <div class="contact-detail-label">Manzil</div>
-            <div class="contact-detail-val">Namangan shaxar, Ziyokor mfy</div>
+            <div class="c-label">Manzil</div>
+            <div class="c-val">Namangan shahar, Ziyokor mfy</div>
           </div>
         </div>
         <div class="contact-item reveal">
           <div class="contact-icon">🕐</div>
           <div>
-            <div class="contact-detail-label">Ish vaqti</div>
-            <div class="contact-detail-val">Du-Yak: 08:00 – 20:00</div>
+            <div class="c-label">Ish vaqti</div>
+            <div class="c-val">Du-Yak: 08:00 – 20:00</div>
           </div>
         </div>
         <div class="contact-item reveal">
           <div class="contact-icon">⚡</div>
           <div>
-            <div class="contact-detail-label">Javob vaqti</div>
-            <div class="contact-detail-val">30 daqiqa ichida aloqa</div>
+            <div class="c-label">Javob vaqti</div>
+            <div class="c-val">30 daqiqa ichida aloqa</div>
           </div>
         </div>
         <div class="call-cta reveal">
-          <div class="call-cta-title">HOZIROQ QONG'IROQ QILING</div>
+          <div class="call-cta-title">Hoziroq qo'ng'iroq qiling</div>
           <div class="call-cta-sub">Bepul maslahat va ko'rik uchun</div>
-          <a href="tel:+998913631012" class="btn-call-big" onclick="showNotif()">
-            <span class="phone-icon">📞</span>
-            Qo'ng'iroq qilish
+          <a href="tel:+998913631012" class="btn-primary" onclick="showNotif()" style="justify-content:center;display:inline-flex">
+            📞 Qo'ng'iroq qilish
           </a>
         </div>
       </div>
@@ -1621,16 +1467,16 @@
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Ismingiz</label>
-            <input type="text" class="form-control" placeholder="Ismingiizni kiriting">
+            <input type="text" class="form-input" placeholder="Ismingizni kiriting">
           </div>
           <div class="form-group">
             <label class="form-label">Telefon</label>
-            <input type="tel" class="form-control" placeholder="+998 XX XXX XX XX">
+            <input type="tel" class="form-input" placeholder="+998 XX XXX XX XX">
           </div>
         </div>
         <div class="form-group">
           <label class="form-label">Xizmat turi</label>
-          <select class="form-control">
+          <select class="form-select">
             <option>Beton quyish</option>
             <option>G'isht urish</option>
             <option>Sesma pol</option>
@@ -1643,9 +1489,9 @@
         </div>
         <div class="form-group">
           <label class="form-label">Xabar</label>
-          <textarea class="form-control" rows="4" placeholder="Qo'shimcha ma'lumot (ixtiyoriy)..."></textarea>
+          <textarea class="form-input" rows="4" placeholder="Qo'shimcha ma'lumot (ixtiyoriy)..."></textarea>
         </div>
-        <button class="btn-primary" style="width:100%;justify-content:center;" onclick="submitForm(this)">
+        <button class="btn-primary" style="width:100%;justify-content:center" onclick="submitForm(this)">
           ✉️ So'rov yuborish
         </button>
       </div>
@@ -1653,12 +1499,12 @@
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- Footer -->
 <footer>
   <div class="container">
     <div class="footer-grid">
       <div>
-        <span class="footer-logo">Pro<span>Usta</span></span>
+        <span class="footer-logo">Abdullo <em>Usta</em></span>
         <p class="footer-desc">Professional qurilish xizmatlari. Uyingizni noldan quring yoki ta'mirlang — tajribali ustalar bilan, kafolat bilan.</p>
       </div>
       <div>
@@ -1685,133 +1531,275 @@
         <div class="footer-col-title">Aloqa</div>
         <ul class="footer-links">
           <li><a href="tel:+998913631012" onclick="showNotif()">📞 Qo'ng'iroq qilish</a></li>
-          <li><a href="#contact">📍 NAMANGAN SHAXAR ZIYOKOR MFY</a></li>
+          <li><a href="#contact">📍 Namangan, Ziyokor mfy</a></li>
           <li><a href="#contact">🕐 Du-Yak: 08-20</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© 2025 ProUsta — Barcha huquqlar himoyalangan.</p>
-      <p class="footer-credit">Sifatli qurilish — bizning sharafimiz</p>
+      <p class="footer-copy">© 2025 Abdullo Usta — Barcha huquqlar himoyalangan.</p>
+      <p class="footer-credit">Sifatli qurilish — <em>bizning sharafimiz</em></p>
     </div>
   </div>
 </footer>
 
 <!-- Order Modal -->
 <div class="modal-overlay" id="orderModal">
-  <div class="modal" style="position:relative;">
+  <div class="modal">
     <button class="modal-close" onclick="closeModal('orderModal')">✕</button>
-    <div class="modal-title">SO'ROV YUBORILDI</div>
+    <div class="modal-title">So'rov yuborildi</div>
     <div class="modal-sub">Usta 30 daqiqa ichida siz bilan bog'lanadi</div>
-    <div style="text-align:center; font-size:64px; margin: 24px 0;">✅</div>
-    <p style="color:var(--text2); font-size:13px; text-align:center; line-height:1.8;">
+    <div style="text-align:center;font-size:64px;margin:24px 0">✅</div>
+    <p style="color:var(--text2);font-size:14px;text-align:center;line-height:1.8">
       So'rovingiz qabul qilindi. Ustamiz tez orada siz bilan bog'lanib, bepul ko'rik uchun vaqt belgilaydi.
     </p>
-    <div style="margin-top:28px;">
-      <a href="tel:+998913631012" class="btn-gold" onclick="showNotif(); closeModal('orderModal')">📞 Hoziroq qo'ng'iroq qilish</a>
+    <div style="margin-top:28px">
+      <a href="tel:+998913631012" class="btn-full btn-gold" onclick="showNotif();closeModal('orderModal')" style="text-align:center;display:block">📞 Hoziroq qo'ng'iroq qilish</a>
     </div>
   </div>
 </div>
 
 <script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    setTimeout(() => {
-      ring.style.left = e.clientX + 'px';
-      ring.style.top = e.clientY + 'px';
-    }, 80);
-  });
-  document.querySelectorAll('a, button, input, select, textarea, .service-card, .master-card').forEach(el => {
-    el.addEventListener('mouseenter', () => { cursor.classList.add('hovered'); ring.classList.add('hovered'); });
-    el.addEventListener('mouseleave', () => { cursor.classList.remove('hovered'); ring.classList.remove('hovered'); });
-  });
+// ─── LOADER ───
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 400);
+});
 
-  // Navbar scroll
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
+// ─── CURSOR ───
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  dot.style.left = e.clientX + 'px';
+  dot.style.top = e.clientY + 'px';
+  requestAnimationFrame(() => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
   });
+});
+document.querySelectorAll('a, button, input, select, textarea, .service-card, .master-card, .process-step, .hamburger').forEach(el => {
+  el.addEventListener('mouseenter', () => { dot.classList.add('hovered'); ring.classList.add('hovered'); });
+  el.addEventListener('mouseleave', () => { dot.classList.remove('hovered'); ring.classList.remove('hovered'); });
+});
 
-  // Scroll reveal
-  const revealEls = document.querySelectorAll('.reveal, .process-step, .master-card, .pricing-card');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), (e.target.dataset.delay || 0) * 1000);
-        observer.unobserve(e.target);
+// ─── SCROLL PROGRESS ───
+const progressBar = document.getElementById('scrollProgress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (window.scrollY / h * 100) + '%';
+});
+
+// ─── NAVBAR ───
+const navbar = document.getElementById('navbar');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ─── HAMBURGER ───
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('active');
+  document.getElementById('navLinks').classList.toggle('open');
+}
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('hamburger').classList.remove('active');
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+// ─── PARTICLES ───
+(function initParticles() {
+  const canvas = document.getElementById('particles-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [];
+  const COUNT = 50;
+
+  function resize() {
+    w = canvas.width = canvas.parentElement.offsetWidth;
+    h = canvas.height = canvas.parentElement.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.size = Math.random() * 2 + .5;
+      this.speedX = (Math.random() - .5) * .3;
+      this.speedY = (Math.random() - .5) * .3;
+      this.opacity = Math.random() * .4 + .1;
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x < 0 || this.x > w) this.speedX *= -1;
+      if (this.y < 0 || this.y > h) this.speedY *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200,169,110,${this.opacity})`;
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < COUNT; i++) particles.push(new Particle());
+
+  function connect() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(200,169,110,${.06 * (1 - dist / 120)})`;
+          ctx.lineWidth = .5;
+          ctx.stroke();
+        }
       }
-    });
-  }, { threshold: 0.15 });
-  revealEls.forEach((el, i) => {
-    el.dataset.delay = (i % 3) * 0.12;
-    observer.observe(el);
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => { p.update(); p.draw(); });
+    connect();
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+// ─── 3D TILT ───
+document.querySelectorAll('[data-tilt]').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    const tiltX = (y - .5) * 8;
+    const tiltY = (x - .5) * -8;
+    card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02,1.02,1.02)`;
   });
-
-  // Calculator
-  const serviceRates = {
-    beton: { rate: 260000, unit: 'kub metr', label: 'Hajm (kub metr)', max: 100 },
-    gisht: { rate: 7500, unit: 'dona', label: 'Miqdor (dona)', max: 5000 },
-    sesma: { rate: 70000, unit: 'm²', label: 'Maydon (m²)', max: 500 },
-    tom: { rate: 80000, unit: 'm²', label: 'Maydon (m²)', max: 500 },
-    elektr: { rate: 35000, unit: 'm²', label: 'Maydon (m²)', max: 500 },
-    suvoq: { rate: 25000, unit: 'm²', label: 'Maydon (m²)', max: 500 }
-  };
-
-  function calcPrice() {
-    const service = document.getElementById('calcService').value;
-    const amount = parseInt(document.getElementById('calcAmount').value);
-    const quality = parseFloat(document.getElementById('calcQuality').value);
-    const s = serviceRates[service];
-    document.getElementById('amountLabel').textContent = s.label;
-    document.getElementById('calcAmount').max = s.max;
-    document.getElementById('amountVal').textContent = amount + ' ' + s.unit;
-    const total = s.rate * amount * quality;
-    document.getElementById('resultPrice').textContent = formatNum(Math.round(total));
-    document.getElementById('breakWorkPrice').textContent = formatNum(Math.round(total)) + ' so\'m';
-  }
-  function formatNum(n) {
-    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-  }
-  document.getElementById('calcAmount').addEventListener('input', function() {
-    const s = serviceRates[document.getElementById('calcService').value];
-    document.getElementById('amountVal').textContent = this.value + ' ' + s.unit;
-    calcPrice();
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)';
   });
+});
 
-  // Notification
-  function showNotif() {
-    const n = document.getElementById('notif');
-    n.classList.add('show');
-    setTimeout(() => n.classList.remove('show'), 3500);
-  }
-
-  // Form submit
-  function submitForm(btn) {
-    btn.textContent = '✅ Yuborildi!';
-    btn.style.background = 'var(--green)';
-    document.getElementById('orderModal').classList.add('active');
-  }
-  function closeModal(id) {
-    document.getElementById(id).classList.remove('active');
-  }
-  document.querySelectorAll('.modal-overlay').forEach(m => {
-    m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); });
+// ─── SCROLL REVEAL ───
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), (e.target.dataset.delay || 0) * 1000);
+      revealObserver.unobserve(e.target);
+    }
   });
+}, { threshold: .1, rootMargin: '0px 0px -40px 0px' });
 
-  // Smooth scroll for nav links
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
-    });
+document.querySelectorAll('.reveal, .process-step, .master-card, .pricing-card').forEach((el, i) => {
+  el.dataset.delay = (i % 3) * .1;
+  revealObserver.observe(el);
+});
+
+// ─── COUNTER ───
+const counterObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.dataset.count);
+      const dur = 2000;
+      const start = performance.now();
+      function update(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const val = Math.floor(p * target);
+        el.textContent = val + (target === 24 ? '' : '+');
+        if (p < 1) requestAnimationFrame(update);
+        else el.textContent = target + (target === 24 ? '' : '+');
+      }
+      requestAnimationFrame(update);
+      counterObserver.unobserve(el);
+    }
   });
+}, { threshold: .5 });
 
-  // Init
+document.querySelectorAll('.stat-num[data-count]').forEach(el => counterObserver.observe(el));
+
+// ─── CALCULATOR ───
+const serviceRates = {
+  beton: { rate: 260000, unit: 'kub metr', label: 'Hajm (kub metr)', max: 100 },
+  gisht: { rate: 7500, unit: 'dona', label: 'Miqdor (dona)', max: 5000 },
+  sesma: { rate: 70000, unit: 'm²', label: 'Maydon (m²)', max: 500 },
+  tom: { rate: 80000, unit: 'm²', label: 'Maydon (m²)', max: 500 },
+  elektr: { rate: 35000, unit: 'm²', label: 'Maydon (m²)', max: 500 },
+  suvoq: { rate: 25000, unit: 'm²', label: 'Maydon (m²)', max: 500 }
+};
+
+function calcPrice() {
+  const service = document.getElementById('calcService').value;
+  const amount = parseInt(document.getElementById('calcAmount').value);
+  const quality = parseFloat(document.getElementById('calcQuality').value);
+  const s = serviceRates[service];
+  document.getElementById('amountLabel').textContent = s.label;
+  document.getElementById('calcAmount').max = s.max;
+  if (amount > s.max) document.getElementById('calcAmount').value = s.max;
+  document.getElementById('amountVal').textContent = Math.min(amount, s.max) + ' ' + s.unit;
+  const total = s.rate * Math.min(amount, s.max) * quality;
+  document.getElementById('resultPrice').textContent = formatNum(Math.round(total));
+  document.getElementById('breakWorkPrice').textContent = formatNum(Math.round(total)) + ' so\'m';
+}
+function formatNum(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+document.getElementById('calcAmount').addEventListener('input', function() {
+  const s = serviceRates[document.getElementById('calcService').value];
+  if (this.value > s.max) this.value = s.max;
+  document.getElementById('amountVal').textContent = this.value + ' ' + s.unit;
   calcPrice();
+});
+
+// ─── NOTIFICATION ───
+function showNotif() {
+  const n = document.getElementById('notif');
+  n.classList.add('show');
+  setTimeout(() => n.classList.remove('show'), 3500);
+}
+
+// ─── FORM ───
+function submitForm(btn) {
+  btn.textContent = '✅ Yuborildi!';
+  btn.style.background = 'var(--green)';
+  document.getElementById('orderModal').classList.add('active');
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('active');
+}
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); });
+});
+
+// ─── SMOOTH SCROLL ───
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+
+// ─── BACK TO TOP BUTTON ───
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('visible', window.scrollY > 600);
+});
+
+// ─── INIT ───
+calcPrice();
+
+// ─── KEYBOARD ───
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+});
 </script>
 </body>
 </html>
