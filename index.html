@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Abdullo Usta — Professional Qurilish | Namangan</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<title>Abdullo Usta - Professional Qurilish | Namangan</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0a0a0a;
@@ -31,7 +31,7 @@ html{scroll-behavior:smooth;height:100%}
 body{
   background:var(--bg);
   color:var(--text);
-  font-family:'Inter',sans-serif;
+  font-family:'Outfit',sans-serif;
   overflow:hidden;height:100%;
   -webkit-font-smoothing:antialiased;
   user-select:none;
@@ -82,7 +82,7 @@ body{
   cursor:pointer;
   transition:color .25s,background .25s;
   position:relative;
-  font-family:'Inter',sans-serif;
+  
   -webkit-tap-highlight-color:transparent;
 }
 .tab-btn .tab-icon{font-size:20px;line-height:1}
@@ -113,7 +113,7 @@ body{
 .logo small{
   display:block;
   font-size:9px;
-  font-family:'Inter',sans-serif;
+  
   color:var(--text3);
   letter-spacing:2px;
   font-weight:500;
@@ -130,7 +130,7 @@ body{
   border-radius:100px;
   font-size:12px;
   font-weight:700;
-  font-family:'Inter',sans-serif;
+  
   cursor:pointer;
   text-decoration:none;
   transition:transform .2s,box-shadow .2s;
@@ -149,7 +149,7 @@ body{
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;
   transition:all .2s;
-  font-family:'Inter',sans-serif;
+  
   -webkit-tap-highlight-color:transparent;
 }
 .header-icon-btn:active{transform:scale(.9)}
@@ -245,7 +245,7 @@ body{
   padding:12px 24px;
   border-radius:100px;
   font-size:13px;font-weight:700;
-  font-family:'Inter',sans-serif;
+  
   border:none;
   cursor:pointer;
   text-decoration:none;
@@ -527,7 +527,7 @@ body{
   border-radius:100px;
   font-size:11px;font-weight:700;
   letter-spacing:1px;text-transform:uppercase;
-  font-family:'Inter',sans-serif;
+  
   border:none;
   cursor:pointer;
   text-decoration:none;
@@ -572,7 +572,7 @@ body{
   border-radius:var(--radius-sm);
   padding:10px 14px;
   color:var(--text);
-  font-family:'Inter',sans-serif;
+  
   font-size:13px;
   appearance:none;
   cursor:pointer;
@@ -602,7 +602,7 @@ body{
   box-shadow:0 0 0 3px rgba(200,169,110,.12);
 }
 .range-group .rval{
-  font-family:'Inter',sans-serif;
+  
   font-size:13px;
   font-weight:600;
   color:var(--gold);
@@ -665,6 +665,12 @@ body{
 .form-compact{
   display:flex;flex-direction:column;gap:10px;
 }
+.form-compact .fg{display:flex;flex-direction:column;gap:3px}
+.form-compact .fg label{
+  font-size:10px;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--text3);
+}
 .form-compact input,
 .form-compact select,
 .form-compact textarea{
@@ -673,7 +679,7 @@ body{
   border-radius:var(--radius-sm);
   padding:10px 14px;
   color:var(--text);
-  font-family:'Inter',sans-serif;
+  
   font-size:13px;
   width:100%;
   transition:border-color .2s;
@@ -693,7 +699,7 @@ body{
   border-radius:100px;
   font-size:13px;
   font-weight:700;
-  font-family:'Inter',sans-serif;
+  
   cursor:pointer;
   transition:transform .2s;
   -webkit-tap-highlight-color:transparent;
@@ -730,7 +736,7 @@ body{
   border-radius:100px;
   text-decoration:none;
   font-size:12px;font-weight:700;
-  font-family:'Inter',sans-serif;
+  
   transition:transform .2s;
 }
 .cta-block .btn:active{transform:scale(.97)}
@@ -747,6 +753,23 @@ body{
   color:var(--text3);
 }
 .footer-compact em{font-style:italic;color:var(--gold)}
+
+/* ─── REDUCED MOTION ─── */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+  .tab-content.active{animation:none}
+  .hero-content{border-radius:0}
+}
+
+/* ─── FOCUS ─── */
+:focus-visible{
+  outline:2px solid var(--gold);
+  outline-offset:2px;
+}
 
 /* ─── NOTIFICATION ─── */
 /* ─── MODAL ─── */
@@ -782,7 +805,7 @@ body{
   background:var(--gold);color:var(--bg);
   border:none;border-radius:100px;
   font-size:12px;font-weight:700;
-  font-family:'Inter',sans-serif;
+  
   cursor:pointer;
   text-decoration:none;
 }
@@ -821,7 +844,7 @@ body{
     color:var(--text3);
     cursor:pointer;
     transition:all .25s;
-    font-family:'Inter',sans-serif;
+    
   }
   .desktop-tabs .tab-btn .tab-icon{font-size:16px}
   .desktop-tabs .tab-btn.active{
@@ -884,7 +907,7 @@ body{
       <div class="hero-content">
       <div class="hero-compact">
         <div class="tag">⚡ 8 yillik tajriba, 340+ loyiha</div>
-        <h1>Ishonchli <em>usta</em> — <br>sifatli <em>natija</em></h1>
+        <h1>Ishonchli <em>usta</em> - <br>sifatli <em>natija</em></h1>
         <p>Rasmiy shartnoma, kafolat va bepul ko'rik. Uyingizni noldan quring yoki ta'mirlang.</p>
         <div class="hero-actions">
           <a href="#" class="btn btn-primary" onclick="switchTab('tab-services');return false">📋 Xizmatlar</a>
@@ -927,7 +950,7 @@ body{
       </div>
       <div class="footer-compact">
         <span>© 2025 Abdullo Usta</span>
-        <span>Sifatli qurilish — <em>sharafimiz</em></span>
+        <span>Sifatli qurilish - <em>sharafimiz</em></span>
       </div>
     </div>
     </div>
@@ -935,7 +958,6 @@ body{
     <!-- XIZMATLAR -->
     <div class="tab-content" id="tab-services">
       <div class="section-mini">
-        <div class="st">Xizmatlar</div>
         <h2>Nimani <em>taklif qilamiz</em></h2>
         <p>Barcha ishlar rasmiy shartnoma va kafolat bilan. Narxlar aniq, yashirin to'lovlarsiz.</p>
       </div>
@@ -1088,14 +1110,14 @@ body{
           </div>
           <div class="acc-body">
             <div class="acc-inner">
-              Poydevor qazishdan to tom yopishgacha — to'liq kalit topshiriq asosida uy qurilishi. Siz faqat yashaydigan kunni kuting.
+              Poydevor qazishdan to tom yopishgacha - to'liq kalit topshiriq asosida uy qurilishi. Siz faqat yashaydigan kunni kuting.
             </div>
           </div>
         </div>
       </div>
       <div style="margin-top:12px;text-align:center">
-        <a href="#" class="btn btn-primary" style="display:inline-flex;padding:12px 32px;border-radius:100px;background:var(--gold);color:var(--bg);font-size:13px;font-weight:700;font-family:'Inter',sans-serif;text-decoration:none;border:none;cursor:pointer" onclick="switchTab('tab-contact');return false">
-          📞 Bepul maslahat olish
+        <a href="#" class="btn btn-primary" style="display:inline-flex;padding:12px 32px;border-radius:100px;background:var(--gold);color:var(--bg);font-size:13px;font-weight:700;text-decoration:none;border:none;cursor:pointer" onclick="switchTab('tab-contact');return false">
+          Bepul maslahat
         </a>
       </div>
     </div>
@@ -1103,7 +1125,6 @@ body{
     <!-- USTALAR -->
     <div class="tab-content" id="tab-masters">
       <div class="section-mini">
-        <div class="st">Jamoamiz</div>
         <h2>Tajribali <em>ustalar</em></h2>
         <p>Har bir usta o'z sohasida kamida 5 yillik tajribaga ega. Natija uchun ishlaymiz.</p>
       </div>
@@ -1163,7 +1184,6 @@ body{
     <!-- NARXLAR -->
     <div class="tab-content" id="tab-pricing">
       <div class="section-mini">
-        <div class="st">Narxlar</div>
         <h2>Aniq va <em>shaffof</em></h2>
         <p>Yashirin to'lovlar yo'q. Shartnomada yozilgan narxdan ortiq to'lamaysiz. Kafolat bilan.</p>
       </div>
@@ -1221,7 +1241,7 @@ body{
             <li>Elektr tarmog'i</li>
             <li>1 yil kafolat</li>
           </ul>
-          <a href="tel:+998913631012" class="btn btn-outline" >Qo'ng'iroq</a>
+          <a href="tel:+998913631012" class="btn btn-outline" >Bepul maslahat</a>
         </div>
         <div class="pricing-mini popular">
           <div class="badge">Mashhur</div>
@@ -1249,7 +1269,7 @@ body{
             <li>Mebel o'rnatish</li>
             <li>3 yil kafolat</li>
           </ul>
-          <a href="tel:+998913631012" class="btn btn-outline" >Qo'ng'iroq</a>
+          <a href="tel:+998913631012" class="btn btn-outline" >Bepul maslahat</a>
         </div>
       </div>
     </div>
@@ -1274,9 +1294,10 @@ body{
       <div style="margin-top:12px">
         <div class="form-compact">
           <div class="form-row-2">
-            <input type="text" placeholder="Ismingiz" id="formName">
-            <input type="tel" placeholder="Telefon raqam" id="formPhone">
+            <div class="fg"><label for="formName">Ismingiz</label><input type="text" placeholder="Ismingiz" id="formName"></div>
+            <div class="fg"><label for="formPhone">Telefon raqam</label><input type="tel" placeholder="+998 XX XXX XX XX" id="formPhone"></div>
           </div>
+          <div class="fg"><label for="formService">Xizmat turi</label>
           <select id="formService">
             <option value="">Xizmat turini tanlang</option>
             <option>Beton quyish</option>
@@ -1287,19 +1308,19 @@ body{
             <option>Santexnika</option>
             <option>Uyni 0 dan qurish</option>
             <option>Boshqa</option>
-          </select>
-          <textarea placeholder="Qo'shimcha ma'lumot (ixtiyoriy)..."></textarea>
-          <button onclick="submitForm()">✉️ So'rov yuborish</button>
+          </select></div>
+          <div class="fg"><label for="formMsg">Qo'shimcha ma'lumot</label><textarea placeholder="Ixtiyoriy..." id="formMsg"></textarea></div>
+          <button onclick="submitForm()">So'rov yuborish</button>
         </div>
       </div>
       <div class="cta-block">
         <h3>Hoziroq qo'ng'iroq qiling</h3>
         <p>Bepul maslahat va ko'rik uchun</p>
-        <a href="tel:+998913631012" class="btn" >📞 Qo'ng'iroq qilish</a>
+        <a href="tel:+998913631012" class="btn" >Bepul maslahat</a>
       </div>
       <div class="footer-compact">
         <span>© 2025 Abdullo Usta</span>
-        <span>Sifatli qurilish — <em>sharafimiz</em></span>
+        <span>Sifatli qurilish - <em>sharafimiz</em></span>
       </div>
     </div>
   </div>
