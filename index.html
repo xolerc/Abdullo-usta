@@ -746,36 +746,20 @@ body{
 /* ─── TICKER RIBBON ─── */
 .ticker{
   flex-shrink:0;
-  overflow:hidden;
   height:30px;
   background:var(--surface);
   border-top:1px solid var(--border2);
-  display:flex;align-items:center;
-  white-space:nowrap;
+  overflow:hidden;
   z-index:5;
 }
-.ticker-track{
-  display:flex;
-  gap:0;
-  animation:tickerScroll 120s linear infinite;
-}
-.ticker-item{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:0 24px;
+.ticker marquee{
   font-size:10px;
   color:var(--text2);
   letter-spacing:.3px;
-  flex-shrink:0;
+  line-height:30px;
 }
-.ticker-item .hl{color:var(--accent);font-weight:600}
-.ticker-item .sep{color:var(--border2);font-weight:300;margin:0 4px}
-@keyframes tickerScroll{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-50%)}
-}
-@media(prefers-reduced-motion:reduce){
-  .ticker-track{animation:none}
-}
+.ticker .hl{color:var(--accent);font-weight:600}
+.ticker .sep{color:var(--border2);font-weight:300;margin:0 6px}
 </style>
 <audio id="bgAudio" src="bg-audio.m4a" autoplay loop preload="none" style="display:none"></audio>
 </head>
@@ -1165,18 +1149,17 @@ body{
   </div>
 
   <div class="ticker">
-    <div class="ticker-track" id="tickerTrack">
-      <span class="ticker-item"><span class="hl">Abdullo Usta</span><span class="sep">|</span>Professional qurilish xizmatlari</span>
-      <span class="ticker-item"><span class="hl">✦</span> Kapital remont <span class="sep">·</span> Kosmetik remont <span class="sep">·</span> Dizayn <span class="sep">·</span> Kommunikatsiya</span>
-      <span class="ticker-item"><span class="hl">2 yil</span> kafolat <span class="sep">|</span> <span class="hl">8+ yil</span> tajriba <span class="sep">|</span> <span class="hl">340+</span> loyiha</span>
-      <span class="ticker-item"><span class="hl">Bepul chiqish</span> - baholash va o'lchov <span class="sep">|</span> Shartnoma asosida</span>
-      <span class="ticker-item"><span class="hl">Qo'ng'iroq qiling:</span> +998 90 123 45 67</span>
-      <span class="ticker-item"><span class="hl">Abdullo Usta</span><span class="sep">|</span>Professional qurilish xizmatlari</span>
-      <span class="ticker-item"><span class="hl">✦</span> Kapital remont <span class="sep">·</span> Kosmetik remont <span class="sep">·</span> Dizayn <span class="sep">·</span> Kommunikatsiya</span>
-      <span class="ticker-item"><span class="hl">2 yil</span> kafolat <span class="sep">|</span> <span class="hl">8+ yil</span> tajriba <span class="sep">|</span> <span class="hl">340+</span> loyiha</span>
-      <span class="ticker-item"><span class="hl">Bepul chiqish</span> - baholash va o'lchov <span class="sep">|</span> Shartnoma asosida</span>
-      <span class="ticker-item"><span class="hl">Qo'ng'iroq qiling:</span> +998 90 123 45 67</span>
-    </div>
+    <marquee behavior="scroll" direction="left" scrollamount="1" scrolldelay="50" truespeed>
+      <span class="hl">Abdullo Usta</span><span class="sep">|</span>Professional qurilish xizmatlari
+      <span class="sep">&#8226;</span>
+      <span class="hl">✦</span> Kapital remont <span class="sep">·</span> Kosmetik remont <span class="sep">·</span> Dizayn <span class="sep">·</span> Kommunikatsiya
+      <span class="sep">&#8226;</span>
+      <span class="hl">2 yil</span> kafolat <span class="sep">|</span> <span class="hl">8+ yil</span> tajriba <span class="sep">|</span> <span class="hl">340+</span> loyiha
+      <span class="sep">&#8226;</span>
+      <span class="hl">Bepul chiqish</span> - baholash va o'lchov <span class="sep">|</span> Shartnoma asosida
+      <span class="sep">&#8226;</span>
+      <span class="hl">Qo'ng'iroq qiling:</span> +998 90 123 45 67
+    </marquee>
   </div>
 
   <nav class="app-tabs" id="bottomTabs">
