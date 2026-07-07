@@ -32,6 +32,32 @@
   --font-serif:'Playfair Display',serif;
   --font-sans:'Outfit',sans-serif;
 }
+@media(prefers-color-scheme:light){
+  :root{
+    --bg:#f5f3ef;
+    --surface:#ece9e4;
+    --surface2:#e3dfd9;
+    --surface3:#d9d4cc;
+    --card:#faf8f5;
+    --accent:#b8862e;
+    --accent2:#c89538;
+    --accent-dim:rgba(184,134,46,.08);
+    --accent-dim2:rgba(184,134,46,.15);
+    --text:#1a1814;
+    --text2:#6a6660;
+    --text3:#9c9890;
+    --border:rgba(0,0,0,.06);
+    --border2:rgba(184,134,46,.2);
+    --shadow:0 4px 32px rgba(0,0,0,.08);
+    --glow:0 0 40px rgba(184,134,46,.06);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .hero-fig img{transform:none!important}
+  .bento-cell:hover,.master-card:hover,.pricing-card:hover{transform:none!important}
+  .bento-cell:hover.bento-img img{transform:none!important}
+}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{height:100%}
 body{
@@ -1176,20 +1202,17 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 (function(){const a=document.getElementById('bgAudio');if(!a)return;a.volume=.15;const p=()=>{a.play().catch(()=>{})};p();document.addEventListener('click',()=>{if(a.paused)p()},{once:true});document.addEventListener('touchstart',()=>{if(a.paused)p()},{once:true});document.addEventListener('visibilitychange',()=>{if(!document.hidden&&a.paused)p()})})();
 calcPrice();
 
-// SCROLL-DRIVEN HERO ZOOM
+// SCROLL-DRIVEN HERO ZOOM (IntersectionObserver, no scroll listener)
 (function(){
   const fig=document.getElementById('heroFig');
   if(!fig)return;
-  const body=document.getElementById('appBody');
-  body.addEventListener('scroll',()=>{
-    const r=fig.getBoundingClientRect();
-    const h=window.innerHeight;
-    const t=r.top;
-    const p=Math.max(0,Math.min(1,(h-t)/h));
-    fig.style.setProperty('--zoom',p);
-    const s=1+p*.12;
-    fig.querySelector('img').style.transform='scale('+s+')';
-  },{passive:true});
+  const img=fig.querySelector('img');
+  const o=new IntersectionObserver(([e])=>{
+    const ratio=e.intersectionRatio;
+    const s=1+(1-ratio)*.15;
+    img.style.transform='scale('+Math.min(s,1.15)+')';
+  },{threshold:[0,.1,.2,.3,.4,.5,.6,.7,.8,.9,1]});
+  o.observe(fig);
 })();
 
 // SCROLL REVEAL
