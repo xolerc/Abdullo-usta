@@ -449,8 +449,16 @@ body{
   -webkit-overflow-scrolling:touch;
 }
 .master-scroll::-webkit-scrollbar{height:2px}
+.master-scroll{
+  display:flex;gap:10px;
+  overflow-x:auto;padding-bottom:10px;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+}
+.master-scroll::-webkit-scrollbar{height:2px}
 .master-card{
-  min-width:160px;
+  min-width:120px;
+  max-width:160px;
   background:var(--card);
   border:1px solid var(--border);
   border-radius:var(--radius);
@@ -461,7 +469,8 @@ body{
 }
 .master-card:hover{transform:translateY(-4px);box-shadow:0 8px 40px rgba(0,0,0,.5)}
 .master-card .img{
-  width:100%;aspect-ratio:4/3;
+  width:100%;aspect-ratio:1/1;
+  max-height:120px;
   position:relative;overflow:hidden;
 }
 .master-card .img::after{
@@ -470,9 +479,9 @@ body{
 }
 .master-card .img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .master-card:hover .img img{transform:scale(1.05)}
-.master-card .body{padding:10px 12px 12px}
-.master-card .body h4{font-family:var(--font-serif);font-size:18px;font-weight:700;font-style:italic;color:var(--accent)}
-.master-card .body .spec{font-size:11px;color:var(--text3);margin-top:1px}
+.master-card .body{padding:8px 10px 10px}
+.master-card .body h4{font-family:var(--font-serif);font-size:15px;font-weight:700;font-style:italic;color:var(--accent)}
+.master-card .body .spec{font-size:10px;color:var(--text3);margin-top:1px}
 .master-card .body .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
 .master-card .body .tags span{
   font-size:9px;font-weight:600;padding:3px 9px;
@@ -686,7 +695,7 @@ body{
   .form-row-2{grid-template-columns:1fr}
   .hero-strip{flex-wrap:wrap;gap:16px}
   .pricing-card{min-width:210px}
-   .master-card{min-width:140px}
+   .master-card{min-width:110px;max-width:140px}
   .hero{margin:-16px -16px 0;width:calc(100% + 32px)}
   .hero-fig{height:320px}
   .hero-overlay{padding:28px 18px 24px}
