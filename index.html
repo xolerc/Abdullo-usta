@@ -244,36 +244,36 @@ body{
 }
 .hero-overlay{
   position:absolute;
-  bottom:0;left:0;right:0;
+  top:0;left:0;right:0;
   z-index:2;
-  padding:40px 24px 32px;
-  background:linear-gradient(to top,var(--bg) 30%,transparent);
+  padding:24px 24px 32px;
+  background:linear-gradient(to bottom,var(--bg) 15%,transparent 80%);
 }
 .hero-overlay .tag{
-  font-size:10px;font-weight:600;
+  font-size:9px;font-weight:600;
   color:var(--accent);
   letter-spacing:2px;
   text-transform:uppercase;
   display:inline-flex;align-items:center;gap:6px;
-  margin-bottom:8px;
+  margin-bottom:6px;
 }
 .hero-overlay h1{
   font-family:var(--font-serif);
-  font-size:clamp(28px,6vw,52px);
+  font-size:clamp(22px,4.5vw,40px);
   font-weight:700;
   font-style:italic;
-  letter-spacing:-1px;
-  line-height:1.1;
-  max-width:600px;
+  letter-spacing:-.5px;
+  line-height:1.15;
+  max-width:500px;
 }
 .hero-overlay h1 .sans{font-family:var(--font-sans);font-style:normal;font-weight:800}
 .hero-overlay h1 .gold{color:var(--accent)}
 .hero-overlay p{
-  font-size:14px;
+  font-size:12px;
   color:var(--text2);
-  line-height:1.6;
-  margin-top:10px;
-  max-width:480px;
+  line-height:1.5;
+  margin-top:6px;
+  max-width:400px;
 }
 .hero-content{
   position:relative;
@@ -722,7 +722,7 @@ body{
    .master-card{width:120px}
   .hero{margin:-16px -16px 0;width:calc(100% + 32px)}
   .hero-fig{height:320px}
-  .hero-overlay{padding:28px 18px 24px}
+  .hero-overlay{padding:16px 16px 20px}
   .bento-grid{grid-template-columns:1fr 1fr}
   .bento-tall{min-height:150px}
   .trust-bento{grid-template-columns:1fr 1fr}
