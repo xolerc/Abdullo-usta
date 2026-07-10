@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdullo Usta — Qurilish va ta'mirlash</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal: #201E1B;
+    --charcoal-2: #171512;
+    --concrete: #B9B2A4;
+    --chalk: #F3EFE7;
+    --brick: #B4441C;
+    --brick-bright: #D4571F;
+    --tape: #D9A62E;
+    --ink: #17140F;
+    --line: rgba(243,239,231,0.14);
+    --radius: 2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background: var(--charcoal);
+    color: var(--chalk);
+    font-family: 'Manrope', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  ::selection{background:var(--brick); color:var(--chalk);}
+  :focus-visible{outline: 2px solid var(--tape); outline-offset:3px;}
+
+  .display{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.04em;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--tape);
+    display:flex;
+    align-items:center;
+    gap:0.6em;
+  }
+  .eyebrow::before{
+    content:'';
+    width:22px; height:2px;
+    background:var(--brick-bright);
+    display:inline-block;
+  }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 clamp(20px, 5vw, 56px);
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:linear-gradient(to bottom, rgba(23,21,18,0.92), transparent);
+    padding:20px 0;
+  }
+  .nav-inner{
+    max-width:1180px; margin:0 auto;
+    padding:0 clamp(20px,5vw,56px);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-mark{
+    font-family:'Anton', sans-serif;
+    font-size:1.15rem;
+    letter-spacing:0.02em;
+    text-transform:uppercase;
+  }
+  .nav-mark span{color:var(--brick-bright);}
+  .nav-links{
+    display:flex; gap:32px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.75rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+  }
+  .nav-links a{position:relative; padding-bottom:4px; color:var(--concrete); transition:color .25s;}
+  .nav-links a:hover{color:var(--chalk);}
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--tape); transition:width .25s;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase;
+    border:1px solid var(--concrete); padding:9px 16px; color:var(--chalk);
+    transition:all .25s;
+  }
+  .nav-cta:hover{background:var(--brick); border-color:var(--brick);}
+  .nav-links{ }
+  @media (max-width:760px){ .nav-links{display:none;} }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding-top:110px; padding-bottom:80px;
+    background:
+      linear-gradient(180deg, rgba(20,18,16,0.2), var(--charcoal) 85%),
+      repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 80px),
+      repeating-linear-gradient(0deg, var(--line) 0 1px, transparent 1px 80px);
+    background-color:var(--charcoal);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';
+    position:absolute; inset:0;
+    background:radial-gradient(circle at 78% 24%, rgba(180,68,28,0.28), transparent 42%);
+    pointer-events:none;
+  }
+  .hero-inner{ position:relative; z-index:2; }
+  .hero-eyebrow{margin-bottom:22px;}
+  .hero h1{
+    font-size:clamp(3.1rem, 10vw, 8rem);
+    line-height:0.92;
+    color:var(--chalk);
+  }
+  .hero h1 .reveal{
+    display:block;
+    clip-path: inset(0 100% 0 0);
+    animation: wipe 0.9s cubic-bezier(.65,0,.2,1) forwards;
+  }
+  .hero h1 .reveal:nth-child(1){animation-delay:.05s;}
+  .hero h1 .reveal:nth-child(2){animation-delay:.28s; color:var(--brick-bright);}
+  @keyframes wipe{ to{ clip-path: inset(0 0 0 0); } }
+
+  .hero-sub{
+    max-width:520px;
+    margin-top:26px;
+    color:var(--concrete);
+    font-size:1.05rem;
+  }
+  .hero-actions{
+    margin-top:38px;
+    display:flex; gap:16px; flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase;
+    padding:16px 26px;
+    display:inline-flex; align-items:center; gap:10px;
+    border:1px solid transparent;
+    transition:transform .2s, background .2s, border-color .2s;
+  }
+  .btn-primary{background:var(--brick); color:var(--chalk);}
+  .btn-primary:hover{background:var(--brick-bright); transform:translateY(-2px);}
+  .btn-ghost{border-color:var(--concrete); color:var(--chalk);}
+  .btn-ghost:hover{border-color:var(--chalk); transform:translateY(-2px);}
+
+  .hero-stats{
+    position:relative; z-index:2;
+    margin-top:64px;
+    display:flex; gap:clamp(24px,6vw,64px); flex-wrap:wrap;
+    border-top:1px solid var(--line);
+    padding-top:24px;
+  }
+  .stat b{
+    display:block;
+    font-family:'Anton', sans-serif;
+    font-size:2rem;
+    color:var(--chalk);
+  }
+  .stat span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--concrete);
+  }
+
+  .scroll-cue{
+    position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
+    font-family:'IBM Plex Mono', monospace; font-size:0.65rem;
+    letter-spacing:0.2em; text-transform:uppercase; color:var(--concrete);
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+  }
+  .scroll-cue::after{
+    content:''; width:1px; height:34px; background:var(--concrete);
+    animation:drop 1.8s ease-in-out infinite;
+  }
+  @keyframes drop{ 0%,100%{opacity:.2; transform:scaleY(.4); transform-origin:top;} 50%{opacity:1; transform:scaleY(1); transform-origin:top;} }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:clamp(70px,10vw,130px) 0;}
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    gap:24px; margin-bottom:52px; flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-size:clamp(2rem, 4.4vw, 3.4rem);
+    line-height:1.02;
+    margin-top:14px;
+  }
+  .section-head p{max-width:360px; color:var(--concrete); font-size:0.95rem;}
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--charcoal);}
+  .service-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    border-top:1px solid var(--line);
+    border-left:1px solid var(--line);
+  }
+  @media (max-width:900px){ .service-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:600px){ .service-grid{grid-template-columns:1fr;} }
+  .service{
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:32px 26px;
+    transition:background .25s;
+    position:relative;
+  }
+  .service:hover{background:rgba(180,68,28,0.08);}
+  .service .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem; color:var(--tape); display:block; margin-bottom:22px;
+  }
+  .service h3{
+    font-family:'Anton', sans-serif;
+    font-size:1.28rem;
+    text-transform:uppercase;
+    margin-bottom:10px;
+    letter-spacing:0.01em;
+  }
+  .service p{color:var(--concrete); font-size:0.92rem;}
+
+  /* ---------- TRANSFORMATION SLIDER ---------- */
+  .transform-section{background:var(--charcoal-2);}
+  .slider-wrap{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    max-height:560px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    cursor:ew-resize;
+    user-select:none;
+    background:var(--ink);
+  }
+  .slide-layer{
+    position:absolute; inset:0;
+    display:flex; align-items:flex-end;
+  }
+  .slide-layer .tag{
+    position:absolute; top:20px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase;
+    padding:7px 12px; background:rgba(23,21,18,0.75);
+  }
+  .before-layer{
+    background:
+      repeating-linear-gradient(48deg, rgba(0,0,0,0.35) 0 2px, transparent 2px 14px),
+      repeating-linear-gradient(-48deg, rgba(0,0,0,0.25) 0 2px, transparent 2px 22px),
+      linear-gradient(160deg, #5b544a, #3a352e 60%, #2a2621);
+  }
+  .before-layer .tag{left:20px; color:var(--concrete);}
+  .after-layer{
+    clip-path: inset(0 0 0 var(--pos, 50%));
+    background:
+      repeating-linear-gradient(90deg, rgba(243,239,231,0.06) 0 1px, transparent 1px 60px),
+      repeating-linear-gradient(0deg, rgba(243,239,231,0.06) 0 1px, transparent 1px 60px),
+      linear-gradient(160deg, #E7E1D4, #C9C2B2 60%, #B9B2A4);
+  }
+  .after-layer .tag{right:20px; left:auto; color:var(--ink); background:rgba(243,239,231,0.85);}
+  .handle{
+    position:absolute; top:0; bottom:0;
+    left:var(--pos, 50%);
+    width:2px; background:var(--brick-bright);
+    transform:translateX(-1px);
+  }
+  .handle::after{
+    content:'⇔';
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:46px; height:46px; border-radius:50%;
+    background:var(--brick-bright); color:var(--chalk);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem;
+    box-shadow:0 6px 18px rgba(0,0,0,0.4);
+  }
+  .slider-range{
+    position:absolute; inset:0; width:100%; height:100%;
+    opacity:0; cursor:ew-resize;
+  }
+  .transform-caption{
+    display:flex; justify-content:space-between; margin-top:18px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem;
+    color:var(--concrete); letter-spacing:0.06em;
+  }
+
+  /* ---------- PROCESS ---------- */
+  .process{background:var(--charcoal);}
+  .process-list{border-top:1px solid var(--line);}
+  .process-row{
+    display:grid;
+    grid-template-columns:110px 1fr 1fr;
+    gap:24px;
+    padding:30px 0;
+    border-bottom:1px solid var(--line);
+    align-items:start;
+  }
+  @media (max-width:700px){ .process-row{grid-template-columns:60px 1fr; } .process-row .p-desc{grid-column:2;} }
+  .process-row .p-num{
+    font-family:'Anton', sans-serif; font-size:2.2rem; color:var(--brick-bright);
+  }
+  .process-row h3{
+    font-family:'Anton', sans-serif; font-size:1.3rem; text-transform:uppercase;
+  }
+  .process-row p{color:var(--concrete); font-size:0.92rem; max-width:420px;}
+
+  /* ---------- PORTFOLIO ---------- */
+  .portfolio{background:var(--charcoal-2);}
+  .port-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+  }
+  @media (max-width:900px){ .port-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .port-grid{grid-template-columns:1fr;} }
+  .port-card{
+    position:relative;
+    aspect-ratio:4/5;
+    overflow:hidden;
+    background:var(--ink);
+  }
+  .port-card .tex{
+    position:absolute; inset:0;
+    transition:transform .5s ease;
+  }
+  .port-card:hover .tex{transform:scale(1.06);}
+  .port-card .info{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:20px;
+    background:linear-gradient(to top, rgba(23,21,18,0.92), transparent);
+  }
+  .port-card .info .mono{font-size:0.68rem; color:var(--tape);}
+  .port-card .info h4{font-family:'Anton',sans-serif; font-size:1.15rem; text-transform:uppercase; margin-top:6px;}
+  .tex1{background:linear-gradient(150deg,#8a5a3b,#4b3527 55%,#2c2018), repeating-linear-gradient(90deg, rgba(0,0,0,.15) 0 1px, transparent 1px 18px);}
+  .tex2{background:linear-gradient(150deg,#7c8a86,#455551 55%,#212a27), repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 1px, transparent 1px 26px);}
+  .tex3{background:linear-gradient(150deg,#B4441C,#7a2d12 55%,#3a1508), repeating-linear-gradient(45deg, rgba(0,0,0,.2) 0 2px, transparent 2px 16px);}
+  .tex4{background:linear-gradient(150deg,#c9c2b4,#948c7c 55%,#5c564a), repeating-linear-gradient(90deg, rgba(0,0,0,.08) 0 1px, transparent 1px 40px), repeating-linear-gradient(0deg, rgba(0,0,0,.08) 0 1px, transparent 1px 40px);}
+  .tex5{background:linear-gradient(150deg,#3d4a52,#232c31 55%,#141a1d);}
+  .tex6{background:linear-gradient(150deg,#D9A62E,#96721c 55%,#4d3a0e), repeating-linear-gradient(135deg, rgba(0,0,0,.15) 0 2px, transparent 2px 20px);}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials{background:var(--charcoal);}
+  .test-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:800px){ .test-grid{grid-template-columns:1fr;} }
+  .test-card{background:var(--charcoal); padding:34px 28px;}
+  .test-card .quote{font-size:1.02rem; color:var(--chalk); margin-bottom:20px;}
+  .test-card .who{font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--concrete); text-transform:uppercase; letter-spacing:0.06em;}
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background:var(--brick);
+    color:var(--chalk);
+    position:relative;
+    overflow:hidden;
+  }
+  .contact::before{
+    content:'';
+    position:absolute; inset:0;
+    background:repeating-linear-gradient(-45deg, rgba(0,0,0,0.06) 0 14px, transparent 14px 28px);
+  }
+  .contact-inner{position:relative; z-index:2; display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px;}
+  @media (max-width:800px){ .contact-inner{grid-template-columns:1fr;} }
+  .contact h2{font-size:clamp(2.2rem,5vw,3.6rem); line-height:1.02; margin-bottom:20px;}
+  .contact p.lead{max-width:420px; opacity:0.9;}
+  .contact-links{margin-top:32px; display:flex; flex-direction:column; gap:14px;}
+  .contact-links a{
+    font-family:'IBM Plex Mono', monospace; font-size:1.05rem;
+    border-bottom:1px solid rgba(243,239,231,0.4);
+    padding-bottom:6px; width:fit-content;
+    transition:border-color .2s;
+  }
+  .contact-links a:hover{border-color:var(--chalk);}
+
+  form.order{
+    background:var(--charcoal-2);
+    padding:32px;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  form.order label{
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--concrete);
+    display:block; margin-bottom:8px;
+  }
+  form.order input, form.order textarea{
+    width:100%; background:transparent; border:none; border-bottom:1px solid var(--line);
+    color:var(--chalk); font-family:'Manrope',sans-serif; font-size:1rem;
+    padding:8px 0; resize:none;
+  }
+  form.order input:focus, form.order textarea:focus{outline:none; border-color:var(--tape);}
+  form.order button{
+    margin-top:10px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase;
+    background:var(--brick-bright); color:var(--chalk); border:none;
+    padding:16px; cursor:pointer; transition:background .2s;
+  }
+  form.order button:hover{background:var(--tape); color:var(--ink);}
+  .form-note{font-size:0.78rem; color:var(--concrete); font-family:'IBM Plex Mono', monospace;}
+
+  footer{
+    background:var(--charcoal-2);
+    padding:26px 0;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem; color:var(--concrete);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+    .hero h1 .reveal{clip-path:inset(0 0 0 0);}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-mark">ABDULLO<span>.</span>USTA</div>
+    <nav class="nav-links">
+      <a href="#xizmatlar">Xizmatlar</a>
+      <a href="#natija">Natija</a>
+      <a href="#jarayon">Jarayon</a>
+      <a href="#loyihalar">Loyihalar</a>
+      <a href="#aloqa">Aloqa</a>
+    </nav>
+    <a class="nav-cta" href="#aloqa">Buyurtma</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-eyebrow eyebrow">Toshkent · Qurilish va ta'mirlash ustasi</div>
+    <h1 class="display">
+      <span class="reveal">ASOSDAN</span>
+      <span class="reveal">TUGATISHGACHA</span>
+    </h1>
+    <p class="hero-sub">Abdullo Usta — 14 yillik tajribaga ega qurilish brigadasi. Devordan polgacha, loyihadan topshirishgacha — har bir ish o'lchov bilan boshlanadi, kafolat bilan tugaydi.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#aloqa">Buyurtma berish →</a>
+      <a class="btn btn-ghost" href="#loyihalar">Ishlarni ko'rish</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><b>14</b><span>Yillik tajriba</span></div>
+      <div class="stat"><b>230+</b><span>Bajarilgan obyekt</span></div>
+      <div class="stat"><b>36 oy</b><span>Ish kafolati</span></div>
+      <div class="stat"><b>0</b><span>Yashirin xarajat</span></div>
+    </div>
+  </div>
+  <div class="scroll-cue">Pastga</div>
+</section>
+
+<section id="xizmatlar" class="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Nima qilamiz</div>
+        <h2 class="display">Xizmatlar</h2>
+      </div>
+      <p>Har bir yo'nalish o'z ustasi tomonidan, yagona brigada nazorati ostida bajariladi.</p>
+    </div>
+  </div>
+  <div class="service-grid">
+    <div class="service"><span class="num mono">01</span><h3>Kapital ta'mirlash</h3><p>Xonadon va uylarni asosdan to'liq qayta jihozlash — devordan shiftgacha.</p></div>
+    <div class="service"><span class="num mono">02</span><h3>Fasad ishlari</h3><p>Tashqi devor izolyatsiyasi, shtukaturka va fasad qoplamalari.</p></div>
+    <div class="service"><span class="num mono">03</span><h3>Elektr va santexnika</h3><p>Simlar, quvurlar, isitish va issiq-sovuq suv tizimlarini o'rnatish.</p></div>
+    <div class="service"><span class="num mono">04</span><h3>Gips va shpaklyovka</h3><p>Devor va shiftlarni ideal tekislikka keltirish, bo'yoqqa tayyorlash.</p></div>
+    <div class="service"><span class="num mono">05</span><h3>Pol va plitka</h3><p>Kafel, laminat, parket yotqizish — o'lchovdan yakuniy silliqlashgacha.</p></div>
+    <div class="service"><span class="num mono">06</span><h3>Kichik ta'mirlash</h3><p>Tez muddatli mayda ishlar: eshik, jomoshir, elektr nosozliklari.</p></div>
+  </div>
+</section>
+
+<section id="natija" class="transform-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Ko'rsatkich emas, natija</div>
+        <h2 class="display">Oldin / Keyin</h2>
+      </div>
+      <p>Chizg'ichni suring — bitta xonadonning haqiqiy o'zgarishi shu tarzda ko'rinadi.</p>
+    </div>
+    <div class="slider-wrap" id="sliderWrap">
+      <div class="slide-layer before-layer"><span class="tag mono">Oldin</span></div>
+      <div class="slide-layer after-layer" id="afterLayer"><span class="tag mono">Keyin</span></div>
+      <div class="handle" id="handle"></div>
+      <input type="range" min="0" max="100" value="50" class="slider-range" id="sliderRange" aria-label="Oldin va keyin taqqoslash">
+    </div>
+    <div class="transform-caption">
+      <span>Chilonzor, 3-xonali kvartira</span>
+      <span>Muddat: 5 hafta</span>
+    </div>
+  </div>
+</section>
+
+<section id="jarayon" class="process">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Qanday ishlaymiz</div>
+        <h2 class="display">Ish jarayoni</h2>
+      </div>
+      <p>To'rt bosqich — birinchi qo'ng'iroqdan kalitni topshirishgacha.</p>
+    </div>
+    <div class="process-list">
+      <div class="process-row">
+        <div class="p-num mono">01</div>
+        <h3>So'rov</h3>
+        <p class="p-desc">Qo'ng'iroq yoki Telegram orqali murojaat qilasiz, ishning ko'lamini qisqacha aytib berasiz.</p>
+      </div>
+      <div class="process-row">
+        <div class="p-num mono">02</div>
+        <h3>O'lchov va smeta</h3>
+        <p class="p-desc">Obyektga tashrif buyuramiz, aniq o'lchov olamiz va shaffof smeta tuzamiz — yashirin xarajatlarsiz.</p>
+      </div>
+      <div class="process-row">
+        <div class="p-num mono">03</div>
+        <h3>Ish bajarish</h3>
+        <p class="p-desc">Kelishilgan muddatda, belgilangan brigada bilan sifatli ishlaymiz, har bosqichda hisobot beramiz.</p>
+      </div>
+      <div class="process-row">
+        <div class="p-num mono">04</div>
+        <h3>Topshirish</h3>
+        <p class="p-desc">Natijani birga tekshiramiz, kamchiliklarni bartaraf etamiz va 36 oylik kafolat beramiz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="loyihalar" class="portfolio">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">So'nggi ishlar</div>
+        <h2 class="display">Loyihalar</h2>
+      </div>
+      <p>Har bir obyekt — o'lchov, material va muddat bo'yicha alohida hikoya.</p>
+    </div>
+  </div>
+  <div class="port-grid">
+    <div class="port-card"><div class="tex tex1"></div><div class="info"><span class="mono">Kapital ta'mirlash</span><h4>Chilonzor, kvartira</h4></div></div>
+    <div class="port-card"><div class="tex tex2"></div><div class="info"><span class="mono">Ofis ta'mirlash</span><h4>Yunusobod, ofis</h4></div></div>
+    <div class="port-card"><div class="tex tex3"></div><div class="info"><span class="mono">Fasad ishlari</span><h4>Yakkasaroy, hovli uy</h4></div></div>
+    <div class="port-card"><div class="tex tex4"></div><div class="info"><span class="mono">Pol va plitka</span><h4>Mirzo Ulug'bek, kvartira</h4></div></div>
+    <div class="port-card"><div class="tex tex5"></div><div class="info"><span class="mono">Elektr-santexnika</span><h4>Sergeli, uy</h4></div></div>
+    <div class="port-card"><div class="tex tex6"></div><div class="info"><span class="mono">Kapital ta'mirlash</span><h4>Shayxontohur, kvartira</h4></div></div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Mijozlar fikri</div>
+        <h2 class="display">Ular nima deydi</h2>
+      </div>
+    </div>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <p class="quote">"Smeta boshidanoq aniq edi, hech qanday qo'shimcha to'lov chiqmadi. Muddatida topshirishdi."</p>
+      <p class="who">— Nodira, Chilonzor</p>
+    </div>
+    <div class="test-card">
+      <p class="quote">"Ofisimizni 3 haftada, ish jarayonini to'xtatmasdan ta'mirlashdi. Juda tartibli brigada."</p>
+      <p class="who">— Jasur, Yunusobod</p>
+    </div>
+    <div class="test-card">
+      <p class="quote">"Fasad ishidan keyin qish oyida issiqlik sarfi sezilarli kamaydi. Tavsiya qilaman."</p>
+      <p class="who">— Malika, Yakkasaroy</p>
+    </div>
+  </div>
+</section>
+
+<section id="aloqa" class="contact">
+  <div class="wrap contact-inner">
+    <div>
+      <div class="eyebrow" style="color:var(--ink)">Ishni boshlaylik</div>
+      <h2 class="display">Loyihangizni<br>muhokama qilamiz</h2>
+      <p class="lead">Qo'ng'iroq qiling yoki forma orqali qisqacha yozing — 24 soat ichida smeta bilan bog'lanamiz.</p>
+      <div class="contact-links">
+        <a href="tel:+998901234567">+998 90 123 45 67</a>
+        <a href="https://t.me/abdullousta" target="_blank" rel="noopener">t.me/abdullousta</a>
+        <a href="#">Toshkent, O'zbekiston</a>
+      </div>
+    </div>
+    <form class="order" id="orderForm">
+      <div>
+        <label for="name">Ism</label>
+        <input id="name" type="text" required placeholder="Ismingiz">
+      </div>
+      <div>
+        <label for="phone">Telefon</label>
+        <input id="phone" type="tel" required placeholder="+998 __ ___ __ __">
+      </div>
+      <div>
+        <label for="msg">Ish haqida qisqacha</label>
+        <textarea id="msg" rows="3" placeholder="Masalan: 2-xonali kvartira, kapital ta'mirlash"></textarea>
+      </div>
+      <button type="submit">Xabar yuborish</button>
+      <p class="form-note" id="formNote">Formani to'ldirib, tez orada javob olasiz.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span>© 2026 Abdullo Usta. Barcha huquqlar himoyalangan.</span>
+  <span>Qurilish va ta'mirlash xizmatlari — Toshkent</span>
+</footer>
+
+<script>
+  const range = document.getElementById('sliderRange');
+  const after = document.getElementById('afterLayer');
+  const handle = document.getElementById('handle');
+  function updateSlider(v){
+    after.style.setProperty('--pos', v + '%');
+    handle.style.setProperty('--pos', v + '%');
+  }
+  range.addEventListener('input', e => updateSlider(e.target.value));
+
+  const form = document.getElementById('orderForm');
+  const note = document.getElementById('formNote');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    note.textContent = "Rahmat! Xabaringiz qabul qilindi, tez orada bog'lanamiz.";
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
