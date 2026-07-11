@@ -177,15 +177,4 @@
     document.addEventListener('touchend', function () { dragging = false; });
   }
 
-  /* --- Contact Form --- */
-  var form = document.getElementById('orderForm');
-  var formSuccess = document.getElementById('formSuccess');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      form.style.display = 'none';
-      formSuccess.classList.add('is-visible');
-    });
-  }
-
 })();
