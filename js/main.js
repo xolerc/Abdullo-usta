@@ -23,6 +23,28 @@
   });
   document.body.style.overflow = 'hidden';
 
+  /* --- Logo Full-Screen Overlay --- */
+  var preloaderLogo = document.getElementById('preloaderLogo');
+  var logoOverlay = document.getElementById('logoOverlay');
+  var logoOverlayClose = document.getElementById('logoOverlayClose');
+
+  if (preloaderLogo && logoOverlay) {
+    preloaderLogo.addEventListener('click', function () {
+      logoOverlay.classList.add('is-visible');
+      document.body.style.overflow = 'hidden';
+    });
+    logoOverlayClose.addEventListener('click', function () {
+      logoOverlay.classList.remove('is-visible');
+      document.body.style.overflow = '';
+    });
+    logoOverlay.addEventListener('click', function (e) {
+      if (e.target === logoOverlay) {
+        logoOverlay.classList.remove('is-visible');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
   /* --- Dark / Light Mode --- */
   var modeToggle = document.querySelector('.mode-toggle');
   var html = document.documentElement;

@@ -30,8 +30,16 @@
 
   <!-- PRELOADER -->
   <div class="preloader" aria-hidden="true">
-    <div class="preloader-logo"><img src="img/logo.png" alt="Abdullo Usta" style="width:100%;max-width:320px;height:auto;"></div>
+    <div class="preloader-logo" id="preloaderLogo" style="cursor:pointer;">
+      <img src="img/logo.png" alt="Abdullo Usta" style="width:100%;max-width:320px;height:auto;">
+    </div>
     <div class="preloader-bar-track"><div class="preloader-bar"></div></div>
+  </div>
+
+  <!-- Full-screen logo overlay -->
+  <div class="logo-overlay" id="logoOverlay">
+    <button class="logo-overlay-close" id="logoOverlayClose" aria-label="Yopish">&times;</button>
+    <img src="img/logo.png" alt="Abdullo Usta" class="logo-overlay-img">
   </div>
 
   <!-- NAVIGATION — Floating Glass Pill -->
