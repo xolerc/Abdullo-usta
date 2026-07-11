@@ -80,12 +80,14 @@ html.light ::selection { background: var(--accent); color: #fff; }
 }
 .preloader.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
 .preloader-logo {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  letter-spacing: 0.08em;
-  color: var(--white);
+  display: flex; align-items: center; justify-content: center;
   opacity: 0; transform: translateY(16px);
   animation: preIn 0.6s 0.1s var(--ease-spring) forwards;
+}
+.preloader-logo img {
+  width: 100%;
+  max-width: min(80vw, 320px);
+  height: auto;
 }
 .preloader-bar-track {
   width: 200px; height: 2px;
@@ -630,12 +632,12 @@ html.light .process-step-desc { color: var(--white-dim); }
 }
 
 /* Card gradient placeholders */
-.pc-bg-1 { background: linear-gradient(135deg, #2a1f16, #5c3d2e, #8b6f47); }
-.pc-bg-2 { background: linear-gradient(135deg, #1a2332, #2d4a6f, #4a7ab5); }
-.pc-bg-3 { background: linear-gradient(135deg, #3d2b1f, #6b4c3b, #a08060); }
-.pc-bg-4 { background: linear-gradient(135deg, #1f2d1f, #3b6b3b, #60a060); }
-.pc-bg-5 { background: linear-gradient(135deg, #2d1a2d, #4a2d4a, #7a4a7a); }
-.pc-bg-6 { background: linear-gradient(135deg, #2d2d1a, #6b6b3b, #a0a060); }
+.pc-bg-1 { background: url('../img/portfolio-1.jpg') center/cover no-repeat; }
+.pc-bg-2 { background: url('../img/portfolio-2.jpg') center/cover no-repeat; }
+.pc-bg-3 { background: url('../img/portfolio-3.jpg') center/cover no-repeat; }
+.pc-bg-4 { background: url('../img/portfolio-4.jpg') center/cover no-repeat; }
+.pc-bg-5 { background: url('../img/portfolio-5.jpg') center/cover no-repeat; }
+.pc-bg-6 { background: url('../img/portfolio-6.jpg') center/cover no-repeat; }
 
 /* === TESTIMONIALS === */
 .testimonials-section {
