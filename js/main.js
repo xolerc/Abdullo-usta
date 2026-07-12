@@ -1,5 +1,5 @@
 /* ============================================================
-   ABDULLO.USTA v3.0 — ARCHITECTURAL CANVAS
+   ABDULLO.USTA v3.1 — MASTER FULL STACK UPDATE
    Three.js + Cursor Trail + Magnetic Interactions
    ============================================================ */
 (function () {

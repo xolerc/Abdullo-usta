@@ -1,6 +1,6 @@
 /* ============================================================
-   ABDULLO.USTA v3.0 — ARCHITECTURAL CANVAS
-   Completely new UI/UX — Unconventional, Creative, Premium
+   ABDULLO.USTA v3.1 — MASTER FULL STACK UPDATE
+   Premium Editorial / Architectural Luxury
    ============================================================ */
 
 /* === TOKENS === */
@@ -97,7 +97,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   font-family: var(--ff-mono);
-  font-size: 0.55rem;
+  font-size: 0.6rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--accent);
@@ -131,12 +131,12 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 }
 .loader-phase-num {
   font-family: var(--ff-mono);
-  font-size: 0.6rem; color: var(--accent);
+  font-size: 0.7rem; color: var(--accent);
   letter-spacing: 0.1em;
 }
 .loader-phase-text {
   font-family: var(--ff-mono);
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   letter-spacing: 0.2em;
   color: var(--fg-3);
 }
@@ -200,7 +200,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 .orbital-info {
   display: flex; align-items: center; gap: 1rem;
   font-family: var(--ff-mono);
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   letter-spacing: 0.15em;
   color: var(--fg-3);
 }
@@ -225,7 +225,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 }
 .fullscreen-menu-index {
   font-family: var(--ff-mono);
-  font-size: 0.6rem; letter-spacing: 0.3em;
+  font-size: 0.65rem; letter-spacing: 0.3em;
   color: var(--fg-4);
   margin-bottom: 3rem;
 }
@@ -247,7 +247,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 .fullscreen-menu-item:hover { padding-left: 1rem; border-color: var(--accent); }
 .fullscreen-menu-num {
   font-family: var(--ff-mono);
-  font-size: 0.6rem; color: var(--accent);
+  font-size: 0.65rem; color: var(--accent);
   letter-spacing: 0.1em; width: 30px;
 }
 .fullscreen-menu-label {
@@ -268,14 +268,14 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
   border-top: 1px solid var(--border);
 }
 .fullscreen-menu-contact-label {
-  font-size: 0.6rem; letter-spacing: 0.15em;
+  font-size: 0.65rem; letter-spacing: 0.15em;
   text-transform: uppercase; color: var(--fg-4);
   margin-bottom: 0.5rem;
 }
 .fullscreen-menu-contact-value { font-size: 1rem; }
 .fullscreen-menu-social-link {
   font-family: var(--ff-mono);
-  font-size: 0.7rem; letter-spacing: 0.15em;
+  font-size: 0.75rem; letter-spacing: 0.15em;
   color: var(--accent);
   transition: opacity 0.3s;
 }
@@ -295,11 +295,11 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 }
 .section-indicator-current {
   font-family: var(--ff-mono);
-  font-size: 0.7rem; color: var(--accent);
+  font-size: 0.75rem; color: var(--accent);
 }
 .section-indicator-total {
   font-family: var(--ff-mono);
-  font-size: 0.6rem; color: var(--fg-4);
+  font-size: 0.65rem; color: var(--fg-4);
 }
 
 /* === SCROLL PROGRESS === */
@@ -363,7 +363,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 .hero-tag {
   display: inline-flex; align-items: center; gap: 1rem;
   font-family: var(--ff-mono);
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   letter-spacing: 0.25em;
   color: var(--accent);
   margin-bottom: 2rem;
@@ -450,7 +450,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 }
 .hero-stat-orb-label {
   font-family: var(--ff-mono);
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   letter-spacing: 0.15em;
   color: var(--fg-3);
 }
@@ -471,7 +471,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 .hero-scroll-circle svg { width: 100%; height: 100%; }
 .hero-scroll-textpath {
   font-family: var(--ff-mono);
-  font-size: 0.35rem;
+  font-size: 0.4rem;
   letter-spacing: 0.15em;
   fill: var(--fg-4);
 }
@@ -484,7 +484,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 .hero-bottom-info {
   display: flex; gap: 2rem;
   font-family: var(--ff-mono);
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   letter-spacing: 0.15em;
   color: var(--fg-4);
 }
@@ -540,7 +540,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 }
 .blueprint-card-num {
   font-family: var(--ff-mono);
-  font-size: 0.6rem; color: var(--accent);
+  font-size: 0.65rem; color: var(--accent);
   letter-spacing: 0.1em;
 }
 .blueprint-card-line { flex: 1; height: 1px; background: var(--border); }
@@ -559,7 +559,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
   letter-spacing: -0.01em;
 }
 .blueprint-card-desc {
-  font-size: 0.85rem; line-height: 1.7;
+  font-size: 0.9rem; line-height: 1.7;
   color: var(--fg-3);
   margin-bottom: 1.5rem;
 }
@@ -570,7 +570,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 }
 .blueprint-card-detail {
   font-family: var(--ff-mono);
-  font-size: 0.55rem;
+  font-size: 0.6rem;
   letter-spacing: 0.15em;
   color: var(--fg-4);
 }
@@ -620,7 +620,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
   background: var(--accent);
   border-radius: 2px;
   font-family: var(--ff-mono);
-  font-size: 0.5rem; font-weight: 500;
+  font-size: 0.55rem; font-weight: 500;
   letter-spacing: 0.15em;
   color: var(--bg);
   margin-bottom: 0.75rem;
@@ -633,14 +633,14 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 }
 .gallery-item-meta {
   font-family: var(--ff-mono);
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   letter-spacing: 0.12em;
   color: var(--fg-3);
 }
 .gallery-item-index {
   position: absolute; top: 1.5rem; right: 1.5rem;
   font-family: var(--ff-mono);
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   letter-spacing: 0.1em;
   color: var(--fg-4);
   opacity: 0;
@@ -689,7 +689,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 @keyframes timelinePulse { 0% { transform: scale(0.8); opacity: 0.5; } 100% { transform: scale(2); opacity: 0; } }
 .timeline-num {
   font-family: var(--ff-mono);
-  font-size: 0.6rem; color: var(--accent);
+  font-size: 0.65rem; color: var(--accent);
   letter-spacing: 0.1em;
   margin-bottom: 0.5rem;
   opacity: 0.6;
@@ -800,13 +800,13 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 }
 .contact-block-num {
   font-family: var(--ff-mono);
-  font-size: 0.6rem; color: var(--accent);
+  font-size: 0.65rem; color: var(--accent);
   letter-spacing: 0.1em;
   opacity: 0.5;
 }
 .contact-block-label {
   font-family: var(--ff-mono);
-  font-size: 0.55rem;
+  font-size: 0.6rem;
   letter-spacing: 0.15em;
   color: var(--fg-4);
   margin-bottom: 0.2rem;
@@ -831,14 +831,14 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 .footer-logo { height: 40px; width: auto; }
 .footer-tagline {
   font-family: var(--ff-display);
-  font-size: 0.8rem; font-weight: 700;
+  font-size: 0.85rem; font-weight: 700;
   letter-spacing: 0.05em;
   line-height: 1.4;
   color: var(--fg-3);
 }
 .footer-copy {
   font-family: var(--ff-mono);
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   letter-spacing: 0.1em;
   line-height: 1.8;
   color: var(--fg-4);
@@ -894,21 +894,20 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
   .hero { min-height: auto; padding: 7rem 0 4rem; }
   .hero-headline { font-size: clamp(2.5rem, 12vw, 4rem); }
   .hero-description { font-size: 1rem; max-width: 100%; }
-  .hero-tag { font-size: 0.65rem; }
+  .hero-tag { font-size: 0.7rem; }
   .hero-cta-row { margin-bottom: 0; }
   .hero-bottom { display: none; }
   .btn-magnetic { padding: 0.9rem 1.5rem; }
-  .btn-magnetic-text { font-size: 0.65rem; }
+  .btn-magnetic-text { font-size: 0.7rem; }
 
   /* Stats */
   .hero-stat-orb { padding: 1rem 1.5rem; }
   .hero-stat-orb-value { font-size: 1.5rem; }
-  .hero-stat-orb-label { font-size: 0.55rem; }
+  .hero-stat-orb-label { font-size: 0.6rem; }
 
   /* Section headers */
   .scene-title { font-size: clamp(2rem, 10vw, 3rem); }
-  .scene-header-tag { font-size: 0.6rem; }
-  .section-header-tag, .scene-header-tag { letter-spacing: 0.15em; }
+  .scene-header-tag { font-size: 0.65rem; }
 
   /* Blueprint cards */
   .blueprint-grid, .reviews { grid-template-columns: 1fr; }
@@ -946,7 +945,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
 
   /* Fullscreen menu */
   .fullscreen-menu-label { font-size: clamp(1.5rem, 6vw, 2.5rem); }
-  .fullscreen-menu-num { font-size: 0.55rem; }
+  .fullscreen-menu-num { font-size: 0.6rem; }
   .fullscreen-menu-content { padding: 6rem 1.5rem 2rem; }
 
   /* Footer */
@@ -956,7 +955,7 @@ button { font-family: inherit; border: none; cursor: none; background: none; col
   .footer-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
   .footer-link { font-size: 0.6rem; }
   .footer-social-link { font-size: 0.6rem; }
-  .footer-tagline { font-size: 0.7rem; text-align: center; }
+  .footer-tagline { font-size: 0.75rem; text-align: center; }
 
   /* Marquee */
   .mega-marquee { padding: 1.5rem 0; }
