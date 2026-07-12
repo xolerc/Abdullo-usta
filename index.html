@@ -3,14 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abdullo Usta — Premium 3D Qurilish | Namangan</title>
-  <meta name="description" content="Abdullo usta — 14 yillik tajriba bilan premium qurilish va ta'mirlash xizmatlari.">
+  <title>Abdullo Usta — Materiality | Premium Qurilish</title>
+  <meta name="description" content="Premium qurilish tajribasi. Beton, po'lat, shisha — har bir material san'at.">
   <link rel="icon" type="image/png" href="img/logo.png">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Abdullo Usta — Premium Qurilish">
-  <meta property="og:description" content="14 yillik tajriba. 230+ bajarilgan obyekt.">
-  <meta property="og:image" content="https://xolerc.github.io/Abdullo-usta/img/logo.png">
-  <meta name="theme-color" content="#050505">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -18,495 +13,345 @@
 </head>
 <body>
 
-  <!-- NOISE -->
-  <div class="noise"></div>
+  <!-- MATERIAL GRAIN -->
+  <div class="grain"></div>
 
-  <!-- CURSOR TRAIL -->
-  <canvas id="cursorTrail" class="cursor-trail"></canvas>
+  <!-- DYNAMIC LIGHT -->
+  <div class="dynamic-light" id="dynamicLight"></div>
 
-  <!-- MAGNETIC CURSOR -->
-  <div class="magnetic-cursor" id="magneticCursor">
-    <div class="magnetic-dot"></div>
-    <div class="magnetic-ring"></div>
-    <div class="magnetic-text" id="magneticText"></div>
+  <!-- CURSOR -->
+  <div class="cursor-main" id="cursorMain">
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+    <div class="cursor-label" id="cursorLabel"></div>
   </div>
 
-  <!-- PRELOADER -->
+  <!-- PRELOADER — Material Assembly -->
   <div class="loader" id="loader">
-    <div class="loader-grid"></div>
+    <div class="loader-bg"></div>
     <div class="loader-content">
-      <div class="loader-phase">
-        <span class="loader-phase-num">01</span>
-        <span class="loader-phase-text">TIZIM YUKLANMOQDA</span>
+      <div class="loader-materials">
+        <span class="loader-material" data-delay="0">BETON</span>
+        <span class="loader-material" data-delay="1">PO'LAT</span>
+        <span class="loader-material" data-delay="2">SHISHA</span>
       </div>
-      <div class="loader-bar">
-        <div class="loader-bar-fill" id="loaderFill"></div>
+      <div class="loader-progress">
+        <div class="loader-progress-bar" id="loaderBar"></div>
       </div>
-      <div class="loader-percent" id="loaderPercent">0%</div>
-    </div>
-    <div class="loader-corners">
-      <span class="loader-corner loader-corner--tl"></span>
-      <span class="loader-corner loader-corner--tr"></span>
-      <span class="loader-corner loader-corner--bl"></span>
-      <span class="loader-corner loader-corner--br"></span>
+      <div class="loader-percent" id="loaderPercent">0</div>
     </div>
   </div>
 
-  <!-- NAVIGATION -->
-  <nav class="orbital-nav" id="orbitalNav">
-    <div class="orbital-logo" data-magnetic>
-      <img src="img/logo.png" alt="AU" class="orbital-logo-img">
+  <!-- NAVIGATION — Minimal Floating -->
+  <nav class="nav-float" id="navFloat">
+    <div class="nav-float-left">
+      <img src="img/logo.png" alt="AU" class="nav-float-logo">
     </div>
-    <div class="orbital-center">
-      <button class="orbital-menu-btn" id="orbitalMenuBtn" data-magnetic>
-        <span class="orbital-menu-line"></span>
-        <span class="orbital-menu-line"></span>
+    <div class="nav-float-center">
+      <button class="nav-float-menu" id="navMenuBtn" data-cursor="MENYU">
+        <span></span><span></span>
       </button>
     </div>
-    <div class="orbital-info">
-      <span class="orbital-location">NAMANGAN, UZ</span>
-      <span class="orbital-divider">|</span>
-      <span class="orbital-time" id="orbitalTime">00:00</span>
+    <div class="nav-float-right">
+      <span class="nav-float-time" id="navTime">00:00</span>
     </div>
   </nav>
 
-  <!-- FULLSCREEN MENU -->
-  <div class="fullscreen-menu" id="fullscreenMenu">
-    <div class="fullscreen-menu-bg"></div>
-    <div class="fullscreen-menu-content">
-      <div class="fullscreen-menu-index">INDEX</div>
-      <div class="fullscreen-menu-items">
-        <a href="#hero" class="fullscreen-menu-item" data-index="01">
-          <span class="fullscreen-menu-num">01</span>
-          <span class="fullscreen-menu-label">BOSHLISH</span>
-          <span class="fullscreen-menu-arrow">↗</span>
-        </a>
-        <a href="#xizmatlar" class="fullscreen-menu-item" data-index="02">
-          <span class="fullscreen-menu-num">02</span>
-          <span class="fullscreen-menu-label">XIZMATLAR</span>
-          <span class="fullscreen-menu-arrow">↗</span>
-        </a>
-        <a href="#loyihalar" class="fullscreen-menu-item" data-index="03">
-          <span class="fullscreen-menu-num">03</span>
-          <span class="fullscreen-menu-label">LOYIHALAR</span>
-          <span class="fullscreen-menu-arrow">↗</span>
-        </a>
-        <a href="#jarayon" class="fullscreen-menu-item" data-index="04">
-          <span class="fullscreen-menu-num">04</span>
-          <span class="fullscreen-menu-label">JARAYON</span>
-          <span class="fullscreen-menu-arrow">↗</span>
-        </a>
-        <a href="#aloqa" class="fullscreen-menu-item" data-index="05">
-          <span class="fullscreen-menu-num">05</span>
-          <span class="fullscreen-menu-label">ALOQA</span>
-          <span class="fullscreen-menu-arrow">↗</span>
-        </a>
+  <!-- FULLSCREEN MENU — Material Layers -->
+  <div class="menu-full" id="menuFull">
+    <div class="menu-full-layer menu-full-layer--1"></div>
+    <div class="menu-full-layer menu-full-layer--2"></div>
+    <div class="menu-full-layer menu-full-layer--3"></div>
+    <div class="menu-full-content">
+      <div class="menu-full-header">
+        <span class="menu-full-index">NAVIGATSIYA</span>
+        <span class="menu-full-close" id="menuClose">YOPISH</span>
       </div>
-      <div class="fullscreen-menu-footer">
-        <div class="fullscreen-menu-contact">
-          <div class="fullscreen-menu-contact-label">BOG'LANISH</div>
-          <a href="tel:+998913631012" class="fullscreen-menu-contact-value">+998 91 363 10 12</a>
-        </div>
-        <div class="fullscreen-menu-social">
-          <a href="https://t.me/abdullousta" target="_blank" class="fullscreen-menu-social-link">TELEGRAM</a>
+      <nav class="menu-full-nav">
+        <a href="#hero" class="menu-full-link" data-cursor="BOSHLASH">
+          <span class="menu-full-link-num">01</span>
+          <span class="menu-full-link-text">BOSHLASH</span>
+          <span class="menu-full-link-arrow">→</span>
+        </a>
+        <a href="#materiallar" class="menu-full-link" data-cursor="MATERIAL">
+          <span class="menu-full-link-num">02</span>
+          <span class="menu-full-link-text">MATERIAL</span>
+          <span class="menu-full-link-arrow">→</span>
+        </a>
+        <a href="#loyihalar" class="menu-full-link" data-cursor="LOYIHA">
+          <span class="menu-full-link-num">03</span>
+          <span class="menu-full-link-text">LOYIHALAR</span>
+          <span class="menu-full-link-arrow">→</span>
+        </a>
+        <a href="#jarayon" class="menu-full-link" data-cursor="JARAYON">
+          <span class="menu-full-link-num">04</span>
+          <span class="menu-full-link-text">JARAYON</span>
+          <span class="menu-full-link-arrow">→</span>
+        </a>
+        <a href="#aloqa" class="menu-full-link" data-cursor="ALOQA">
+          <span class="menu-full-link-num">05</span>
+          <span class="menu-full-link-text">ALOQA</span>
+          <span class="menu-full-link-arrow">→</span>
+        </a>
+      </nav>
+      <div class="menu-full-footer">
+        <div class="menu-full-contact">
+          <span class="menu-full-contact-label">BOG'LANISH</span>
+          <a href="tel:+998913631012" class="menu-full-contact-value">+998 91 363 10 12</a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SECTION INDICATOR -->
-  <div class="section-indicator" id="sectionIndicator">
-    <div class="section-indicator-line"></div>
-    <div class="section-indicator-current">01</div>
-    <div class="section-indicator-total">/ 05</div>
+  <!-- PROGRESS -->
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+  <!-- SECTION COUNTER -->
+  <div class="section-counter" id="sectionCounter">
+    <span class="section-counter-current">01</span>
+    <span class="section-counter-sep">/</span>
+    <span class="section-counter-total">06</span>
   </div>
 
-  <!-- SCROLL PROGRESS -->
-  <div class="scroll-progress">
-    <div class="scroll-progress-fill" id="scrollProgress"></div>
-  </div>
-
-  <!-- ====== HERO ====== -->
-  <section class="scene scene--hero" id="hero">
-    <canvas id="heroCanvas" class="scene-canvas"></canvas>
-    <div class="scene-content">
-      <div class="hero-layout">
-        <div class="hero-left">
-          <div class="hero-tag">
-            <span class="hero-tag-line"></span>
-            PREMIUM QURILISH
-          </div>
-          <h1 class="hero-headline">
-            <span class="hero-headline-line"><span class="hero-headline-word">ARXITEKTURA</span></span>
-            <span class="hero-headline-line"><span class="hero-headline-word accent">SAN'ATI</span></span>
-          </h1>
-          <p class="hero-description">
-            Har bir bino — bu hikoya. Har bir devor — bu qaror. Biz sizning orzuilingizni beton va shishaga aylantiramiz.
-          </p>
-          <div class="hero-cta-row">
-            <a href="#aloqa" class="btn-magnetic" data-magnetic data-cursor-text="BOG'LANISH">
-              <span class="btn-magnetic-bg"></span>
-              <span class="btn-magnetic-text">LOYIHANI BOSHLASH</span>
-              <span class="btn-magnetic-icon">→</span>
-            </a>
-          </div>
-        </div>
-        <div class="hero-right">
-          <div class="hero-stats-orb">
-            <div class="hero-stat-orb" data-magnetic>
-              <div class="hero-stat-orb-value">14</div>
-              <div class="hero-stat-orb-label">YIL</div>
-            </div>
-            <div class="hero-stat-orb" data-magnetic>
-              <div class="hero-stat-orb-value">230<span class="accent">+</span></div>
-              <div class="hero-stat-orb-label">OBYEKT</div>
-            </div>
-            <div class="hero-stat-orb" data-magnetic>
-              <div class="hero-stat-orb-value">36<span class="accent">oy</span></div>
-              <div class="hero-stat-orb-label">KAFOLAT</div>
-            </div>
-          </div>
+  <!-- ====== HERO — DRAMATIC TYPOGRAPHY ====== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <canvas id="heroCanvas"></canvas>
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow reveal">
+        <span class="hero-eyebrow-line"></span>
+        <span>NAMANGAN</span>
+        <span class="hero-eyebrow-dot">·</span>
+        <span>14 YIL</span>
+        <span class="hero-eyebrow-dot">·</span>
+        <span>PREMIUM</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="hero-title-line reveal reveal-d1"><span class="hero-title-word">ARXI</span></span>
+        <span class="hero-title-line reveal reveal-d2"><span class="hero-title-word accent">TEK</span></span>
+        <span class="hero-title-line reveal reveal-d3"><span class="hero-title-word">TURA</span></span>
+      </h1>
+      <div class="hero-bottom-row">
+        <p class="hero-desc reveal reveal-d3">Beton, po'lat, shisha — har bir material san'atga aylanadi. Biz sizning orzuilingizni quramiz.</p>
+        <div class="hero-cta reveal reveal-d3">
+          <a href="#aloqa" class="cta-btn" data-cursor="BOSHLASH">
+            <span class="cta-btn-text">LOYIHANI BOSHLASH</span>
+            <span class="cta-btn-line"></span>
+          </a>
         </div>
       </div>
-      <div class="hero-bottom">
-        <div class="hero-scroll-cue">
-          <div class="hero-scroll-circle">
-            <svg viewBox="0 0 100 100">
-              <path id="scrollTextPath" d="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="none"/>
-              <text>
-                <textPath href="#scrollTextPath" class="hero-scroll-textpath">SCROLL · SKROLL · BOSHLASH · </textPath>
-              </text>
-            </svg>
-          </div>
-          <div class="hero-scroll-arrow">↓</div>
+      <div class="hero-stats reveal reveal-d3">
+        <div class="hero-stat">
+          <div class="hero-stat-val" data-count="14">0</div>
+          <div class="hero-stat-lbl">YIL</div>
         </div>
-        <div class="hero-bottom-info">
-          <span>NAMANGAN</span>
-          <span>2024 — 2026</span>
-          <span>PREMIUM</span>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-val" data-count="230" data-suffix="+">0</div>
+          <div class="hero-stat-lbl">OBYEKT</div>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-val" data-count="36" data-suffix=" oy">0</div>
+          <div class="hero-stat-lbl">KAFOLAT</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="hero-scroll-line"></div>
+      <span class="hero-scroll-text">SKROLL</span>
+    </div>
+  </section>
+
+  <!-- ====== MATERIAL SHOWCASE ====== -->
+  <section class="section section--concrete" id="materiallar">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag reveal">
+          <span class="section-tag-num">02</span>
+          <span class="section-tag-line"></span>
+          MATERIAL
+        </div>
+        <h2 class="section-title reveal reveal-d1">HAR BIR<br>MATERIAL</h2>
+      </div>
+      <div class="material-grid">
+        <div class="material-card material-card--concrete" data-cursor="BETON">
+          <div class="material-card-bg"></div>
+          <div class="material-card-content">
+            <div class="material-card-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1">
+                <rect x="4" y="20" width="40" height="24" rx="2"/>
+                <path d="M4 28h40M14 20V8h20v12"/>
+              </svg>
+            </div>
+            <h3 class="material-card-title">BETON</h3>
+            <p class="material-card-desc">Kuch, ishonch, abadiylik. Har bir poydevor — bu kelajakka sarmoya.</p>
+            <div class="material-card-detail">
+              <span class="material-card-detail-label">KUCH</span>
+              <div class="material-card-detail-bar"><div class="material-card-detail-fill" style="width:95%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="material-card material-card--steel" data-cursor="PO'LAT">
+          <div class="material-card-bg"></div>
+          <div class="material-card-content">
+            <div class="material-card-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M8 40V8l32 16-32 16z"/>
+              </svg>
+            </div>
+            <h3 class="material-card-title">PO'LAT</h3>
+            <p class="material-card-desc">Zamonaviylik, chidamlilik. Metall — bu arxitektura skeleti.</p>
+            <div class="material-card-detail">
+              <span class="material-card-detail-label">CHIDAMLILIK</span>
+              <div class="material-card-detail-bar"><div class="material-card-detail-fill" style="width:98%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="material-card material-card--glass" data-cursor="SHISHA">
+          <div class="material-card-bg"></div>
+          <div class="material-card-content">
+            <div class="material-card-icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1">
+                <rect x="8" y="4" width="32" height="40" rx="2"/>
+                <path d="M8 12h32M8 24h32M8 36h32"/>
+              </svg>
+            </div>
+            <h3 class="material-card-title">SHISHA</h3>
+            <p class="material-card-desc">Yorug'lik, ochiqlik, zamonaviylik. Derazalar — bu binoning ko'zlari.</p>
+            <div class="material-card-detail">
+              <span class="material-card-detail-label">SHAFFOFLIK</span>
+              <div class="material-card-detail-bar"><div class="material-card-detail-fill" style="width:100%"></div></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MARQUEE -->
-  <div class="mega-marquee">
-    <div class="mega-marquee-track">
-      <span>KAPITAL TA'MIRLASH</span>
-      <span class="mega-marquee-sep">★</span>
-      <span>FASAD</span>
-      <span class="mega-marquee-sep">★</span>
-      <span>ELEKTR</span>
-      <span class="mega-marquee-sep">★</span>
-      <span>SANTEXNIKA</span>
-      <span class="mega-marquee-sep">★</span>
-      <span>GIPS</span>
-      <span class="mega-marquee-sep">★</span>
-      <span>POL</span>
-      <span class="mega-marquee-sep">★</span>
-      <span>KAPITAL TA'MIRLASH</span>
-      <span class="mega-marquee-sep">★</span>
-      <span>FASAD</span>
-      <span class="mega-marquee-sep">★</span>
-      <span>ELEKTR</span>
-      <span class="mega-marquee-sep">★</span>
-      <span>SANTEXNIKA</span>
-      <span class="mega-marquee-sep">★</span>
-      <span>GIPS</span>
-      <span class="mega-marquee-sep">★</span>
-      <span>POL</span>
-      <span class="mega-marquee-sep">★</span>
-    </div>
-  </div>
-
-  <!-- ====== SERVICES ====== -->
-  <section class="scene scene--dark" id="xizmatlar">
+  <!-- ====== PORTFOLIO — Immersive Gallery ====== -->
+  <section class="section section--gallery" id="loyihalar">
     <div class="container">
-      <div class="scene-header">
-        <div class="scene-header-tag">
-          <span class="scene-header-num">02</span>
-          <span class="scene-header-line"></span>
-          XIZMATLAR
-        </div>
-        <h2 class="scene-title">NIMA<br>QILA OLAMIZ</h2>
-      </div>
-      <div class="blueprint-grid">
-        <article class="blueprint-card" data-magnetic data-cursor-text="BATAFSIL">
-          <div class="blueprint-card-header">
-            <div class="blueprint-card-num">01</div>
-            <div class="blueprint-card-line"></div>
-          </div>
-          <div class="blueprint-card-icon">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="0.8">
-              <rect x="8" y="18" width="48" height="38" rx="2"/>
-              <path d="M8 28h48M24 18V8h16v10"/>
-              <rect x="24" y="36" width="16" height="20"/>
-              <path d="M32 36v20"/>
-            </svg>
-          </div>
-          <h3 class="blueprint-card-title">Kapital ta'mirlash</h3>
-          <p class="blueprint-card-desc">To'liq qayta jihozlash — loyihadan topshirishgacha. 14 yillik tajriba.</p>
-          <div class="blueprint-card-footer">
-            <span class="blueprint-card-detail">LOYIHA + BAJARISH</span>
-            <span class="blueprint-card-arrow">→</span>
-          </div>
-        </article>
-
-        <article class="blueprint-card" data-magnetic data-cursor-text="BATAFSIL">
-          <div class="blueprint-card-header">
-            <div class="blueprint-card-num">02</div>
-            <div class="blueprint-card-line"></div>
-          </div>
-          <div class="blueprint-card-icon">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="0.8">
-              <rect x="4" y="10" width="56" height="44" rx="2"/>
-              <path d="M4 24h56M20 10v44M44 10v44"/>
-              <path d="M4 38h56"/>
-            </svg>
-          </div>
-          <h3 class="blueprint-card-title">Fasad ishlari</h3>
-          <p class="blueprint-card-desc">Tashqi izolyatsiya, shtukaturka, zamonaviy qoplamalar.</p>
-          <div class="blueprint-card-footer">
-            <span class="blueprint-card-detail">IZOLYATSIYA + BEZAK</span>
-            <span class="blueprint-card-arrow">→</span>
-          </div>
-        </article>
-
-        <article class="blueprint-card" data-magnetic data-cursor-text="BATAFSIL">
-          <div class="blueprint-card-header">
-            <div class="blueprint-card-num">03</div>
-            <div class="blueprint-card-line"></div>
-          </div>
-          <div class="blueprint-card-icon">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="0.8">
-              <circle cx="32" cy="32" r="12"/>
-              <path d="M32 4v10M32 50v10M4 32h10M50 32h10"/>
-              <path d="M13 13l8 8M43 43l8 8M13 51l8-8M43 13l8-8"/>
-            </svg>
-          </div>
-          <h3 class="blueprint-card-title">Elektr va santexnika</h3>
-          <p class="blueprint-card-desc">Professional o'rnatish va ta'mirlash. 24/6 qo'llab-quvvatlash.</p>
-          <div class="blueprint-card-footer">
-            <span class="blueprint-card-detail">O'RATISH + TA'MIRLASH</span>
-            <span class="blueprint-card-arrow">→</span>
-          </div>
-        </article>
-
-        <article class="blueprint-card" data-magnetic data-cursor-text="BATAFSIL">
-          <div class="blueprint-card-header">
-            <div class="blueprint-card-num">04</div>
-            <div class="blueprint-card-line"></div>
-          </div>
-          <div class="blueprint-card-icon">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="0.8">
-              <rect x="8" y="8" width="48" height="48" rx="3"/>
-              <path d="M8 32h48M32 8v48"/>
-              <circle cx="20" cy="20" r="4"/>
-              <circle cx="44" cy="44" r="4"/>
-            </svg>
-          </div>
-          <h3 class="blueprint-card-title">Gips va shpaklyovka</h3>
-          <p class="blueprint-card-desc">Ideal tekislik — har bir millimetr nazorat ostida.</p>
-          <div class="blueprint-card-footer">
-            <span class="blueprint-card-detail">TEKISLASH + TAYYORLASH</span>
-            <span class="blueprint-card-arrow">→</span>
-          </div>
-        </article>
-
-        <article class="blueprint-card" data-magnetic data-cursor-text="BATAFSIL">
-          <div class="blueprint-card-header">
-            <div class="blueprint-card-num">05</div>
-            <div class="blueprint-card-line"></div>
-          </div>
-          <div class="blueprint-card-icon">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="0.8">
-              <rect x="4" y="36" width="56" height="16" rx="2"/>
-              <path d="M16 36V14l16 10 16-10v22"/>
-              <path d="M16 24l16 10 16-10"/>
-            </svg>
-          </div>
-          <h3 class="blueprint-card-title">Pol va plitka</h3>
-          <p class="blueprint-card-desc">Kafel, laminat, parket — mukammal natija.</p>
-          <div class="blueprint-card-footer">
-            <span class="blueprint-card-detail">O'LCHOV + YOTQIZISH</span>
-            <span class="blueprint-card-arrow">→</span>
-          </div>
-        </article>
-
-        <article class="blueprint-card" data-magnetic data-cursor-text="BATAFSIL">
-          <div class="blueprint-card-header">
-            <div class="blueprint-card-num">06</div>
-            <div class="blueprint-card-line"></div>
-          </div>
-          <div class="blueprint-card-icon">
-            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="0.8">
-              <path d="M18 8l-10 10 10 10M46 8l10 10-10 10"/>
-              <path d="M8 18h48M8 46h48"/>
-              <path d="M18 56l-10-10 10-10M46 56l10-10-10-10"/>
-            </svg>
-          </div>
-          <h3 class="blueprint-card-title">Kichik ta'mirlash</h3>
-          <p class="blueprint-card-desc">Tez, sifatli, ishonchli — har qanday mayda ish.</p>
-          <div class="blueprint-card-footer">
-            <span class="blueprint-card-detail">TEZ MUDDATLI</span>
-            <span class="blueprint-card-arrow">→</span>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====== PORTFOLIO ====== -->
-  <section class="scene scene--gallery" id="loyihalar">
-    <div class="container">
-      <div class="scene-header">
-        <div class="scene-header-tag">
-          <span class="scene-header-num">03</span>
-          <span class="scene-header-line"></span>
+      <div class="section-header">
+        <div class="section-tag reveal">
+          <span class="section-tag-num">03</span>
+          <span class="section-tag-line"></span>
           LOYIHALAR
         </div>
-        <h2 class="scene-title">TANLANGAN<br>ISHLAR</h2>
+        <h2 class="section-title reveal reveal-d1">TANLANGAN<br>ISHLAR</h2>
       </div>
       <div class="gallery">
-        <div class="gallery-item gallery-item--large" data-magnetic data-cursor-text="KO'RISH">
+        <div class="gallery-item gallery-item--hero" data-cursor="KO'RISH">
           <div class="gallery-item-img" style="background-image:url('img/portfolio-1.jpg')"></div>
           <div class="gallery-item-overlay"></div>
           <div class="gallery-item-content">
-            <div class="gallery-item-tag">KAPITAL</div>
-            <h3 class="gallery-item-title">Chilonzor</h3>
-            <div class="gallery-item-meta">5 HAFTA · KVARTIRA</div>
+            <span class="gallery-item-tag">KAPITAL</span>
+            <h3 class="gallery-item-title">Chilonzor, kvartira</h3>
+            <div class="gallery-item-meta">5 HAFTA · NAMANGAN</div>
           </div>
-          <div class="gallery-item-index">01</div>
+          <div class="gallery-item-num">01</div>
         </div>
-        <div class="gallery-item" data-magnetic data-cursor-text="KO'RISH">
+        <div class="gallery-item" data-cursor="KO'RISH">
           <div class="gallery-item-img" style="background-image:url('img/portfolio-2.jpg')"></div>
           <div class="gallery-item-overlay"></div>
           <div class="gallery-item-content">
-            <div class="gallery-item-tag">OFIS</div>
+            <span class="gallery-item-tag">OFIS</span>
             <h3 class="gallery-item-title">Yunusobod</h3>
             <div class="gallery-item-meta">3 HAFTA</div>
           </div>
-          <div class="gallery-item-index">02</div>
+          <div class="gallery-item-num">02</div>
         </div>
-        <div class="gallery-item" data-magnetic data-cursor-text="KO'RISH">
+        <div class="gallery-item" data-cursor="KO'RISH">
           <div class="gallery-item-img" style="background-image:url('img/portfolio-3.jpg')"></div>
           <div class="gallery-item-overlay"></div>
           <div class="gallery-item-content">
-            <div class="gallery-item-tag">FASAD</div>
+            <span class="gallery-item-tag">FASAD</span>
             <h3 class="gallery-item-title">Yakkasaroy</h3>
             <div class="gallery-item-meta">2 HAFTA</div>
           </div>
-          <div class="gallery-item-index">03</div>
+          <div class="gallery-item-num">03</div>
         </div>
-        <div class="gallery-item gallery-item--wide" data-magnetic data-cursor-text="KO'RISH">
+        <div class="gallery-item gallery-item--wide" data-cursor="KO'RISH">
           <div class="gallery-item-img" style="background-image:url('img/portfolio-4.jpg')"></div>
           <div class="gallery-item-overlay"></div>
           <div class="gallery-item-content">
-            <div class="gallery-item-tag">PLITKA</div>
+            <span class="gallery-item-tag">PLITKA</span>
             <h3 class="gallery-item-title">Mirzo Ulug'bek</h3>
             <div class="gallery-item-meta">1 HAFTA</div>
           </div>
-          <div class="gallery-item-index">04</div>
+          <div class="gallery-item-num">04</div>
         </div>
-        <div class="gallery-item" data-magnetic data-cursor-text="KO'RISH">
+        <div class="gallery-item" data-cursor="KO'RISH">
           <div class="gallery-item-img" style="background-image:url('img/portfolio-5.jpg')"></div>
           <div class="gallery-item-overlay"></div>
           <div class="gallery-item-content">
-            <div class="gallery-item-tag">SANTEXNIKA</div>
+            <span class="gallery-item-tag">SANTEXNIKA</span>
             <h3 class="gallery-item-title">Sergeli</h3>
             <div class="gallery-item-meta">4 HAFTA</div>
           </div>
-          <div class="gallery-item-index">05</div>
+          <div class="gallery-item-num">05</div>
         </div>
-        <div class="gallery-item" data-magnetic data-cursor-text="KO'RISH">
+        <div class="gallery-item" data-cursor="KO'RISH">
           <div class="gallery-item-img" style="background-image:url('img/portfolio-6.jpg')"></div>
           <div class="gallery-item-overlay"></div>
           <div class="gallery-item-content">
-            <div class="gallery-item-tag">KAPITAL</div>
+            <span class="gallery-item-tag">KAPITAL</span>
             <h3 class="gallery-item-title">Shayxontohur</h3>
             <div class="gallery-item-meta">6 HAFTA</div>
           </div>
-          <div class="gallery-item-index">06</div>
+          <div class="gallery-item-num">06</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ====== PROCESS ====== -->
-  <section class="scene scene--dark" id="jarayon">
+  <!-- ====== PROCESS — Horizontal Scroll ====== -->
+  <section class="section section--process" id="jarayon">
     <div class="container">
-      <div class="scene-header">
-        <div class="scene-header-tag">
-          <span class="scene-header-num">04</span>
-          <span class="scene-header-line"></span>
+      <div class="section-header">
+        <div class="section-tag reveal">
+          <span class="section-tag-num">04</span>
+          <span class="section-tag-line"></span>
           JARAYON
         </div>
-        <h2 class="scene-title">QANDAY<br>ISHLAYMIZ</h2>
+        <h2 class="section-title reveal reveal-d1">QANDAY<br>QILAMIZ</h2>
       </div>
-      <div class="timeline">
-        <div class="timeline-track"></div>
-        <div class="timeline-step">
-          <div class="timeline-marker">
-            <div class="timeline-dot"></div>
-            <div class="timeline-pulse"></div>
-          </div>
-          <div class="timeline-content">
-            <div class="timeline-num">01</div>
-            <h3 class="timeline-title">SO'ROV</h3>
-            <p class="timeline-desc">Qo'ng'iroq yoki Telegram. Ish ko'lamini gapiramiz.</p>
-          </div>
-          <div class="timeline-visual">
-            <div class="timeline-visual-box">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><path d="M42 34v6a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 0114.11 14h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L18.09 20.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0132 34z"/></svg>
-            </div>
+      <div class="process-flow">
+        <div class="process-step" data-cursor="01">
+          <div class="process-step-num">01</div>
+          <div class="process-step-line"></div>
+          <h3 class="process-step-title">SO'ROV</h3>
+          <p class="process-step-desc">Qo'ng'iroq yoki Telegram. Ish ko'lamini gapiramiz.</p>
+          <div class="process-step-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><path d="M42 34v6a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 0114.11 14h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L18.09 20.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0132 34z"/></svg>
           </div>
         </div>
-        <div class="timeline-step">
-          <div class="timeline-marker">
-            <div class="timeline-dot"></div>
-            <div class="timeline-pulse"></div>
-          </div>
-          <div class="timeline-content">
-            <div class="timeline-num">02</div>
-            <h3 class="timeline-title">O'LCHOV</h3>
-            <p class="timeline-desc">Obyektga borib, aniq o'lchov olamiz. Smetani shaffof tuzamiz.</p>
-          </div>
-          <div class="timeline-visual">
-            <div class="timeline-visual-box">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 42L42 6M18 6H6v12M30 42h12V30"/></svg>
-            </div>
+        <div class="process-step" data-cursor="02">
+          <div class="process-step-num">02</div>
+          <div class="process-step-line"></div>
+          <h3 class="process-step-title">O'LCHOV</h3>
+          <p class="process-step-desc">Obyektga borib, aniq o'lchov olamiz. Smetani shaffof tuzamiz.</p>
+          <div class="process-step-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 42L42 6M18 6H6v12M30 42h12V30"/></svg>
           </div>
         </div>
-        <div class="timeline-step">
-          <div class="timeline-marker">
-            <div class="timeline-dot"></div>
-            <div class="timeline-pulse"></div>
-          </div>
-          <div class="timeline-content">
-            <div class="timeline-num">03</div>
-            <h3 class="timeline-title">BAJARISH</h3>
-            <p class="timeline-desc">Belgilangan muddatda, sifatli ishlaymiz. Har bosqichda hisobot.</p>
-          </div>
-          <div class="timeline-visual">
-            <div class="timeline-visual-box">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><rect x="6" y="20" width="36" height="22" rx="2"/><path d="M16 20V10h16v10M6 30h36"/></svg>
-            </div>
+        <div class="process-step" data-cursor="03">
+          <div class="process-step-num">03</div>
+          <div class="process-step-line"></div>
+          <h3 class="process-step-title">BAJARISH</h3>
+          <p class="process-step-desc">Belgilangan muddatda, sifatli ishlaymiz. Har bosqichda hisobot.</p>
+          <div class="process-step-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><rect x="6" y="20" width="36" height="22" rx="2"/><path d="M16 20V10h16v10M6 30h36"/></svg>
           </div>
         </div>
-        <div class="timeline-step">
-          <div class="timeline-marker">
-            <div class="timeline-dot"></div>
-            <div class="timeline-pulse"></div>
-          </div>
-          <div class="timeline-content">
-            <div class="timeline-num">04</div>
-            <h3 class="timeline-title">TOPSHIRISH</h3>
-            <p class="timeline-desc">Natijani birga tekshiramiz. 36 oylik kafolat beramiz.</p>
-          </div>
-          <div class="timeline-visual">
-            <div class="timeline-visual-box">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><circle cx="24" cy="24" r="18"/><path d="M16 24l6 6 10-12"/></svg>
-            </div>
+        <div class="process-step" data-cursor="04">
+          <div class="process-step-num">04</div>
+          <div class="process-step-line"></div>
+          <h3 class="process-step-title">TOPSHIRISH</h3>
+          <p class="process-step-desc">Natijani birga tekshiramiz. 36 oylik kafolat beramiz.</p>
+          <div class="process-step-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><circle cx="24" cy="24" r="18"/><path d="M16 24l6 6 10-12"/></svg>
           </div>
         </div>
       </div>
@@ -514,47 +359,47 @@
   </section>
 
   <!-- ====== TESTIMONIALS ====== -->
-  <section class="scene" id="testimonials">
+  <section class="section section--reviews" id="testimonials">
     <div class="container">
-      <div class="scene-header">
-        <div class="scene-header-tag">
-          <span class="scene-header-num">05</span>
-          <span class="scene-header-line"></span>
+      <div class="section-header">
+        <div class="section-tag reveal">
+          <span class="section-tag-num">05</span>
+          <span class="section-tag-line"></span>
           SHARHLAR
         </div>
-        <h2 class="scene-title">MIJOZLAR<br>FIKRLARI</h2>
+        <h2 class="section-title reveal reveal-d1">MIJOZLAR<br>FIKRLARI</h2>
       </div>
       <div class="reviews">
-        <div class="review">
-          <div class="review-quote">"</div>
-          <p class="review-text">Smeta boshidanoq aniq edi. Hech qanday qo'shimcha to'lov chiqmadi. Professional jamoa.</p>
-          <div class="review-author">
-            <div class="review-avatar">N</div>
+        <div class="review-card" data-cursor="O'QISH">
+          <div class="review-card-quote">"</div>
+          <p class="review-card-text">Smeta boshidanoq aniq edi. Hech qanday qo'shimcha to'lov chiqmadi. Professional jamoa.</p>
+          <div class="review-card-author">
+            <div class="review-card-avatar">N</div>
             <div>
-              <div class="review-name">Nodira Karimova</div>
-              <div class="review-role">Chilonzor · 3-xonali</div>
+              <div class="review-card-name">Nodira Karimova</div>
+              <div class="review-card-role">Chilonzor · 3-xonali</div>
             </div>
           </div>
         </div>
-        <div class="review">
-          <div class="review-quote">"</div>
-          <p class="review-text">Ofisimizni 3 haftada ta'mirlashdi. Ish jarayonini to'xtatmasdan. Juda sifatli.</p>
-          <div class="review-author">
-            <div class="review-avatar">J</div>
+        <div class="review-card" data-cursor="O'QISH">
+          <div class="review-card-quote">"</div>
+          <p class="review-card-text">Ofisimizni 3 haftada ta'mirlashdi. Ish jarayonini to'xtatmasdan. Juda sifatli.</p>
+          <div class="review-card-author">
+            <div class="review-card-avatar">J</div>
             <div>
-              <div class="review-name">Jasur Toshmatov</div>
-              <div class="review-role">Yunusobod · Ofis</div>
+              <div class="review-card-name">Jasur Toshmatov</div>
+              <div class="review-card-role">Yunusobod · Ofis</div>
             </div>
           </div>
         </div>
-        <div class="review">
-          <div class="review-quote">"</div>
-          <p class="review-text">Fasad ishidan keyin issiqlik sarfi 40% kamaydi. Tavsiya qilaman.</p>
-          <div class="review-author">
-            <div class="review-avatar">M</div>
+        <div class="review-card" data-cursor="O'QISH">
+          <div class="review-card-quote">"</div>
+          <p class="review-card-text">Fasad ishidan keyin issiqlik sarfi 40% kamaydi. Tavsiya qilaman.</p>
+          <div class="review-card-author">
+            <div class="review-card-avatar">M</div>
             <div>
-              <div class="review-name">Malika Raximova</div>
-              <div class="review-role">Yakkasaroy · Hovli uy</div>
+              <div class="review-card-name">Malika Raximova</div>
+              <div class="review-card-role">Yakkasaroy · Hovli uy</div>
             </div>
           </div>
         </div>
@@ -563,40 +408,40 @@
   </section>
 
   <!-- ====== CONTACT ====== -->
-  <section class="scene scene--contact" id="aloqa">
+  <section class="section section--contact" id="aloqa">
     <div class="container">
-      <div class="contact-layout">
+      <div class="contact-split">
         <div class="contact-left">
-          <div class="scene-header-tag">
-            <span class="scene-header-num">06</span>
-            <span class="scene-header-line"></span>
+          <div class="section-tag reveal">
+            <span class="section-tag-num">06</span>
+            <span class="section-tag-line"></span>
             ALOQA
           </div>
-          <h2 class="contact-headline">LOYIHANGIZNI<br>BOSHLAYMIZ</h2>
-          <p class="contact-text">Qo'ng'iroq yoki yozing — 24 soatda smeta bilan bog'lanamiz.</p>
+          <h2 class="contact-title reveal reveal-d1">LOYIHANGIZNI<br>BOSHLAYMIZ</h2>
+          <p class="contact-desc reveal reveal-d2">Qo'ng'iroq yoki yozing — 24 soatda smeta bilan bog'lanamiz.</p>
         </div>
-        <div class="contact-right">
-          <a href="tel:+998913631012" class="contact-block" data-magnetic data-cursor-text="QO'NG'IROQ">
-            <div class="contact-block-num">01</div>
-            <div class="contact-block-content">
-              <div class="contact-block-label">TELEFON</div>
-              <div class="contact-block-value">+998 91 363 10 12</div>
+        <div class="contact-right reveal reveal-d2">
+          <a href="tel:+998913631012" class="contact-card" data-cursor="QO'NG'IROQ">
+            <div class="contact-card-num">01</div>
+            <div class="contact-card-body">
+              <div class="contact-card-label">TELEFON</div>
+              <div class="contact-card-value">+998 91 363 10 12</div>
             </div>
-            <div class="contact-block-icon">↗</div>
+            <div class="contact-card-arrow">↗</div>
           </a>
-          <a href="https://t.me/abdullousta" target="_blank" class="contact-block" data-magnetic data-cursor-text="YAZING">
-            <div class="contact-block-num">02</div>
-            <div class="contact-block-content">
-              <div class="contact-block-label">TELEGRAM</div>
-              <div class="contact-block-value">t.me/abdullousta</div>
+          <a href="https://t.me/abdullousta" target="_blank" class="contact-card" data-cursor="YAZING">
+            <div class="contact-card-num">02</div>
+            <div class="contact-card-body">
+              <div class="contact-card-label">TELEGRAM</div>
+              <div class="contact-card-value">t.me/abdullousta</div>
             </div>
-            <div class="contact-block-icon">↗</div>
+            <div class="contact-card-arrow">↗</div>
           </a>
-          <div class="contact-block">
-            <div class="contact-block-num">03</div>
-            <div class="contact-block-content">
-              <div class="contact-block-label">MANZIL</div>
-              <div class="contact-block-value">Namangan, O'zbekiston</div>
+          <div class="contact-card">
+            <div class="contact-card-num">03</div>
+            <div class="contact-card-body">
+              <div class="contact-card-label">MANZIL</div>
+              <div class="contact-card-value">Namangan, O'zbekiston</div>
             </div>
           </div>
         </div>
@@ -607,24 +452,18 @@
   <!-- ====== FOOTER ====== -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-top">
+      <div class="footer-main">
         <div class="footer-brand">
           <img src="img/logo.png" alt="AU" class="footer-logo">
           <div class="footer-tagline">ARXITEKTURA<br>SAN'ATI</div>
         </div>
-        <div class="footer-copy">© 2026 ABDULLO USTA.<br>BARCHA HUQUQLAR HIMoyalangan.</div>
-      </div>
-      <div class="footer-bottom">
         <div class="footer-links">
-          <a href="#xizmatlar" class="footer-link">XIZMATLAR</a>
+          <a href="#materiallar" class="footer-link">MATERIAL</a>
           <a href="#loyihalar" class="footer-link">LOYIHALAR</a>
           <a href="#jarayon" class="footer-link">JARAYON</a>
           <a href="#aloqa" class="footer-link">ALOQA</a>
         </div>
-        <div class="footer-social">
-          <a href="https://t.me/abdullousta" target="_blank" class="footer-social-link">TELEGRAM</a>
-          <a href="tel:+998913631012" class="footer-social-link">TELEFON</a>
-        </div>
+        <div class="footer-copy">© 2026 ABDULLO USTA</div>
       </div>
     </div>
   </footer>
