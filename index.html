@@ -2,26 +2,14 @@
 <html lang="uz" class="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=5">
-  <title>Abdullo usta — 3D Qurilish va Ta'mirlash | Namangan</title>
-  <meta name="description" content="Abdullo usta tomonidan tez, sifatli va ishonchli xizmatlar. Arzon narxlar va kafolatli ish. Hoziroq biz bilan bog'laning.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abdullo Usta — Premium 3D Qurilish | Namangan</title>
+  <meta name="description" content="Abdullo usta tomonidan tez, sifatli va ishonchli qurilish xizmatlari.">
   <link rel="icon" type="image/png" href="img/logo.png">
-
-  <!-- Open Graph / Telegram / WhatsApp -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Abdullo Usta">
-  <meta property="og:title" content="Abdullo usta — 3D Qurilish va Ta'mirlash | Namangan">
-  <meta property="og:description" content="Abdullo usta tomonidan tez, sifatli va ishonchli xizmatlar. Arzon narxlar va kafolatli ish.">
+  <meta property="og:title" content="Abdullo Usta — Premium 3D Qurilish">
+  <meta property="og:description" content="Premium qurilish xizmatlari Namanganda.">
   <meta property="og:image" content="https://xolerc.github.io/Abdullo-usta/img/logo.png">
-  <meta property="og:url" content="https://xolerc.github.io/Abdullo-usta/">
-  <meta property="og:locale" content="uz_UZ">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Abdullo usta — 3D Qurilish va Ta'mirlash | Namangan">
-  <meta name="twitter:description" content="Abdullo usta tomonidan tez, sifatli va ishonchli xizmatlar. Arzon narxlar va kafolatli ish.">
-  <meta name="twitter:image" content="https://xolerc.github.io/Abdullo-usta/img/logo.png">
-  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -32,40 +20,31 @@
   <!-- CURSOR GLOW -->
   <div class="cursor-glow" id="cursorGlow"></div>
 
-  <!-- FLOATING PARTICLES -->
-  <div class="particles" id="particles"></div>
-
   <!-- PRELOADER -->
-  <div class="preloader" aria-hidden="true">
-    <div class="preloader-logo" id="preloaderLogo">
+  <div class="preloader" id="preloader">
+    <div class="preloader-logo">
       <img src="img/logo.png" alt="Abdullo Usta">
     </div>
     <div class="preloader-bar-track"><div class="preloader-bar"></div></div>
   </div>
 
-  <!-- Full-screen logo overlay -->
-  <div class="logo-overlay" id="logoOverlay">
-    <button class="logo-overlay-close" id="logoOverlayClose" aria-label="Yopish">&times;</button>
-    <img src="img/logo.png" alt="Abdullo Usta" class="logo-overlay-img">
-  </div>
-
-  <!-- NAVIGATION — Floating 3D Glass Pill -->
-  <header class="hud">
-    <a href="#" class="hud-brand"><img src="img/logo.png" alt="Abdullo Usta" style="height:28px;width:auto;"></a>
-    <nav class="hud-links">
-      <a href="#xizmatlar">Xizmatlar</a>
-      <a href="#natija">Natija</a>
-      <a href="#jarayon">Jarayon</a>
-      <a href="#loyihalar">Loyihalar</a>
-      <a href="#aloqa">Aloqa</a>
+  <!-- NAVIGATION -->
+  <header class="nav" id="nav">
+    <a href="#" class="nav-brand">
+      <img src="img/logo.png" alt="Abdullo Usta" style="height:28px;width:auto;filter:drop-shadow(0 0 10px rgba(201,168,76,0.3));">
+    </a>
+    <nav class="nav-links">
+      <a href="#xizmatlar" class="nav-link">Xizmatlar</a>
+      <a href="#natija" class="nav-link">Natija</a>
+      <a href="#jarayon" class="nav-link">Jarayon</a>
+      <a href="#loyihalar" class="nav-link">Loyihalar</a>
+      <a href="#aloqa" class="nav-link">Aloqa</a>
     </nav>
-    <div class="hud-right">
-      <button class="mode-toggle" aria-label="Mavzuni o'zgartirish">
+    <div class="nav-right">
+      <button class="mode-toggle" id="modeToggle" aria-label="Mavzu">
         <div class="mode-toggle-knob"></div>
-        <svg class="mode-toggle-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-        <svg class="mode-toggle-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
       </button>
-      <div class="hamburger" aria-label="Menyu">
+      <div class="hamburger" id="hamburger" aria-label="Menyu">
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
@@ -74,7 +53,7 @@
   </header>
 
   <!-- MOBILE MENU -->
-  <div class="mobile-menu">
+  <div class="mobile-menu" id="mobileMenu">
     <a href="#xizmatlar">Xizmatlar</a>
     <a href="#natija">Natija</a>
     <a href="#jarayon">Jarayon</a>
@@ -82,117 +61,108 @@
     <a href="#aloqa">Aloqa</a>
   </div>
 
-  <!-- HERO — 3D Immersive -->
-  <section class="hero">
+  <!-- HERO -->
+  <section class="hero" id="hero">
     <div class="hero-bg"></div>
-    <div class="hero-grid"></div>
+    <canvas id="heroCanvas" class="hero-canvas"></canvas>
     <div class="hero-content">
-      <div class="hero-eyebrow">Namangan · 14 yillik tajriba</div>
+      <div class="hero-eyebrow">
+        <span class="eyebrow-line"></span>
+        Namangan · 14 yillik tajriba
+      </div>
       <h1 class="hero-title">
         <span class="word"><span class="word-inner">ASOSDAN</span></span>
-        <span class="word"><span class="word-inner hero-accent">TUGATISHGACHA</span></span>
+        <span class="word"><span class="word-inner accent">TUGATISHGACHA</span></span>
       </h1>
       <p class="hero-sub">Devordan polgacha, loyihadan topshirishgacha — har bir ish o'lchov bilan boshlanadi, kafolat bilan tugaydi.</p>
       <div class="hero-actions">
         <a href="#aloqa" class="btn btn-primary">
-          Buyurtma berish
-          <span class="btn-icon-wrap">
-            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
+          <span>Buyurtma berish</span>
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <a href="#loyihalar" class="btn">
-          Ishlarni ko'rish
-          <span class="btn-icon-wrap">
-            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
+          <span>Ishlarni ko'rish</span>
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <div class="hero-stat-num" data-count="14" data-suffix="">0</div>
+          <div class="hero-stat-num" data-target="14">0</div>
           <div class="hero-stat-label">Yillik tajriba</div>
         </div>
         <div class="hero-stat">
-          <div class="hero-stat-num" data-count="230" data-suffix="+">0</div>
+          <div class="hero-stat-num" data-target="230" data-suffix="+">0</div>
           <div class="hero-stat-label">Bajarilgan obyekt</div>
         </div>
         <div class="hero-stat">
-          <div class="hero-stat-num" data-count="36" data-suffix=" oy">0</div>
+          <div class="hero-stat-num" data-target="36" data-suffix=" oy">0</div>
           <div class="hero-stat-label">Ish kafolati</div>
         </div>
         <div class="hero-stat">
-          <div class="hero-stat-num" data-count="0" data-suffix="">0</div>
+          <div class="hero-stat-num" data-target="0">0</div>
           <div class="hero-stat-label">Yashirin xarajat</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES — 3D Bento Grid -->
-  <section id="xizmatlar" class="section">
+  <!-- SERVICES -->
+  <section class="section" id="xizmatlar">
     <div class="section-header reveal">
       <h2 class="section-title">XIZMATLAR</h2>
     </div>
-    <div class="services-bento">
+    <div class="services-grid">
       <div class="service-card reveal">
         <div class="service-card-num">01</div>
         <svg class="service-card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="5" y="12" width="30" height="24" rx="2"/><path d="M5 19h30M15 12V5h10v7"/></svg>
         <h3 class="service-card-title">Kapital ta'mirlash</h3>
-        <p class="service-card-desc">Xonadon va uylarni asosdan to'liq qayta jihozlash — devordan shiftgacha, loyihadan topshirishgacha. 14 yillik tajriba bilan har qanday murakkab ishni bajaramiz.</p>
-        <svg class="service-card-cross" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 9h10M9 4v10"/></svg>
+        <p class="service-card-desc">Xonadon va uylarni asosdan to'liq qayta jihozlash — devordan shiftgacha, loyihadan topshirishgacha.</p>
       </div>
       <div class="service-card reveal reveal-d1">
         <div class="service-card-num">02</div>
         <svg class="service-card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="7" width="34" height="26" rx="2"/><path d="M3 17h34M13 7v26M27 7v26"/></svg>
         <h3 class="service-card-title">Fasad ishlari</h3>
-        <p class="service-card-desc">Tashqi devor izolyatsiyasi, shtukaturka va fasad qoplamalari. Issiqlikni saqlash va binoga yangi ko'rinish berish.</p>
-        <svg class="service-card-cross" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 9h10M9 4v10"/></svg>
+        <p class="service-card-desc">Tashqi devor izolyatsiyasi, shtukaturka va fasad qoplamalari. Issiqlikni saqlash va binoga yangi ko'rinish.</p>
       </div>
       <div class="service-card reveal reveal-d2">
         <div class="service-card-num">03</div>
         <svg class="service-card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="20" r="7"/><path d="M20 3v7M20 30v7M3 20h7M30 20h7M8.5 8.5l5 5M26.5 26.5l5 5M8.5 31.5l5-5M26.5 13.5l5-5"/></svg>
         <h3 class="service-card-title">Elektr va santexnika</h3>
         <p class="service-card-desc">Simlar, quvurlar, isitish va issiq-sovuq suv tizimlarini o'rnatish va ta'mirlash.</p>
-        <svg class="service-card-cross" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 9h10M9 4v10"/></svg>
       </div>
       <div class="service-card reveal reveal-d1">
         <div class="service-card-num">04</div>
         <svg class="service-card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="5" y="5" width="30" height="30" rx="3"/><path d="M5 20h30M20 5v30"/></svg>
         <h3 class="service-card-title">Gips va shpaklyovka</h3>
         <p class="service-card-desc">Devor va shiftlarni ideal tekislikka keltirish, bo'yoqqa tayyorlash.</p>
-        <svg class="service-card-cross" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 9h10M9 4v10"/></svg>
       </div>
       <div class="service-card reveal reveal-d2">
         <div class="service-card-num">05</div>
         <svg class="service-card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="24" width="34" height="10" rx="2"/><path d="M10 24V8l10 7 10-7v16"/></svg>
         <h3 class="service-card-title">Pol va plitka</h3>
         <p class="service-card-desc">Kafel, laminat, parket yotqizish — o'lchovdan yakuniy silliqlashgacha.</p>
-        <svg class="service-card-cross" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 9h10M9 4v10"/></svg>
       </div>
       <div class="service-card reveal reveal-d3">
         <div class="service-card-num">06</div>
         <svg class="service-card-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 5l-7 7 7 7M28 5l7 7-7 7"/><path d="M5 12h30M5 28h30M12 35l-7-7 7-7M28 35l7-7-7-7"/></svg>
         <h3 class="service-card-title">Kichik ta'mirlash</h3>
         <p class="service-card-desc">Tez muddatli mayda ishlar: eshik, jomoshir, elektr nosozliklari va boshqalar.</p>
-        <svg class="service-card-cross" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 9h10M9 4v10"/></svg>
       </div>
     </div>
   </section>
 
-  <!-- BEFORE / AFTER — 3D Slider -->
-  <section id="natija" class="section ba-section">
+  <!-- BEFORE / AFTER -->
+  <section class="section ba-section" id="natija">
     <div class="ba-wrapper">
-      <div class="ba-content">
-        <h2 class="section-title reveal" style="margin-bottom:0.5em">OLDIN / KEYIN</h2>
-        <p class="hero-sub reveal reveal-d1" style="opacity:1;transform:none;filter:none;animation:none;max-width:100%;margin-bottom:1.5em">
-          Chizg'ichni suring — bitta xonadonning haqiqiy o'zgarishi. Chilonzor tumanidagi 3-xonali kvartira 5 hafta ichida to'liq qayta jihozlandi.
-        </p>
-        <div class="ba-caption reveal reveal-d2">Chilonzor, 3-xonali kvartira · Muddat: 5 hafta</div>
+      <div class="reveal">
+        <h2 class="section-title" style="margin-bottom:0.5em">OLDIN / KEYIN</h2>
+        <p class="ba-desc">Chizg'ichni suring — bitta xonadonning haqiqiy o'zgarishi. Chilonzor tumanidagi 3-xonali kvartira 5 hafta ichida to'liq qayta jihozlandi.</p>
+        <div class="ba-caption reveal reveal-d1">Chilonzor, 3-xonali kvartira · Muddat: 5 hafta</div>
       </div>
-      <div class="ba-slider-wrap reveal reveal-d1">
-        <div class="ba-layer ba-layer-after"></div>
-        <div class="ba-layer ba-layer-before"></div>
-        <div class="ba-handle">
+      <div class="ba-slider reveal reveal-d1" id="baSlider">
+        <div class="ba-layer ba-after" style="background-image:url('img/after.jpg')"></div>
+        <div class="ba-layer ba-before" id="baBefore" style="background-image:url('img/before.jpg')"></div>
+        <div class="ba-handle" id="baHandle">
           <div class="ba-handle-knob">⇔</div>
         </div>
         <span class="ba-label ba-label-before">Oldin</span>
@@ -201,12 +171,12 @@
     </div>
   </section>
 
-  <!-- PROCESS — 3D Timeline -->
-  <section id="jarayon" class="section">
+  <!-- PROCESS -->
+  <section class="section" id="jarayon">
     <div class="section-header reveal">
       <h2 class="section-title">ISH JARAYONI</h2>
     </div>
-    <div class="process-list">
+    <div class="process-grid">
       <div class="process-step reveal">
         <div class="process-step-num">01</div>
         <h3 class="process-step-title">So'rov</h3>
@@ -230,14 +200,14 @@
     </div>
   </section>
 
-  <!-- PORTFOLIO — 3D Masonry Grid -->
-  <section id="loyihalar" class="section" style="background:var(--surface)">
+  <!-- PORTFOLIO -->
+  <section class="section section-surface" id="loyihalar">
     <div class="section-header reveal">
       <h2 class="section-title">LOYIHALAR</h2>
     </div>
     <div class="portfolio-grid">
       <div class="portfolio-card reveal">
-        <div class="portfolio-card-bg pc-bg-1"></div>
+        <div class="portfolio-card-bg" style="background-image:url('img/portfolio-1.jpg')"></div>
         <div class="portfolio-card-overlay"></div>
         <div class="portfolio-card-info">
           <div class="portfolio-card-tag">Kapital ta'mirlash</div>
@@ -246,7 +216,7 @@
         </div>
       </div>
       <div class="portfolio-card reveal reveal-d1">
-        <div class="portfolio-card-bg pc-bg-2"></div>
+        <div class="portfolio-card-bg" style="background-image:url('img/portfolio-2.jpg')"></div>
         <div class="portfolio-card-overlay"></div>
         <div class="portfolio-card-info">
           <div class="portfolio-card-tag">Ofis ta'mirlash</div>
@@ -255,7 +225,7 @@
         </div>
       </div>
       <div class="portfolio-card reveal reveal-d2">
-        <div class="portfolio-card-bg pc-bg-3"></div>
+        <div class="portfolio-card-bg" style="background-image:url('img/portfolio-3.jpg')"></div>
         <div class="portfolio-card-overlay"></div>
         <div class="portfolio-card-info">
           <div class="portfolio-card-tag">Fasad ishlari</div>
@@ -264,7 +234,7 @@
         </div>
       </div>
       <div class="portfolio-card reveal reveal-d1">
-        <div class="portfolio-card-bg pc-bg-4"></div>
+        <div class="portfolio-card-bg" style="background-image:url('img/portfolio-4.jpg')"></div>
         <div class="portfolio-card-overlay"></div>
         <div class="portfolio-card-info">
           <div class="portfolio-card-tag">Pol va plitka</div>
@@ -273,7 +243,7 @@
         </div>
       </div>
       <div class="portfolio-card reveal reveal-d2">
-        <div class="portfolio-card-bg pc-bg-5"></div>
+        <div class="portfolio-card-bg" style="background-image:url('img/portfolio-5.jpg')"></div>
         <div class="portfolio-card-overlay"></div>
         <div class="portfolio-card-info">
           <div class="portfolio-card-tag">Elektr-santexnika</div>
@@ -282,7 +252,7 @@
         </div>
       </div>
       <div class="portfolio-card reveal reveal-d3">
-        <div class="portfolio-card-bg pc-bg-6"></div>
+        <div class="portfolio-card-bg" style="background-image:url('img/portfolio-6.jpg')"></div>
         <div class="portfolio-card-overlay"></div>
         <div class="portfolio-card-info">
           <div class="portfolio-card-tag">Kapital ta'mirlash</div>
@@ -293,7 +263,7 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS — 3D Cards -->
+  <!-- TESTIMONIALS -->
   <section class="section testimonials-section">
     <div class="section-header reveal">
       <h2 class="section-title">ULAR NIMA DEYDI</h2>
@@ -304,10 +274,7 @@
         <p class="testimonial-text">"Smeta boshidanoq aniq edi, hech qanday qo'shimcha to'lov chiqmadi. Muddatida topshirishdi."</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">N</div>
-          <div>
-            <div class="testimonial-name">Nodira</div>
-            <div class="testimonial-loc">Chilonzor</div>
-          </div>
+          <div><div class="testimonial-name">Nodira</div><div class="testimonial-loc">Chilonzor</div></div>
         </div>
       </div>
       <div class="testimonial-card reveal reveal-d1">
@@ -315,10 +282,7 @@
         <p class="testimonial-text">"Ofisimizni 3 haftada, ish jarayonini to'xtatmasdan ta'mirlashdi. Juda tartibli brigada."</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">J</div>
-          <div>
-            <div class="testimonial-name">Jasur</div>
-            <div class="testimonial-loc">Yunusobod</div>
-          </div>
+          <div><div class="testimonial-name">Jasur</div><div class="testimonial-loc">Yunusobod</div></div>
         </div>
       </div>
       <div class="testimonial-card reveal reveal-d2">
@@ -326,45 +290,40 @@
         <p class="testimonial-text">"Fasad ishidan keyin qish oyida issiqlik sarfi sezilarli kamaydi. Tavsiya qilaman."</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">M</div>
-          <div>
-            <div class="testimonial-name">Malika</div>
-            <div class="testimonial-loc">Yakkasaroy</div>
-          </div>
+          <div><div class="testimonial-name">Malika</div><div class="testimonial-loc">Yakkasaroy</div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT — 3D Glassmorphism -->
-  <section id="aloqa" class="section contact-section">
-    <div class="contact-grid">
-      <div class="reveal">
-        <h2 class="contact-title">LOYIHANGIZNI<br>MUHOKAMA QILAMIZ</h2>
-        <p class="contact-sub">Qo'ng'iroq qiling yoki Telegramga yozing — 24 soat ichida smeta bilan bog'lanamiz.</p>
-        <div class="contact-links">
-          <a href="tel:+998913631012" class="contact-link">
-            <svg class="contact-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            +998 91 363 10 12
-          </a>
-          <a href="https://t.me/Ravshanboy_99" target="_blank" rel="noopener" class="contact-link">
-            <svg class="contact-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-            t.me/abdullousta
-          </a>
-          <a href="#" class="contact-link">
-            <svg class="contact-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Namangan, O'zbekiston
-          </a>
-        </div>
+  <!-- CONTACT -->
+  <section class="section contact-section" id="aloqa">
+    <div class="contact-grid reveal">
+      <h2 class="contact-title">LOYIHANGIZNI<br>MUHOKAMA QILAMIZ</h2>
+      <p class="contact-sub">Qo'ng'iroq qiling yoki Telegramga yozing — 24 soat ichida smeta bilan bog'lanamiz.</p>
+      <div class="contact-links">
+        <a href="tel:+998913631012" class="contact-link">
+          <svg class="contact-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +998 91 363 10 12
+        </a>
+        <a href="https://t.me/abdullousta" target="_blank" rel="noopener" class="contact-link">
+          <svg class="contact-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          t.me/abdullousta
+        </a>
+        <a href="#" class="contact-link">
+          <svg class="contact-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Namangan, O'zbekiston
+        </a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-brand"><img src="img/logo.png" alt="Abdullo Usta" style="height:36px;width:auto;"></div>
+    <div class="footer-brand"><img src="img/logo.png" alt="Abdullo Usta" style="height:36px;width:auto;filter:drop-shadow(0 0 10px rgba(201,168,76,0.3));"></div>
     <div class="footer-copy">© 2026 Abdullo Usta. Barcha huquqlar himoyalangan.</div>
     <div class="footer-social">
-      <a href="https://t.me/Ravshanboy_99" target="_blank" rel="noopener" aria-label="Telegram">
+      <a href="https://t.me/abdullousta" target="_blank" rel="noopener" aria-label="Telegram">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
       </a>
       <a href="tel:+998913631012" aria-label="Telefon">
@@ -373,6 +332,8 @@
     </div>
   </footer>
 
+  <!-- THREE.JS via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
